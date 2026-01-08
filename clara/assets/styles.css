@@ -1,0 +1,594 @@
+/* =========================================================
+   RESET
+========================================================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Georgia, "Times New Roman", serif;
+  background: #f7f4ee;
+  color: #111;
+  line-height: 1.42;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  opacity: 1;
+  transition: opacity .25s ease;
+}
+
+body.is-leaving {
+  opacity: 0;
+}
+
+/* =========================================================
+   VARIÁVEIS
+========================================================= */
+:root {
+  --content-width: 40ch;
+  --margin-width: 12ch;
+  --meta-width: 24ch;
+  --gap: 2.5rem;
+
+  --block-total: calc(
+    var(--content-width) +
+    var(--margin-width) +
+    var(--meta-width) +
+    (var(--gap) * 2)
+  );
+
+  --stroke: #999;
+}
+
+/* =========================================================
+   TOPO
+========================================================= */
+.top {
+  padding: 1.6rem 3rem 0;
+}
+
+.top-inner {
+  max-width: var(--block-total);
+  margin: 0 auto;
+  display: flex;
+  gap: 2rem;
+}
+
+.brand {
+  font-size: 1rem;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity .12s ease, transform .12s ease;
+}
+
+a:hover {
+  opacity: .7;
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   LAYOUT PRINCIPAL
+========================================================= */
+.page {
+  padding: 2.2rem 3rem 1.4rem;
+  min-height: calc(100vh - 3.6rem);
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  display: grid;
+  grid-template-columns: var(--content-width) var(--margin-width) var(--meta-width);
+  column-gap: var(--gap);
+  max-width: var(--block-total);
+  margin: 0 auto;
+}
+
+/* =========================================================
+   TÍTULOS
+========================================================= */
+.page-title {
+  display: flex;
+  align-items: baseline;
+  gap: .8rem;
+  margin-bottom: 1.6rem;
+}
+
+.section-letter {
+  font-size: 3.4rem;
+  font-weight: 700;
+}
+
+.section-title {
+  font-size: 2.4rem;
+  font-weight: 400;
+}
+
+/* =========================================================
+   TEXTO
+========================================================= */
+.content p {
+  margin-bottom: 1rem;
+}
+
+.lead {
+  margin-bottom: 1.4rem;
+}
+
+/* =========================================================
+   MARGINALIA / META
+========================================================= */
+.margin {
+  font-style: italic;
+  opacity: .55;
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+  padding-top: 5.6rem;
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  padding-top: 5.6rem;
+}
+
+.meta h3 {
+  font-size: 1rem;
+  margin-bottom: .25rem;
+}
+
+/* =========================================================
+   FOOTER FIXO GLOBAL
+========================================================= */
+
+.footer-fixed {
+  position: fixed;
+  left: 50%;
+  bottom: 1rem;
+  transform: translateX(-50%);
+  width: var(--block-total);
+
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* navegação */
+.footer-fixed .footer-nav {
+  display: flex;
+  height: 26px;
+  pointer-events: auto;
+}
+
+/* assinatura */
+.footer-fixed .signature {
+  align-self: flex-end;
+  font-size: 1.75rem;
+  white-space: nowrap;
+  pointer-events: auto;
+}
+
+
+/* seta base */
+.nav-arrow {
+  flex: 1;
+  position: relative;
+  cursor: pointer;
+}
+
+/* linha */
+.nav-arrow::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--stroke);
+  transform: translateY(-50%);
+  transition: background .15s ease;
+}
+
+/* cabeça */
+.nav-arrow::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border-top: 1px solid var(--stroke);
+  border-right: 1px solid var(--stroke);
+  transform: translateY(-50%);
+  transition: border-color .15s ease;
+}
+
+.nav-arrow.left::after {
+  left: 0;
+  transform: translateY(-50%) rotate(-135deg);
+}
+
+.nav-arrow.right::after {
+  right: 0;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.nav-arrow:hover::before {
+  background: #777;
+}
+
+.nav-arrow:hover::after {
+  border-color: #777;
+}
+
+
+
+/* =========================================================
+   C — EXERCÍCIO
+========================================================= */
+main.page.C .exercise {
+  width: var(--block-total);
+  margin: 1rem auto 0;
+  display: flex;
+  gap: 2rem;
+}
+
+main.page.C .exercise-item {
+  width: 50%;
+  height: 42vh;
+  overflow: hidden;
+  border: 8px solid #fff;
+}
+
+main.page.C .exercise-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  cursor: zoom-in;
+}
+
+/* lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  display: none;
+  background: rgba(247,244,238,.96);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox.open {
+  display: flex;
+}
+
+.lightbox img {
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+.lightbox .close {
+  position: fixed;
+  top: 1.6rem;
+  right: 2rem;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 10000;
+}
+
+/* =========================================================
+   D — TRABALHOS
+========================================================= */
+
+/* ---------- CAROUSEL ---------- */
+
+main.page.D .carousel {
+  width: var(--block-total);
+  margin: 1rem auto 0;
+  position: relative;
+}
+
+/* track */
+main.page.D .carousel-track {
+  position: relative;
+}
+
+/* items */
+main.page.D .carousel-item {
+  display: none;
+}
+
+main.page.D .carousel-item.active {
+  display: block;
+}
+
+/* vídeo */
+main.page.D video {
+  width: 100%;
+  height: 48vh;
+  object-fit: cover;
+  object-position: top;
+  border: 6px solid #fff;
+  display: block;
+}
+
+/* ---------- SETAS SOBRE O VÍDEO ---------- */
+
+.page.D .carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 32px;
+  height: 32px;
+
+  appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* remover qualquer foco / UI residual */
+.page.D .carousel-arrow:focus,
+.page.D .carousel-arrow:focus-visible,
+.page.D .carousel-arrow:active {
+  outline: none;
+  box-shadow: none;
+}
+
+/* posicionamento */
+.page.D .carousel-arrow.prev { left: 12px; }
+.page.D .carousel-arrow.next { right: 12px; }
+
+/* desenho da seta — MESMO TRAÇO do resto do site */
+.page.D .carousel-arrow::before {
+  content: "";
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-top: 1px solid var(--stroke);
+  border-right: 1px solid var(--stroke);
+}
+
+/* direcções */
+.page.D .carousel-arrow.prev::before {
+  transform: rotate(-135deg);
+}
+
+.page.D .carousel-arrow.next::before {
+  transform: rotate(45deg);
+}
+
+/* hover subtil */
+.page.D .carousel-arrow:hover::before {
+  border-color: #777;
+}
+
+/* ---------- LIMPEZA TOTAL DE UI FANTASMA ---------- */
+
+/* remove controlos nativos de vídeo */
+video::-webkit-media-controls,
+video::-webkit-media-controls-enclosure,
+video::-webkit-media-controls-panel,
+video::-webkit-media-controls-overlay-play-button,
+video::-webkit-media-controls-play-button,
+video::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  opacity: 0 !important;
+}
+
+/* remove qualquer “bolinha”, indicador ou resto de carrossel */
+.page.D .carousel [class*="dot"],
+.page.D .carousel [class*="indicator"],
+.page.D .carousel ol,
+.page.D .carousel ul {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  pointer-events: none !important;
+}
+
+
+/* =======================
+   CONTACTO — CARTA (limpa)
+   Substitui as regras antigas da página contacto
+   ======================= */
+
+.page.contact {
+  /* reduzir risco de overflow: aumentar o valor se o topo for mais alto */
+  min-height: calc(100vh - 5rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;              /* evitar paddings globais que empurrem a página */
+  overflow: hidden;        /* garante que não aparece slider por excesso de altura */
+  box-sizing: border-box;
+}
+
+/* normalizar o form — não criar caixas extra */
+.page.contact form {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* a folha (carta) — estreita, tipo máquina */
+.letter {
+  width: 44ch;             /* mais esguio que antes */
+  max-width: 92vw;
+  padding: 2.6rem 2.8rem;
+  background: #fbfaf7;
+  border-radius: 2px;
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,.04),
+    0 18px 40px rgba(0,0,0,.04);
+  font-family: "Courier New", Courier, monospace;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: #111;
+  position: relative;
+  overflow: visible;
+}
+
+/* efeito leve de papel (opcional) */
+.letter::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at top left, rgba(0,0,0,.02), transparent 60%);
+  opacity: .35;
+}
+
+/* texto do corpo */
+.letter p { margin: 0 0 1.15rem 0; }
+
+/* inputs 'fundidos' na folha — quase invisíveis */
+.letter input,
+.letter textarea {
+  font-family: inherit;
+  font-size: inherit;
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(0,0,0,.10); /* muito subtil */
+  padding: .18rem 0;
+  color: inherit;
+  resize: none;
+  transition: border-color .12s ease, box-shadow .12s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* linhas de campos menos visíveis por defeito */
+.letter input { max-width: 28ch; display:block; }
+
+/* textarea com altura mínima */
+.letter textarea { min-height: 4.2rem; }
+
+/* foco simples e legível */
+.letter input:focus,
+.letter textarea:focus {
+  outline: none;
+  border-bottom-color: rgba(0,0,0,.28);
+  box-shadow: none;
+}
+
+/* rótulos / strong (manter o estilo de máquina) */
+.letter strong { font-weight: 700; }
+
+/* botão discreto — administrativo */
+.letter button {
+  margin-top: 1.2rem;
+  background: none;
+  border: 1px solid rgba(0,0,0,.12);
+  padding: .38rem .9rem;
+  cursor: pointer;
+  font-family: Georgia, "Times New Roman", serif; /* corpo mais formal */
+  transition: opacity .12s ease, transform .12s ease;
+}
+.letter button:hover { opacity: .85; transform: translateY(-1px); }
+
+/* assinatura do utilizador (dentro da carta) */
+.letter .sign { margin-top: .9rem; font-size: 1rem; }
+
+/* responsivo */
+@media (max-width: 800px) {
+  .letter { width: 88vw; padding: 2rem; }
+  .letter input { max-width: 100%; }
+  .page.contact { min-height: calc(100vh - 4.2rem); }
+}
+
+
+/* =======================
+   TRANSIÇÃO ENTRE PÁGINAS
+======================= */
+
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translateX(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pageOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+}
+
+/* entrada */
+.page {
+  animation: pageIn .42s cubic-bezier(.4,0,.2,1) both;
+}
+
+/* saída */
+body.is-leaving .page {
+  animation: pageOut .28s cubic-bezier(.4,0,.2,1) both;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+@media (max-width: 800px) {
+  .main {
+    grid-template-columns: 1fr;
+  }
+
+  .margin,
+  .meta {
+    display: none;
+  }
+
+  main.page.C .exercise {
+    flex-direction: column;
+  }
+
+  main.page.C .exercise-item {
+    width: 100%;
+  }
+
+  main.page.D video {
+    height: 30vh;
+  }
+}

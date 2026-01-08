@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Contacto — clara.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/styles.css">
+    <link rel="icon" href="favicon.ico">
+
+</head>
+
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <a href="index.html" class="brand">– clara.</a>
+  </div>
+</header>
+
+<main class="page contact">
+  <form id="contactForm">
+    <section class="letter">
+
+      <p>Olá, <strong>– clara.</strong></p>
+
+      <p>
+        Escrevo-te porque<br>
+        <textarea name="mensagem" rows="4"></textarea>
+      </p>
+
+      <p>
+        Podes responder para<br>
+        <input type="email" name="email">
+      </p>
+
+      <p>
+        Cumprimentos,<br>
+        <input type="text" name="nome">
+      </p>
+
+      <button type="submit">Enviar</button>
+
+    </section>
+  </form>
+</main>
+
+<footer class="footer-fixed">
+ 
+  <div class="signature">– clara.</div>
+</footer>
+</body>
+<script src="assets/app.js"></script>
+<script src="assets/preload.js"></script>
+
+<script>
+document.getElementById('contactForm').addEventListener('submit', e=>{
+  e.preventDefault();
+  document.querySelector('.letter').innerHTML = `
+    <p>Obrigado pela carta.</p>
+    <p>Respondemos na volta do correio.</p>
+    <p class="sign">– clara.</p>
+  `;
+});
+</script>
+</html>
