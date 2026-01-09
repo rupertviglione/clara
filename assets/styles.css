@@ -31,25 +31,19 @@ body.is-leaving { opacity: 0; }
 .visually-hidden { display:none; }
 
 /* =========================================================
-   VARIÁVEIS
+   VARIÁVEIS (DESKTOP)
 ========================================================= */
 :root {
-  /* desktop */
   --content-width: 40ch;
   --margin-width: 12ch;
   --meta-width: 24ch;
   --gap: 2.5rem;
 
-  --reading-block: calc(
+  --block-total: calc(
     var(--content-width) +
     var(--margin-width) +
-    var(--gap)
-  );
-
-  --block-total: calc(
-    var(--reading-block) +
     var(--meta-width) +
-    var(--gap)
+    (var(--gap) * 2)
   );
 
   --stroke: #999;
@@ -59,11 +53,11 @@ body.is-leaving { opacity: 0; }
    TOPO
 ========================================================= */
 .top {
-  padding: 1.6rem 0 0;
+  padding: 1.6rem 3rem 0;
 }
 
 .top-inner {
-  width: var(--reading-block);
+  max-width: var(--block-total);
   margin: 0 auto;
   display: flex;
   gap: 2rem;
@@ -80,24 +74,21 @@ a {
 a:hover { opacity:.7; transform:translateY(-1px); }
 
 /* =========================================================
-   PÁGINA
+   LAYOUT PRINCIPAL — DESKTOP
 ========================================================= */
 .page {
-  padding: 2.2rem 0 1.4rem;
+  padding: 2.2rem 3rem 1.4rem;
   min-height: calc(100vh - 3.6rem);
   display: flex;
   flex-direction: column;
 }
 
-/* =========================================================
-   BLOCO DE LEITURA (CONTENT + MARGIN)
-========================================================= */
 .main {
-  width: var(--reading-block);
-  margin: 0 auto;
   display: grid;
-  grid-template-columns: var(--content-width) var(--margin-width);
+  grid-template-columns: var(--content-width) var(--margin-width) var(--meta-width);
   column-gap: var(--gap);
+  max-width: var(--block-total);
+  margin: 0 auto;
   align-items: start;
 }
 
@@ -128,7 +119,7 @@ a:hover { opacity:.7; transform:translateY(-1px); }
 .lead { margin-bottom: 1.4rem; }
 
 /* =========================================================
-   MARGINALIA
+   MARGINALIA / META — DESKTOP
 ========================================================= */
 .margin {
   font-style: italic;
@@ -139,28 +130,24 @@ a:hover { opacity:.7; transform:translateY(-1px); }
   padding-top: 5.6rem;
 }
 
-/* =========================================================
-   META (fora do bloco de leitura)
-========================================================= */
 .meta {
-  width: var(--meta-width);
-  margin: 0 auto;
-  padding-top: 5.6rem;
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
+  padding-top: 5.6rem;
 }
+
 .meta h3 { font-size:1rem; margin-bottom:.25rem; }
 
 /* =========================================================
-   FOOTER — NAVEGAÇÃO
+   FOOTER FIXO — DESKTOP
 ========================================================= */
 .footer-fixed {
   position: fixed;
   left: 50%;
   bottom: 1rem;
   transform: translateX(-50%);
-  width: var(--reading-block);
+  width: var(--block-total);
   display: flex;
   flex-direction: column;
   gap: .8rem;
@@ -244,10 +231,10 @@ a:hover { opacity:.7; transform:translateY(-1px); }
 }
 
 /* =========================================================
-   C — EXERCÍCIO
+   C — EXERCÍCIO (DESKTOP)
 ========================================================= */
 .page.C .exercise {
-  width: var(--reading-block);
+  width: var(--block-total);
   margin: 1rem auto 0;
   display: flex;
   gap: 2rem;
@@ -268,21 +255,56 @@ a:hover { opacity:.7; transform:translateY(-1px); }
   cursor:zoom-in;
 }
 
+/* LIGHTBOX (restaurado) */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,0.96);
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.lightbox.open { display:flex; }
+
+.lightbox-content {
+  width: 92vw;
+  height: 92vh;
+  max-width: 1400px;
+  max-height: 900px;
+}
+.lightbox-content img,
+.lightbox-content iframe {
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+.lightbox-close {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  background:none;
+  border:none;
+}
+
 /* =========================================================
-   D — TRABALHOS
+   D — TRABALHOS (DESKTOP)
 ========================================================= */
 .page.D .carousel {
-  width: var(--reading-block);
+  width: var(--block-total);
   margin: 1rem auto 0;
   position: relative;
 }
+
+.page.D .carousel-item { display:none; }
+.page.D .carousel-item.active { display:block; }
 
 .page.D video {
   width:100%;
   height:48vh;
   object-fit:cover;
   border:6px solid #fff;
-  display:block;
 }
 
 .page.D .carousel-arrow {
@@ -298,20 +320,19 @@ a:hover { opacity:.7; transform:translateY(-1px); }
 .page.D .carousel-arrow.next { right:12px; transform:translateY(-50%); }
 
 /* =========================================================
-   CONTACTO
+   CONTACTO — DESKTOP (restaurado)
 ========================================================= */
 .page.contact {
   min-height: calc(100vh - 4rem);
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
-  padding-top: 1rem;
 }
 
 .letter {
   width:44ch;
   max-width:92vw;
-  padding:2.2rem 2.4rem;
+  padding:2.6rem 2.8rem;
   background:#fbfaf7;
   font-family:"Courier New", monospace;
 }
@@ -321,33 +342,35 @@ a:hover { opacity:.7; transform:translateY(-1px); }
 ========================================================= */
 @media (max-width: 600px) {
 
-  :root {
-    --content-width: 1fr;
-    --margin-width: 6ch;
-    --gap: 0.8rem;
-    --reading-block: calc(100% - 2.5rem);
-  }
-
+  /* BLOCO = texto + marginália */
   .top-inner,
   .main,
-  .footer-fixed,
-  .page.C .exercise,
-  .page.D .carousel {
-    width: var(--reading-block);
+  .footer-fixed {
+    max-width: calc(100% - 2rem);
+    width: calc(100% - 2rem);
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .main {
-    grid-template-columns: 1fr var(--margin-width);
+    grid-template-columns: 1fr 6ch;
+    column-gap: .6rem;
   }
 
-  .section-letter { font-size:1.1rem; }
-  .section-title { font-size:1.25rem; }
+  /* evitar overflow lateral */
+  .margin { max-width:6ch; }
 
-  /* setas mobile: longas, coladas */
+  /* meta mais próxima */
+  .meta {
+    margin-top: .8rem;
+    padding-top: 0;
+  }
+
+  /* FOOTER MOBILE */
   .footer-fixed {
     position: static;
-    margin: 1rem auto 0;
     transform:none;
+    margin-top: 1rem;
   }
 
   .footer-nav {
@@ -358,37 +381,43 @@ a:hover { opacity:.7; transform:translateY(-1px); }
     height:34px;
   }
 
+  /* labels abaixo da seta */
   .nav-label {
-    position:static;
-    display:block;
-    margin-top:.25rem;
-    text-align:center;
-    font-size:.6rem;
+    position: static;
+    display: block;
+    margin-top: .25rem;
+    font-size: .6rem;
   }
 
+  /* alinhamentos correctos */
+  .nav-arrow.left .nav-label { text-align:left; }
+  .nav-arrow.right .nav-label { text-align:right; }
+
+  /* assinatura maior */
   .signature {
-    margin-top:.5rem;
+    margin-top:.6rem;
+    font-size:1.1rem;
     text-align:right;
-    font-size:.9rem;
   }
 
-  /* C: imagens empilhadas */
+  /* C — imagens empilhadas e cortadas */
   .page.C .exercise {
     flex-direction:column;
+    width:100%;
   }
-
   .page.C .exercise-item {
     width:100%;
     height:32vh;
   }
 
-  /* D: vídeo mais quadrado */
+  /* D — vídeo maior */
   .page.D video {
     height:56vh;
   }
 
-  /* contacto sobe */
+  /* CONTACTO — subir carta */
   .page.contact {
+    align-items:flex-start;
     padding-top:.5rem;
   }
 }
