@@ -2,23 +2,47 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
-  <title>— clara.</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>– clara. | A · Presença Digital clara</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A clara desenha e desenvolve presença digital clara e eficaz. Websites institucionais, portefólios e landing pages com foco na estrutura, legibilidade e resultados.">
+
+  <link rel="canonical" href="https://clarastudio.pt/">
   <link rel="icon" href="favicon.ico">
   <link rel="stylesheet" href="assets/styles.css">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="– clara. · Presença Digital clara">
+  <meta property="og:description" content="Websites claros, funcionais e pensados para pessoas e motores de busca.">
+  <meta property="og:url" content="https://clarastudio.pt/">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "clara",
+    "url": "https://clarastudio.pt/",
+    "description": "Estúdio de design e desenvolvimento web focado em clareza, estrutura e legibilidade."
+  }
+  </script>
 </head>
 
 <body>
 
 <header class="top">
   <div class="top-inner">
-    <a href="index.html" class="brand">– clara.</a>
-    <a href="contacto.html" class="contacto">contacto</a>
+    <a href="index.html" class="brand" aria-label="clara — página inicial">– clara.</a>
+    <a href="contacto.html" class="contacto" aria-label="contacto">contacto</a>
   </div>
 </header>
 
-<main class="page">
+<main class="page" role="main">
 
   <section class="main">
 
@@ -31,34 +55,37 @@
       </h1>
 
       <p class="lead">
-        <strong>– clara.</strong> desenha presença digital com atenção à estrutura,
-        à hierarquia e à forma como a informação se torna legível.
+        <strong>– clara.</strong> concebe presença digital clara,
+        pensada para comunicar o essencial e orientar quem chega.
       </p>
 
       <p>
-        Um website não é apenas um objecto visual: é um sistema de relações
-        entre conteúdos, utilizadores e contexto.
+        Um website não é apenas um objecto visual. É um sistema de relações
+        entre informação, utilizadores e contexto. A sua eficácia depende
+        da forma como essas relações são organizadas e tornadas legíveis.
       </p>
 
       <p>
-        Cada projecto começa por perceber o que é essencial, o que pode ser omitido
-        e o que deve ganhar destaque.
+        Cada projecto começa por identificar o que deve ser compreendido
+        de imediato, o que pode ficar em segundo plano e o que deve ganhar
+        destaque ao longo da navegação.
       </p>
 
       <p>
-        A clareza não é um estilo — é uma consequência de boas decisões sobre
-        arquitectura de informação, ritmo e escala.
+        A clareza não é um estilo gráfico nem uma tendência. É o resultado
+        de decisões consistentes sobre arquitectura de informação,
+        hierarquia visual, ritmo e escala.
       </p>
 
       <p>
-        O resultado são websites claros, funcionais e ajustados a quem os usa
-        e a quem os mantém no dia-a-dia.
+        O resultado são websites funcionais, claros e sustentáveis,
+        ajustados tanto a quem os utiliza como a quem os gere no dia-a-dia.
       </p>
 
     </div>
 
     <!-- MARGINALIA -->
-    <aside class="margin">
+    <aside class="margin" aria-hidden="true">
       <span>presença digital</span>
       <span>estrutura</span>
       <span>hierarquia</span>
@@ -69,10 +96,10 @@
     <aside class="meta">
 
       <div class="meta-block">
-        <h3>Na prática</h3>
+        <h2>Na prática</h2>
         <p>
-          Websites institucionais · Landing pages · Portefólios<br>
-          SEO base · Integração de redes sociais · Sistemas de contacto
+          Websites institucionais · Portefólios · Landing pages<br>
+          SEO base · Integração de formulários · Sistemas de contacto
         </p>
       </div>
 
@@ -80,7 +107,7 @@
         <h3>Entrega típica</h3>
         <p>
           1–3 semanas<br>
-          (dependente da complexidade)
+          (dependente da escala e do conteúdo)
         </p>
       </div>
 
@@ -95,21 +122,35 @@
 
   </section>
 
+  <!-- CTA FINAL DISCRETO -->
+  <section class="page-cta" aria-labelledby="cta-title">
+    <h2 id="cta-title" class="visually-hidden">Contacto</h2>
+    <p>
+      Se este modo de trabalhar fizer sentido para o teu projecto,
+      escreve-nos. Respondemos com clareza sobre abordagem e próximos passos.
+    </p>
+    <p>
+      <a href="contacto.html" class="cta-ghost">Conta-nos o teu projecto</a>
+    </p>
+  </section>
+
   <!-- RODAPÉ -->
-<footer class="footer-fixed">
-  <nav class="footer-nav">
-  
-    <a class="nav-arrow right" href="B-metodo.html" aria-label="seguinte"></a>
-  </nav>
+  <footer class="footer-fixed">
+    <nav class="footer-nav">
 
-  <div class="signature">– clara.</div>
-</footer>
+      <a class="nav-arrow right" href="B-metodo.html" aria-label="seguinte — método">
+        <span class="arrow-mark">B</span>
+        <span class="arrow-label">Método</span>
+      </a>
 
+    </nav>
 
-
+    <div class="signature">– clara.</div>
+  </footer>
 
 </main>
-<script src="app.js" defer></script>
+
+<script src="assets/app.js" defer></script>
 
 </body>
 </html>
