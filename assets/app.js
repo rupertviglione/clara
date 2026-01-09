@@ -65,34 +65,30 @@ function initContactForm() {
   const form = document.getElementById('contactForm');
   if (!form) return;
 
-  form.addEventListener('submit', e => {
+  form.addEventListener('submit', async e => {
     e.preventDefault();
 
     const data = new FormData(form);
-    const nome = (data.get('nome') || '—').toString().trim();
-    const email = (data.get('email') || '(não indicado)').toString().trim();
-    const mensagem = (data.get('mensagem') || '').toString().trim();
 
-    const resposta = `
-      <section class="letter" aria-live="polite">
-        <p>Olá, <strong>${nome}</strong></p>
-        <p>Obrigado pela tua mensagem.</p>
-        <p>
-          Recebemos isto:<br>
-          <em>${mensagem ? mensagem.replace(/\n/g, '<br>') : '<i>(mensagem vazia)</i>'}</em>
-        </p>
-        <p>Responderemos para: <strong>${email}</strong></p>
-        <p class="sign">Cumprimentos,<br>– clara.</p>
-      </section>
-    `;
+    try {
+      const res = await fetch(form.action, {
+        method: form.method,
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
 
-    const container = form.parentElement;
-    form.style.opacity = '0';
+      if (!res.ok) throw new Error();
 
-    setTimeout(() => {
-      container.innerHTML = resposta;
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 180);
+      form.innerHTML = `
+        <section class="letter">
+          <p>Olá,</p>
+          <p>Obrigado pela tua mensagem.</p>
+          <p>Respondemos em breve.</p>
+          <p class="sign">– clara.</p>
+        </section>`;
+    } catch {
+      alert('Houve um problema no envio. Tenta novamente.');
+    }
   });
 }
 
@@ -192,4 +188,44 @@ function initLightbox() {
     img.src = '';
     document.body.style.overflow = '';
   });
+}
+
+function initLightbox() {
+  const lightbox = document.getElementById('lightbox');
+  if (!lightbox) return;
+
+  const content = lightbox.querySelector('.lightbox-content');
+  const closeBtn = lightbox.querySelector('.lightbox-close');
+
+  document.querySelectorAll('[data-modal]').forEach(el => {
+    el.addEventListener('click', () => {
+      const iframeSrc = el.dataset.iframe;
+
+      if (iframeSrc) {
+        content.innerHTML = `
+          <iframe
+            src="${iframeSrc}"
+            loading="lazy"
+            frameborder="0"
+            aria-label="Exercício completo"
+          ></iframe>`;
+      } else {
+        content.innerHTML = `<img src="${el.src}" alt="">`;
+      }
+
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  closeBtn.addEventListener('click', close);
+  lightbox.addEventListener('click', e => {
+    if (e.target === lightbox) close();
+  });
+
+  function close() {
+    lightbox.classList.remove('open');
+    content.innerHTML = '';
+    document.body.style.overflow = '';
+  }
 }

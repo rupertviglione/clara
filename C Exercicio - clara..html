@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Levett & Quinn Ltd | Plumbing & Heating Services in Worthing</title>
+<meta name="description" content="Professional plumbing and heating services in Worthing and West Sussex. Over 30 years’ experience. Fast response. Free quotes.">
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%23C4162A'/%3E%3Ctext x='50' y='68' text-anchor='middle' font-size='60' fill='white' font-family='Arial,Helvetica,sans-serif' font-weight='700'%3EL%3C/text%3E%3C/svg%3E">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+ --red:#C4162A;--red-dark:#9F1221;--bg:#F6F6F5;--dark:#121212;
+ --text:#1C1C1C;--muted:#666;--line:#E6E6E6;--max:1200px
+}
+html{scroll-behavior:smooth}
+body{
+ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+ background:var(--bg);color:var(--text);line-height:1.55
+}
+a{text-decoration:none;color:inherit}
+.container{max-width:var(--max);margin:0 auto;padding:5.5rem 1.5rem}
+
+/* HEADER */
+header{
+ position:fixed;top:0;width:100%;z-index:20;
+ background:rgba(246,246,245,.92);
+ backdrop-filter:blur(6px);
+ border-bottom:1px solid var(--line)
+}
+.header-inner{
+ max-width:var(--max);margin:0 auto;padding:1.2rem 1.5rem;
+ display:flex;justify-content:space-between;align-items:center
+}
+.logo{font-weight:700;letter-spacing:.08em;font-size:.9rem}
+nav a{margin-left:2rem;font-size:.9rem}
+
+/* HERO */
+.hero{
+ min-height:100vh;display:flex;align-items:center;
+ background:linear-gradient(to right,rgba(0,0,0,.65),rgba(0,0,0,.35)),
+ url("https://static.wixstatic.com/media/11062b_6b8ce796d5d1452faea23aa5f3e75d09~mv2.jpg");
+ background-size:cover;background-position:center;
+ padding-top:5rem;color:#fff;opacity:0;animation:fadeIn .8s ease forwards
+}
+.hero-content{max-width:760px}
+.hero h1{font-size:clamp(2.5rem,5vw,4.1rem);margin-bottom:1rem}
+.hero p{font-size:1.15rem;opacity:.95;margin-bottom:1.6rem}
+.tags{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:2.4rem}
+.tag{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;
+padding:.35rem .55rem;border:1px solid rgba(255,255,255,.5);border-radius:4px;opacity:.9}
+.cta a{display:inline-block;margin-right:1rem;padding:.95rem 1.7rem;border-radius:4px;font-weight:500;font-size:.95rem}
+.cta-primary{background:var(--red);color:#fff}
+.cta-primary:hover{background:var(--red-dark)}
+.cta-secondary{border:1px solid rgba(255,255,255,.6)}
+
+/* INFO BAR */
+.infobar{background:#fff;border-bottom:1px solid var(--line)}
+.infobar-grid{
+ max-width:var(--max);margin:0 auto;padding:2.5rem 1.5rem;
+ display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem
+}
+.info-card{border-left:4px solid var(--red);padding:1.3rem 1.5rem;background:#fafafa}
+.info-card strong{display:block;margin-bottom:.25rem;color:var(--red)}
+
+/* SERVICES */
+.services{background:#fff}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.2rem}
+.service{
+ border:1px solid var(--line);padding:2.3rem;border-radius:14px;
+ background:linear-gradient(180deg,#fff,#fafafa);
+ box-shadow:0 10px 30px rgba(0,0,0,.04);
+ transform:translateY(20px);opacity:0;transition:.6s ease
+}
+.service.visible{transform:none;opacity:1}
+.service h3{margin-bottom:.6rem}
+.service p{color:var(--muted);font-size:.95rem}
+
+/* CONTACT */
+.contact{background:var(--bg)}
+.contact-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:3rem}
+.contact h2{margin-bottom:1rem}
+.contact p{color:var(--muted);margin-bottom:1.5rem}
+form input,form textarea{
+ width:100%;padding:.9rem;margin-bottom:1rem;border:1px solid var(--line);
+ border-radius:6px;font-family:inherit
+}
+form button{
+ background:var(--red);color:#fff;border:none;border-radius:6px;
+ padding:.9rem 1.6rem;font-weight:500;cursor:pointer
+}
+
+/* WHATSAPP – DISCREET VERSION */
+.whatsapp{
+ position:fixed;right:18px;bottom:18px;z-index:50
+}
+.whatsapp a{
+ display:flex;align-items:center;justify-content:center;
+ width:46px;height:46px;
+ border-radius:50%;
+ background:#fff;
+ border:1px solid var(--line);
+ box-shadow:0 8px 24px rgba(0,0,0,.18);
+ transition:.25s ease
+}
+.whatsapp a:hover{
+ background:var(--red);
+ border-color:var(--red)
+}
+.whatsapp svg{
+ width:20px;height:20px;
+ fill:var(--text);
+ transition:.25s ease
+}
+.whatsapp a:hover svg{fill:#fff}
+
+/* FOOTER */
+footer{background:#0d0d0d;color:#888;text-align:center;padding:2.5rem 1rem;font-size:.85rem}
+
+/* ANIMATIONS */
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@media(max-width:900px){.services-grid{grid-template-columns:repeat(2,1fr)}.contact-grid{grid-template-columns:1fr}}
+@media(max-width:600px){nav{display:none}.services-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header>
+ <div class="header-inner">
+  <div class="logo">LEVETT & QUINN LTD</div>
+  <nav><a href="#services">Services</a><a href="#contact">Contact</a></nav>
+ </div>
+</header>
+
+<section class="hero">
+ <div class="container hero-content">
+  <h1>Plumbing & Heating Services in Worthing</h1>
+  <p>Professional, reliable plumbing and heating services for homes and businesses across Worthing and West Sussex.</p>
+  <div class="tags">
+   <div class="tag">30+ years</div>
+   <div class="tag">Fast response</div>
+   <div class="tag">Free quotes</div>
+  </div>
+  <div class="cta">
+   <a href="tel:01903724590" class="cta-primary">Call 01903 724590</a>
+   <a href="#contact" class="cta-secondary">Get a free quote</a>
+  </div>
+ </div>
+</section>
+
+<section class="infobar">
+ <div class="infobar-grid">
+  <div class="info-card"><strong>Opening hours</strong>Mon–Fri · 8:00–17:00</div>
+  <div class="info-card"><strong>Address</strong>Worthing, West Sussex</div>
+  <div class="info-card"><strong>Telephone</strong>01903 724590</div>
+  <div class="info-card"><strong>Email</strong>info@levettandquinn.co.uk</div>
+ </div>
+</section>
+
+<section id="services" class="services">
+ <div class="container">
+  <div class="services-grid">
+   <div class="service"><h3>Plumbing Repairs & Installations</h3><p>Leaks, burst pipes, taps, sinks, toilets and general plumbing work.</p></div>
+   <div class="service"><h3>Bathroom & Kitchen Plumbing</h3><p>Plumbing support for renovations and new installations.</p></div>
+   <div class="service"><h3>Drainage Solutions</h3><p>Blocked drains and effective drainage repairs.</p></div>
+   <div class="service"><h3>Boiler & Heating Services</h3><p>Boiler installations, repairs and heating solutions.</p></div>
+   <div class="service"><h3>Gas Appliance Installations</h3><p>Safe installation and servicing of gas appliances.</p></div>
+   <div class="service"><h3>Underfloor Heating</h3><p>Underfloor heating installations and maintenance.</p></div>
+  </div>
+ </div>
+</section>
+
+<section id="contact" class="contact">
+ <div class="container contact-grid">
+  <div>
+   <h2>Get in touch</h2>
+   <p>Tell us what you need. We’ll get back to you quickly with clear advice or a free quote.</p>
+   <form>
+    <input type="text" placeholder="Your name">
+    <input type="email" placeholder="Email address">
+    <textarea rows="4" placeholder="How can we help?"></textarea>
+    <button type="submit">Send enquiry</button>
+   </form>
+  </div>
+  <div>
+   <h2>Quick questions?</h2>
+   <p>You can also reach us via WhatsApp during opening hours.</p>
+  </div>
+ </div>
+</section>
+
+<div class="whatsapp">
+ <a href="https://wa.me/441903724590" target="_blank" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+   <path d="M19.11 17.07c-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.17-1.34-.8-.72-1.34-1.6-1.5-1.87-.16-.27-.02-.41.12-.55.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.02-.22-.54-.45-.47-.61-.48h-.52c-.18 0-.48.07-.73.34-.25.27-.95.93-.95 2.26 0 1.34.98 2.63 1.11 2.81.14.18 1.93 2.95 4.67 4.13.65.28 1.16.45 1.56.58.66.21 1.26.18 1.74.11.53-.08 1.6-.65 1.83-1.27.23-.61.23-1.13.16-1.27-.07-.14-.25-.23-.52-.36z"/>
+  </svg>
+ </a>
+</div>
+
+<footer>
+ © Levett & Quinn Ltd · Plumbing & Heating Engineers · Worthing, West Sussex
+</footer>
+
+<script>
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add("visible");obs.unobserve(x.target)}})},{threshold:.2});
+document.querySelectorAll(".service").forEach(s=>obs.observe(s));
+</script>
+
+
+</body>
+</html>
