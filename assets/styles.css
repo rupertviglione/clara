@@ -253,7 +253,6 @@ a:hover {
   color: rgba(0, 0, 0, 0.55);
   white-space: nowrap;
 
-  pointer-events: none;
   transition: color 0.15s ease, text-decoration-color 0.15s ease;
 }
 
@@ -271,12 +270,14 @@ a:hover {
   text-align: right;
 }
 
-/* hover */
-.nav-arrow:hover .nav-label {
+/* hover: seta OU texto activam o feedback */
+.nav-arrow:hover .nav-label,
+.nav-label:hover {
   color: rgba(0, 0, 0, 0.9);
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
+  cursor: pointer;
 }
 /* =========================================================
    C — EXERCÍCIO
@@ -452,6 +453,16 @@ video::-webkit-media-controls-start-playback-button {
   pointer-events: none !important;
 }
 
+.contact-invite {
+  margin-top: 1.5rem;
+  font-size: 0.95em;
+}
+
+.contact-invite a {
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
 
 /* =======================
    CONTACTO — CARTA (limpa)
