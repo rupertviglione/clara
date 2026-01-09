@@ -648,3 +648,182 @@ body.is-leaving .page {
     height: 30vh;
   }
 }
+
+
+/* =========================================================
+   RESPONSIVE — TABLET E ABAIXO
+========================================================= */
+@media (max-width: 900px) {
+
+  /* layout principal */
+  .main {
+    grid-template-columns: 1fr;
+    row-gap: 2rem;
+  }
+
+  /* marginalia desaparece */
+  .margin {
+    display: none;
+  }
+
+  /* meta passa para baixo do conteúdo */
+  .meta {
+    margin-top: 2rem;
+  }
+
+  /* footer */
+  .footer-nav {
+    padding: 0 1.5rem;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+========================================================= */
+@media (max-width: 600px) {
+
+  /* base */
+  body {
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  .page {
+    padding-bottom: 5.5rem; /* espaço para footer fixo */
+  }
+
+  /* header */
+  .top-inner {
+    padding: 1rem;
+  }
+
+  /* layout */
+  .main {
+    padding: 1.5rem 1rem;
+  }
+
+  /* títulos */
+  .page-title {
+    margin-bottom: 1.5rem;
+  }
+
+  .section-letter {
+    font-size: 0.75rem;
+  }
+
+  .section-title {
+    font-size: 1.2rem;
+  }
+
+  /* texto */
+  .lead {
+    font-size: 1rem;
+  }
+
+  .content p {
+    font-size: 0.95rem;
+  }
+
+  /* meta como nota final */
+  .meta {
+    margin-top: 2.5rem;
+    font-size: 0.9rem;
+  }
+
+  .meta-block {
+    margin-bottom: 1.5rem;
+  }
+
+  /* ===============================
+     PÁGINA C — EXERCÍCIO
+  =============================== */
+
+  .exercise {
+    display: block;
+    margin-top: 2rem;
+  }
+
+  .exercise-item {
+    margin-bottom: 1.5rem;
+  }
+
+  .exercise-item img {
+    width: 100%;
+    height: auto;
+  }
+
+  /* ===============================
+     PÁGINA D — TRABALHOS
+  =============================== */
+
+  .carousel {
+    margin-top: 2rem;
+  }
+
+  .carousel-track {
+    height: auto;
+  }
+
+  .carousel video {
+    width: 100%;
+    height: auto;
+  }
+
+  .carousel-arrow {
+    width: 44px;
+    height: 44px;
+  }
+
+  /* ===============================
+     NAVEGAÇÃO (SETAS + LABELS)
+  =============================== */
+
+  .footer-nav {
+    padding: 0 1rem;
+  }
+
+  .nav-label {
+    font-size: 0.6rem;
+    margin-top: 0.25rem;
+  }
+
+  /* ===============================
+     PÁGINA DE CONTACTO
+  =============================== */
+
+  .letter {
+    padding: 1.5rem 1rem;
+  }
+
+  .letter textarea,
+  .letter input {
+    font-size: 1rem;
+  }
+
+  .letter textarea {
+    min-height: 6rem;
+  }
+
+  .letter button {
+    width: 100%;
+    margin-top: 1.2rem;
+  }
+
+  /* ===============================
+     LIGHTBOX / IFRAME
+  =============================== */
+
+  .lightbox {
+    padding: 0;
+  }
+
+  .lightbox-content {
+    width: 100%;
+    height: 100%;
+  }
+
+  .lightbox-content iframe {
+    width: 100%;
+    height: 100%;
+  }
+}
