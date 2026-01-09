@@ -89,50 +89,7 @@
   <button aria-label="fechar">×</button>
   <img src="" alt="">
 </div>
-<script src="assets/app.js"></script>
-<script src="assets/preload.js"></script>
-
-<script>
-  const modal = document.querySelector('.modal');
-  const modalImg = modal.querySelector('img');
-  const closeBtn = modal.querySelector('.modal-close');
-
-  document.querySelectorAll('[data-modal]').forEach(img => {
-    img.addEventListener('click', () => {
-      modalImg.src = img.src;
-      modal.hidden = false;
-    });
-  });
-
-  closeBtn.onclick = () => {
-    modal.hidden = true;
-    modalImg.src = '';
-  };
-
-  modal.onclick = e => {
-    if (e.target === modal) {
-      modal.hidden = true;
-      modalImg.src = '';
-    }
-  };
-</script>
-<script>
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = lightbox.querySelector('img');
-
-document.querySelectorAll('[data-modal]').forEach(img => {
-  img.addEventListener('click', () => {
-    lightboxImg.src = img.src;
-    lightbox.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  });
-});
-
-lightbox.addEventListener('click', () => {
-  lightbox.classList.remove('open');
-  document.body.style.overflow = '';
-});
-</script>
+<script src="assets/app.js" defer></script>
 
 </body>
 </html>
