@@ -3,6 +3,12 @@
    Código unificado, limpo e defensivo
 ========================================================= */
 
+// Corrigir back/forward cache (mobile branco ao voltar)
+window.addEventListener('pageshow', () => {
+  document.body.classList.remove('is-leaving');
+  document.body.classList.add('is-ready');
+});
+
 document.addEventListener('DOMContentLoaded', () => {
   document.body.classList.add('is-ready');
 
