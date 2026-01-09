@@ -28,10 +28,10 @@ body {
 
 body.is-leaving { opacity: 0; }
 
-.visually-hidden { display:none; }
+.visually-hidden { display: none; }
 
 /* =========================================================
-   VARIÁVEIS (DESKTOP)
+   VARIÁVEIS — DESKTOP
 ========================================================= */
 :root {
   --content-width: 40ch;
@@ -64,14 +64,20 @@ body.is-leaving { opacity: 0; }
   align-items: center;
 }
 
-.brand { font-size: 1rem; }
+.brand {
+  font-size: 1rem;
+}
 
 a {
   color: inherit;
   text-decoration: none;
   transition: opacity .12s ease, transform .12s ease;
 }
-a:hover { opacity:.7; transform:translateY(-1px); }
+
+a:hover {
+  opacity: .7;
+  transform: translateY(-1px);
+}
 
 /* =========================================================
    LAYOUT PRINCIPAL — DESKTOP
@@ -105,18 +111,25 @@ a:hover { opacity:.7; transform:translateY(-1px); }
 .section-letter {
   font-size: 3.4rem;
   font-weight: 700;
+  line-height: 1;
 }
 
 .section-title {
   font-size: 2.4rem;
   font-weight: 400;
+  line-height: 1.02;
 }
 
 /* =========================================================
    TEXTO
 ========================================================= */
-.content p { margin-bottom: 1rem; }
-.lead { margin-bottom: 1.4rem; }
+.content p {
+  margin-bottom: 1rem;
+}
+
+.lead {
+  margin-bottom: 1.4rem;
+}
 
 /* =========================================================
    MARGINALIA / META — DESKTOP
@@ -137,7 +150,10 @@ a:hover { opacity:.7; transform:translateY(-1px); }
   padding-top: 5.6rem;
 }
 
-.meta h3 { font-size:1rem; margin-bottom:.25rem; }
+.meta h3 {
+  font-size: 1rem;
+  margin-bottom: .25rem;
+}
 
 /* =========================================================
    FOOTER FIXO — DESKTOP
@@ -178,56 +194,57 @@ a:hover { opacity:.7; transform:translateY(-1px); }
 }
 
 .nav-arrow::before {
-  content:"";
-  position:absolute;
-  top:50%;
-  left:0;
-  right:0;
-  height:1px;
-  background:var(--stroke);
-  transform:translateY(-50%);
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--stroke);
+  transform: translateY(-50%);
 }
 
 .nav-arrow::after {
-  content:"";
-  position:absolute;
-  top:50%;
-  width:7px;
-  height:7px;
-  border-top:1px solid var(--stroke);
-  border-right:1px solid var(--stroke);
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border-top: 1px solid var(--stroke);
+  border-right: 1px solid var(--stroke);
 }
 
 .nav-arrow.left::after {
-  left:0;
-  transform:translateY(-50%) rotate(-135deg);
+  left: 0;
+  transform: translateY(-50%) rotate(-135deg);
 }
 
 .nav-arrow.right::after {
-  right:0;
-  transform:translateY(-50%) rotate(45deg);
+  right: 0;
+  transform: translateY(-50%) rotate(45deg);
 }
 
-/* labels desktop (fora da linha) */
+/* labels desktop */
 .nav-label {
-  position:absolute;
-  top:100%;
-  margin-top:.05rem;
-  font-size:.55rem;
-  font-weight:600;
-  letter-spacing:.06em;
-  text-transform:uppercase;
-  opacity:.6;
-  white-space:nowrap;
+  position: absolute;
+  top: 100%;
+  margin-top: .05rem;
+  font-size: .55rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  opacity: .6;
+  white-space: nowrap;
 }
 
 .nav-arrow.right .nav-label {
-  left:100%;
-  margin-left:.4rem;
+  left: 100%;
+  margin-left: .4rem;
 }
+
 .nav-arrow.left .nav-label {
-  right:100%;
-  margin-right:.4rem;
+  right: 100%;
+  margin-right: .4rem;
 }
 
 /* =========================================================
@@ -248,24 +265,25 @@ a:hover { opacity:.7; transform:translateY(-1px); }
 }
 
 .page.C .exercise-item img {
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:top;
-  cursor:zoom-in;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  cursor: zoom-in;
 }
 
-/* LIGHTBOX (restaurado) */
+/* LIGHTBOX */
 .lightbox {
   position: fixed;
   inset: 0;
-  background: rgba(255,255,255,0.96);
+  background: rgba(255,255,255,.96);
   z-index: 9999;
   display: none;
   align-items: center;
   justify-content: center;
 }
-.lightbox.open { display:flex; }
+
+.lightbox.open { display: flex; }
 
 .lightbox-content {
   width: 92vw;
@@ -273,19 +291,22 @@ a:hover { opacity:.7; transform:translateY(-1px); }
   max-width: 1400px;
   max-height: 900px;
 }
+
 .lightbox-content img,
 .lightbox-content iframe {
-  width:100%;
-  height:100%;
-  object-fit:contain;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
+
 .lightbox-close {
   position: fixed;
   top: 1rem;
   right: 1rem;
   font-size: 1.5rem;
-  background:none;
-  border:none;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 /* =========================================================
@@ -297,30 +318,39 @@ a:hover { opacity:.7; transform:translateY(-1px); }
   position: relative;
 }
 
-.page.D .carousel-item { display:none; }
-.page.D .carousel-item.active { display:block; }
+.page.D .carousel-item { display: none; }
+.page.D .carousel-item.active { display: block; }
 
 .page.D video {
-  width:100%;
-  height:48vh;
-  object-fit:cover;
-  border:6px solid #fff;
+  width: 100%;
+  height: 48vh;
+  object-fit: cover;
+  border: 6px solid #fff;
+  display: block;
 }
 
 .page.D .carousel-arrow {
-  position:absolute;
-  top:50%;
-  width:32px;
-  height:32px;
-  background:none;
-  border:none;
-  cursor:pointer;
+  position: absolute;
+  top: 50%;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
-.page.D .carousel-arrow.prev { left:12px; transform:translateY(-50%); }
-.page.D .carousel-arrow.next { right:12px; transform:translateY(-50%); }
+
+.page.D .carousel-arrow.prev {
+  left: 12px;
+  transform: translateY(-50%);
+}
+
+.page.D .carousel-arrow.next {
+  right: 12px;
+  transform: translateY(-50%);
+}
 
 /* =========================================================
-   CONTACTO — DESKTOP (restaurado)
+   CONTACTO — DESKTOP
 ========================================================= */
 .page.contact {
   min-height: calc(100vh - 4rem);
@@ -330,11 +360,48 @@ a:hover { opacity:.7; transform:translateY(-1px); }
 }
 
 .letter {
-  width:44ch;
-  max-width:92vw;
-  padding:2.6rem 2.8rem;
-  background:#fbfaf7;
-  font-family:"Courier New", monospace;
+  width: 44ch;
+  max-width: 92vw;
+  padding: 2.6rem 2.8rem;
+  background: #fbfaf7;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 1rem;
+  line-height: 1.55;
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,.04),
+    0 18px 40px rgba(0,0,0,.04);
+}
+
+.letter p { margin-bottom: 1.15rem; }
+
+.letter input,
+.letter textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(0,0,0,.15);
+  font-family: inherit;
+  font-size: inherit;
+  padding: .15rem 0;
+}
+
+.letter textarea { min-height: 4.5rem; }
+
+.letter input:focus,
+.letter textarea:focus {
+  outline: none;
+  border-bottom-color: rgba(0,0,0,.35);
+}
+
+.letter button {
+  margin-top: 1.2rem;
+  background: none;
+  border: none;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: .95rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
 }
 
 /* =========================================================
@@ -342,46 +409,60 @@ a:hover { opacity:.7; transform:translateY(-1px); }
 ========================================================= */
 @media (max-width: 600px) {
 
-  /* BLOCO = texto + marginália */
+  html, body { overflow-x: hidden; }
+
+  /* eixo comum: margens simétricas */
   .top-inner,
   .main,
-  .footer-fixed {
-    max-width: calc(100% - 2rem);
-    width: calc(100% - 2rem);
+  .footer-fixed,
+  .page.C .exercise,
+  .page.D .carousel,
+  .page.contact .letter {
+    width: calc(100% - 2.4rem);
     margin-left: auto;
     margin-right: auto;
   }
 
+  .top {
+    padding: 1rem 0 0;
+  }
+
+  /* layout: texto cresce, marginália fixa */
   .main {
-    grid-template-columns: 1fr 6ch;
-    column-gap: .6rem;
+    grid-template-columns: 1fr 7ch;
+    column-gap: .8rem;
   }
 
-  /* evitar overflow lateral */
-  .margin { max-width:6ch; }
+  /* títulos */
+  .section-letter {
+    font-size: 1.2rem;
+  }
 
-  /* meta mais próxima */
+  .section-title {
+    font-size: 1.35rem;
+  }
+
+  /* marginália */
+  .margin {
+    padding-top: 1.4rem;
+    font-size: .75rem;
+    max-width: 7ch;
+  }
+
+  /* meta em baixo */
   .meta {
-    margin-top: .8rem;
+    grid-column: 1 / -1;
     padding-top: 0;
+    margin-top: .8rem;
   }
 
-  /* FOOTER MOBILE */
+  /* footer mobile */
   .footer-fixed {
     position: static;
-    transform:none;
+    transform: none;
     margin-top: 1rem;
   }
 
-  .footer-nav {
-    display:flex;
-  }
-
-  .nav-arrow {
-    height:34px;
-  }
-
-  /* labels abaixo da seta */
   .nav-label {
     position: static;
     display: block;
@@ -389,35 +470,38 @@ a:hover { opacity:.7; transform:translateY(-1px); }
     font-size: .6rem;
   }
 
-  /* alinhamentos correctos */
-  .nav-arrow.left .nav-label { text-align:left; }
-  .nav-arrow.right .nav-label { text-align:right; }
+  .nav-arrow.left .nav-label { text-align: left; }
+  .nav-arrow.right .nav-label { text-align: right; }
 
-  /* assinatura maior */
   .signature {
-    margin-top:.6rem;
-    font-size:1.1rem;
-    text-align:right;
+    font-size: 1.15rem;
+    margin-top: .4rem;
+    text-align: right;
   }
 
-  /* C — imagens empilhadas e cortadas */
+  /* C — imagens empilhadas */
   .page.C .exercise {
-    flex-direction:column;
-    width:100%;
+    flex-direction: column;
+    gap: .9rem;
   }
+
   .page.C .exercise-item {
-    width:100%;
-    height:32vh;
+    width: 100%;
+    height: 32vh;
   }
 
-  /* D — vídeo maior */
+  /* D — vídeo */
   .page.D video {
-    height:56vh;
+    height: 46vh;
   }
 
-  /* CONTACTO — subir carta */
+  /* contacto mobile */
   .page.contact {
-    align-items:flex-start;
-    padding-top:.5rem;
+    align-items: flex-start;
+    padding-top: .8rem;
+  }
+
+  .letter {
+    padding: 1.6rem 1.4rem;
   }
 }
