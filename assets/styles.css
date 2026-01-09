@@ -242,8 +242,8 @@ a:hover {
 .nav-label {
   display: inline-block;
   margin-left: 0.5rem;
-
-  font-size: 0.75rem;
+right: 0px;
+  font-size: 0.55rem;
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
