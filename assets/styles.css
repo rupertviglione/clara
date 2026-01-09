@@ -64,9 +64,7 @@ body.is-leaving { opacity: 0; }
   align-items: center;
 }
 
-.brand {
-  font-size: 1rem;
-}
+.brand { font-size: 1rem; }
 
 a {
   color: inherit;
@@ -123,13 +121,8 @@ a:hover {
 /* =========================================================
    TEXTO
 ========================================================= */
-.content p {
-  margin-bottom: 1rem;
-}
-
-.lead {
-  margin-bottom: 1.4rem;
-}
+.content p { margin-bottom: 1rem; }
+.lead { margin-bottom: 1.4rem; }
 
 /* =========================================================
    MARGINALIA / META — DESKTOP
@@ -259,7 +252,7 @@ a:hover {
 
 .page.C .exercise-item {
   width: 50%;
-  height: 42vh;
+  height: 34vh; /* ↓ reduzido */
   overflow: hidden;
   border: 8px solid #fff;
 }
@@ -270,43 +263,6 @@ a:hover {
   object-fit: cover;
   object-position: top;
   cursor: zoom-in;
-}
-
-/* LIGHTBOX */
-.lightbox {
-  position: fixed;
-  inset: 0;
-  background: rgba(255,255,255,.96);
-  z-index: 9999;
-  display: none;
-  align-items: center;
-  justify-content: center;
-}
-
-.lightbox.open { display: flex; }
-
-.lightbox-content {
-  width: 92vw;
-  height: 92vh;
-  max-width: 1400px;
-  max-height: 900px;
-}
-
-.lightbox-content img,
-.lightbox-content iframe {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.lightbox-close {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  font-size: 1.5rem;
-  background: none;
-  border: none;
-  cursor: pointer;
 }
 
 /* =========================================================
@@ -323,8 +279,8 @@ a:hover {
 
 .page.D video {
   width: 100%;
-  height: 48vh;
-  object-fit: cover;
+  height: auto; /* ← restaurado */
+  object-fit: contain;
   border: 6px solid #fff;
   display: block;
 }
@@ -377,21 +333,14 @@ a:hover {
 .letter input,
 .letter textarea {
   width: 100%;
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid rgba(0,0,0,.15);
+  background: rgba(255,255,255,.4);
+  border: 1px solid rgba(0,0,0,.15);
   font-family: inherit;
   font-size: inherit;
-  padding: .15rem 0;
+  padding: .25rem .35rem;
 }
 
 .letter textarea { min-height: 4.5rem; }
-
-.letter input:focus,
-.letter textarea:focus {
-  outline: none;
-  border-bottom-color: rgba(0,0,0,.35);
-}
 
 .letter button {
   margin-top: 1.2rem;
@@ -411,42 +360,38 @@ a:hover {
 
   html, body { overflow-x: hidden; }
 
-  /* eixo comum: margens simétricas */
-  .top-inner,
+  /* alinhamento à esquerda pelo menu */
+  .top-inner {
+    max-width: none;
+    width: auto;
+    margin-left: 1.2rem;
+    margin-right: 1.2rem;
+  }
+
   .main,
   .footer-fixed,
   .page.C .exercise,
-  .page.D .carousel,
-  .page.contact .letter {
-    width: calc(100% - 2.4rem);
-    margin-left: auto;
-    margin-right: auto;
+  .page.D .carousel {
+    margin-left: 1.2rem;
+    margin-right: 1.2rem;
+    width: auto;
   }
 
-  .top {
-    padding: 1rem 0 0;
-  }
-
-  /* layout: texto cresce, marginália fixa */
+  /* layout mobile */
   .main {
-    grid-template-columns: 1fr 7ch;
+    grid-template-columns: 1fr 8ch; /* texto cresce */
     column-gap: .8rem;
   }
 
   /* títulos */
-  .section-letter {
-    font-size: 1.2rem;
-  }
+  .section-letter { font-size: 1.2rem; }
+  .section-title { font-size: 1.35rem; }
 
-  .section-title {
-    font-size: 1.35rem;
-  }
-
-  /* marginália */
+  /* marginália com respiro à direita */
   .margin {
     padding-top: 1.4rem;
     font-size: .75rem;
-    max-width: 7ch;
+    padding-right: .6rem;
   }
 
   /* meta em baixo */
@@ -466,7 +411,7 @@ a:hover {
   .nav-label {
     position: static;
     display: block;
-    margin-top: .25rem;
+    margin-top: .3rem; /* ↓ afastado da seta */
     font-size: .6rem;
   }
 
@@ -487,21 +432,23 @@ a:hover {
 
   .page.C .exercise-item {
     width: 100%;
-    height: 32vh;
+    height: 30vh;
   }
 
-  /* D — vídeo */
+  /* D — vídeo mobile */
   .page.D video {
     height: 46vh;
+    object-fit: cover;
   }
 
   /* contacto mobile */
   .page.contact {
     align-items: flex-start;
-    padding-top: .8rem;
+    padding-top: .6rem;
   }
 
   .letter {
+    margin: 0 1.2rem;
     padding: 1.6rem 1.4rem;
   }
 }
