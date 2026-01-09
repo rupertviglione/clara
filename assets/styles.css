@@ -1,4 +1,9 @@
 /* =========================================================
+   styles.css — CLARA (versão unificada)
+   Desktop intacto + media queries finais
+========================================================= */
+
+/* =========================================================
    RESET
 ========================================================= */
 * {
@@ -9,14 +14,13 @@
 
 html, body {
   height: 100%;
-}
-
-html {
   scroll-behavior: smooth;
 }
+
 .visually-hidden {
-  display:none;
+  display: none;
 }
+
 body {
   font-family: Georgia, "Times New Roman", serif;
   background: #f7f4ee;
@@ -33,7 +37,6 @@ body {
 body.is-leaving {
   opacity: 0;
 }
-
 
 /* =========================================================
    VARIÁVEIS
@@ -66,6 +69,7 @@ body.is-leaving {
   margin: 0 auto;
   display: flex;
   gap: 2rem;
+  align-items: center;
 }
 
 .brand {
@@ -85,7 +89,7 @@ a:hover {
 
 /* =========================================================
    LAYOUT PRINCIPAL
-========================================================= */
+======================================================== */
 .page {
   padding: 2.2rem 3rem 1.4rem;
   min-height: calc(100vh - 3.6rem);
@@ -93,12 +97,14 @@ a:hover {
   flex-direction: column;
 }
 
+/* grid principal: content | margin | meta */
 .main {
   display: grid;
   grid-template-columns: var(--content-width) var(--margin-width) var(--meta-width);
   column-gap: var(--gap);
   max-width: var(--block-total);
   margin: 0 auto;
+  align-items: start;
 }
 
 /* =========================================================
@@ -114,11 +120,13 @@ a:hover {
 .section-letter {
   font-size: 3.4rem;
   font-weight: 700;
+  line-height: 1;
 }
 
 .section-title {
   font-size: 2.4rem;
   font-weight: 400;
+  line-height: 1.02;
 }
 
 /* =========================================================
@@ -188,8 +196,8 @@ a:hover {
   font-size: 1.75rem;
   white-space: nowrap;
   pointer-events: auto;
+  padding-right: 0.6rem; /* evita tocar a borda */
 }
-
 
 /* seta base */
 .nav-arrow {
@@ -242,7 +250,7 @@ a:hover {
   border-color: #777;
 }
 
-/* legenda comum */
+/* legenda comum (desktop: fora da linha) */
 .nav-label {
   position: absolute;
   top: 100%;
@@ -259,14 +267,14 @@ a:hover {
   transition: color 0.15s ease, text-decoration-color 0.15s ease;
 }
 
-/* seta para a direita → texto fora, à direita */
+/* seta para a direita → texto fora, à direita (desktop) */
 .nav-arrow.right .nav-label {
   left: 100%;
   margin-left: 0.4rem;
   text-align: left;
 }
 
-/* seta para a esquerda → texto fora, à esquerda */
+/* seta para a esquerda → texto fora, à esquerda (desktop) */
 .nav-arrow.left .nav-label {
   right: 100%;
   margin-right: 0.4rem;
@@ -282,9 +290,10 @@ a:hover {
   text-underline-offset: 3px;
   cursor: pointer;
 }
+
 /* =========================================================
    C — EXERCÍCIO
-========================================================= */
+======================================================== */
 main.page.C .exercise {
   width: var(--block-total);
   margin: 1rem auto 0;
@@ -307,7 +316,8 @@ main.page.C .exercise-item img {
   cursor: zoom-in;
 }
 
-/* lightbox */.lightbox {
+/* lightbox */
+.lightbox {
   position: fixed;
   inset: 0;
   background: rgba(255, 255, 255, 0.96);
@@ -349,10 +359,9 @@ main.page.C .exercise-item img {
   cursor: pointer;
 }
 
-
 /* =========================================================
    D — TRABALHOS
-========================================================= */
+======================================================== */
 
 /* ---------- CAROUSEL ---------- */
 
@@ -468,6 +477,7 @@ video::-webkit-media-controls-start-playback-button {
   pointer-events: none !important;
 }
 
+/* contact invite small */
 .contact-invite {
   margin-top: 1.5rem;
   margin-bottom:0rem!important;
@@ -480,23 +490,20 @@ video::-webkit-media-controls-start-playback-button {
   text-underline-offset: 3px;
 }
 
-/* =======================
-   CONTACTO — CARTA (limpa)
-   Substitui as regras antigas da página contacto
-   ======================= */
+/* =========================================================
+   CONTACTO — CARTA
+======================================================== */
 
 .page.contact {
-  /* reduzir risco de overflow: aumentar o valor se o topo for mais alto */
   min-height: calc(100vh - 5rem);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0;              /* evitar paddings globais que empurrem a página */
-  overflow: hidden;        /* garante que não aparece slider por excesso de altura */
+  padding: 0;
+  overflow: hidden;
   box-sizing: border-box;
 }
 
-/* normalizar o form — não criar caixas extra */
 .page.contact form {
   margin: 0;
   padding: 0;
@@ -506,9 +513,8 @@ video::-webkit-media-controls-start-playback-button {
   width: 100%;
 }
 
-/* a folha (carta) — estreita, tipo máquina */
 .letter {
-  width: 44ch;             /* mais esguio que antes */
+  width: 44ch;
   max-width: 92vw;
   padding: 2.6rem 2.8rem;
   background: #fbfaf7;
@@ -534,10 +540,8 @@ video::-webkit-media-controls-start-playback-button {
   opacity: .35;
 }
 
-/* texto do corpo */
 .letter p { margin: 0 0 1.15rem 0; }
 
-/* inputs 'fundidos' na folha — quase invisíveis */
 .letter input,
 .letter textarea {
   font-family: inherit;
@@ -545,7 +549,7 @@ video::-webkit-media-controls-start-playback-button {
   width: 100%;
   background: transparent;
   border: none;
-  border-bottom: 1px solid rgba(0,0,0,.10); /* muito subtil */
+  border-bottom: 1px solid rgba(0,0,0,.10);
   padding: .18rem 0;
   color: inherit;
   resize: none;
@@ -554,13 +558,9 @@ video::-webkit-media-controls-start-playback-button {
   appearance: none;
 }
 
-/* linhas de campos menos visíveis por defeito */
 .letter input { max-width: 28ch; display:block; }
-
-/* textarea com altura mínima */
 .letter textarea { min-height: 4.2rem; }
 
-/* foco simples e legível */
 .letter input:focus,
 .letter textarea:focus {
   outline: none;
@@ -568,27 +568,24 @@ video::-webkit-media-controls-start-playback-button {
   box-shadow: none;
 }
 
-/* rótulos / strong (manter o estilo de máquina) */
 .letter strong { font-weight: 700; }
 
-/* botão discreto — administrativo */
 .letter button {
   margin-top: 1.2rem;
   background: none;
   border: 1px solid rgba(0,0,0,.12);
   padding: .38rem .9rem;
   cursor: pointer;
-  font-family: Georgia, "Times New Roman", serif; /* corpo mais formal */
+  font-family: Georgia, "Times New Roman", serif;
   transition: opacity .12s ease, transform .12s ease;
 }
 .letter button:hover { opacity: .85; transform: translateY(-1px); }
 
-/* assinatura do utilizador (dentro da carta) */
 .letter .sign { margin-top: .9rem; font-size: 1rem; }
 
-/* =======================
+/* =========================================================
    TRANSIÇÃO ENTRE PÁGINAS
-======================= */
+======================================================== */
 
 @keyframes pageIn {
   from {
@@ -612,67 +609,65 @@ video::-webkit-media-controls-start-playback-button {
   }
 }
 
-/* entrada */
 .page {
   animation: pageIn .42s cubic-bezier(.4,0,.2,1) both;
 }
 
-/* saída */
 body.is-leaving .page {
   animation: pageOut .28s cubic-bezier(.4,0,.2,1) both;
 }
 
-
 /* =========================================================
-   RESPONSIVE — TABLET (≤ 900px)
-========================================================= */
+   RESPONSIVE — TABLET & MOBILE (BLOCO ÚNICO)
+   Mantém a versão desktop. Ajustes para tablet e mobile.
+======================================================== */
+
+/* ----- tablet (≤ 900px) ----- */
 @media (max-width: 900px) {
 
+  /* content larga, margin reduzida para caber melhor */
   .main {
-    grid-template-columns: 1fr;
-    row-gap: 1.75rem;
+    grid-template-columns: 1fr 8ch;
+    column-gap: 1rem;
+    max-width: calc(100% - 4rem); /* permite respirar nas laterais */
+    padding: 0 1rem;
   }
 
+  .top-inner {
+    padding: 0 1rem;
+    max-width: calc(100% - 4rem);
+  }
+
+  /* tornar a marginália mais discreta */
   .margin {
-    display: none;
-  }
-
-  .meta {
-    margin-top: 1.5rem;
-  }
-
-  .footer-nav {
-    padding: 0 1.25rem;
-  }
-}
-
-/* =========================================================
-   RESPONSIVE — TABLET (≤ 900px)
-========================================================= */
-@media (max-width: 900px) {
-
-  .main {
-    grid-template-columns: 1fr auto;
-    column-gap: 1.25rem;
-    align-items: start;
-  }
-
-  .margin {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     opacity: 0.7;
+    padding-top: 3.6rem;
   }
 
   .meta {
-    margin-top: 1.25rem;
+    padding-top: 3.6rem;
+    margin-top: 0;
+  }
+
+  /* footer centraliza com margens mais pequenas */
+  .footer-fixed {
+    width: calc(100% - 2rem);
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 1rem;
+  }
+
+  .footer-fixed .signature {
+    font-size: 1.5rem;
+    padding-right: 0.4rem;
   }
 }
 
-/* =========================================================
-   RESPONSIVE — MOBILE (≤ 600px)
-   REGIME LIMPO, CONTIDO E COERENTE
-========================================================= */
+/* ----- mobile (≤ 600px) ----- */
 @media (max-width: 600px) {
 
+  /* base */
   html, body {
     overflow-x: hidden;
   }
@@ -682,20 +677,29 @@ body.is-leaving .page {
     line-height: 1.55;
   }
 
-  /* ---------- layout principal ---------- */
-
-  .main {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    column-gap: 1rem;
-    padding: 1.2rem 1rem;
-    align-items: start;
+  .top {
+    padding: 1rem;
   }
 
-  /* ---------- títulos ---------- */
+  .top-inner {
+    max-width: calc(100% - 2rem);
+    margin: 0 auto;
+    padding: 0;
+  }
 
+  /* layout: duas colunas suaves (content + margin) para manter margem ao lado */
+  .main {
+    display: grid;
+    grid-template-columns: 1fr 6ch;
+    column-gap: 0.6rem;
+    padding: 0 1rem;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  /* títulos — tornar letra identificadora mais presente */
   .page-title {
-    margin-bottom: 1rem;
+    margin-bottom: 0.9rem;
   }
 
   .section-letter {
@@ -706,7 +710,7 @@ body.is-leaving .page {
 
   .section-title {
     font-size: 1.25rem;
-    line-height: 1.15;
+    line-height: 1.12;
   }
 
   .lead {
@@ -714,15 +718,15 @@ body.is-leaving .page {
   }
 
   .content p {
-    font-size: 0.95rem;
+    font-size: 0.96rem;
   }
 
-  /* ---------- marginália ao lado ---------- */
-
+  /* marginália: compacta e ao lado */
   .margin {
     display: block;
-    font-size: 0.8rem;
-    opacity: 0.65;
+    font-size: 0.78rem;
+    opacity: 0.68;
+    padding-top: 1.2rem;
     white-space: nowrap;
   }
 
@@ -731,104 +735,173 @@ body.is-leaving .page {
     margin-bottom: 0.35rem;
   }
 
-  /* ---------- meta ---------- */
-
+  /* meta como bloco de rodapé da coluna principal */
   .meta {
     grid-column: 1 / -1;
-    margin-top: 1rem;
+    margin-top: 0.8rem;
     font-size: 0.9rem;
+    padding-top: 0.6rem;
   }
 
-  .meta-block {
-    margin-bottom: 1rem;
-  }
-
-  /* ---------- footer / setas ---------- */
-
+  /* FOOTER: tornar parte do fluxo, conter as setas dentro da largura da página */
   .footer-fixed {
     position: static;
-    margin-top: 1.25rem;
+    width: calc(100% - 2rem);
+    margin: 0.8rem auto 0;
+    transform: none;
+    left: auto;
+    bottom: auto;
     padding: 0;
+    pointer-events: auto;
     background: transparent;
   }
 
   .footer-nav {
-    width: calc(100% - 2rem);
-    margin: 0 auto;
     display: flex;
+    width: 100%;
+    margin: 0 auto;
     justify-content: center;
     align-items: center;
     gap: 0;
+    padding: 0 0.4rem;
   }
 
+  /*
+    Setas contidas: duas metades que se tocam visualmente no centro.
+    - largura definida em % para permitir margem lateral pequena
+    - cabeças das setas aparecem dentro da margem
+  */
   .nav-arrow {
-    width: 42%;
-    height: 32px;
+    width: 48%;
+    height: 34px;
     flex: 0 0 auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
+    pointer-events: auto;
   }
 
+  /* linha ajustada para não sair do content width */
+  .nav-arrow::before {
+    left: 4%;
+    right: 4%;
+  }
+
+  /* cabeça das setas um pouco maior e mais visível em mobile */
+  .nav-arrow::after {
+    width: 9px;
+    height: 9px;
+    border-top: 1px solid var(--stroke);
+    border-right: 1px solid var(--stroke);
+  }
+
+  .nav-arrow.left::after { left: 6%; transform: translateY(-50%) rotate(-135deg); }
+  .nav-arrow.right::after { right: 6%; transform: translateY(-50%) rotate(45deg); }
+
+  /* labels: sob a cabeça da seta, centradas e dentro da width */
   .nav-label {
+    position: static;
     display: block;
-    font-size: 0.6rem;
-    margin-top: 0.2rem;
+    font-size: 0.64rem;
+    margin-top: 0.25rem;
     text-align: center;
     white-space: nowrap;
-    opacity: 0.85;
+    opacity: 0.88;
+    pointer-events: auto;
   }
 
-  /* ---------- assinatura ---------- */
-
+  /* assinatura: garantir margem e não sair do ecrã */
   .signature {
     width: calc(100% - 2rem);
-    margin: 0.6rem auto 0;
+    margin: 0.5rem auto 0;
     text-align: right;
-    font-size: 0.85rem;
-    opacity: 0.6;
+    font-size: 0.9rem;
+    padding-right: 0.6rem;
+    opacity: 0.65;
+    box-sizing: border-box;
   }
 
-  /* ---------- página C ---------- */
-
-  .exercise {
+  /* PÁGINA C — imagens empilhadas e contidas */
+  main.page.C .exercise {
     display: block;
-    margin-top: 1.2rem;
-  }
-
-  .exercise-item {
     width: 100%;
-    margin-bottom: 1rem;
+    margin: 0.8rem auto 0;
+    padding: 0;
+    gap: 0.75rem;
   }
 
-  .exercise-item img {
-    display: block;
-    width: calc(100% - 2rem);
-    max-width: 92vw;
-    margin: 0 auto;
-    height: auto;
-  }
-
-  /* ---------- página D ---------- */
-
-  .carousel {
-    margin-top: 1.2rem;
-  }
-
-  .carousel video {
+  main.page.C .exercise-item {
     width: 100%;
     height: auto;
-    max-height: 48vh;
+    margin: 0 0 0.9rem 0;
+    border: 6px solid #fff;
+  }
+
+  main.page.C .exercise-item img {
+    width: 100%;
+    height: auto;
     object-fit: cover;
+    display: block;
   }
 
-  .carousel-arrow {
-    width: 32px;
-    height: 32px;
+  /* PÁGINA D — vídeo mais contido */
+  main.page.D .carousel {
+    width: 100%;
+    margin: 0.8rem auto 0;
   }
 
-  /* ---------- contacto ---------- */
+  main.page.D .carousel-track {
+    position: relative;
+  }
+
+  main.page.D .carousel video {
+    width: 100%;
+    height: auto;
+    max-height: 42vh;
+    object-fit: cover;
+    border: 4px solid #fff;
+    display: block;
+  }
+
+  /* carousel arrow mobile: torná-las visíveis e tácteis (mas não fora do fluxo) */
+  .page.D .carousel-arrow {
+    position: static;
+    margin: 0.6rem 0;
+    width: 44px;
+    height: 44px;
+  }
+
+  /* CONTACTO — carta sobe e fica mais junto ao topo */
+  .page.contact {
+    align-items: flex-start;
+    padding-top: 1rem;
+  }
+
+  .page.contact form {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
 
   .page.contact .letter {
-    margin-top: 0.5rem;
-    padding: 1.2rem 1rem;
+    margin: 0.8rem auto 0;
+    padding: 1.4rem 1.2rem;
+    max-width: 94vw;
+    width: 44ch;
+  }
+
+  /* reduzir sombras/offsets para caber bem no ecrã */
+  .lightbox {
+    background: rgba(255,255,255,0.98);
+  }
+
+  .lightbox.open .lightbox-content {
+    width: 94vw;
+    height: 92vh;
+    max-width: 960px;
+    max-height: 88vh;
   }
 }
+
+/* END OF FILE */
