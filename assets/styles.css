@@ -239,10 +239,11 @@ a:hover {
   border-color: #777;
 }
 
+/* legenda comum */
 .nav-label {
   position: absolute;
   top: 100%;
-  margin-top: 0.25rem;
+  margin-top: 0.05rem;
 
   font-size: 0.55rem;
   font-weight: 600;
@@ -252,23 +253,25 @@ a:hover {
   color: rgba(0, 0, 0, 0.55);
   white-space: nowrap;
 
-  pointer-events: none; /* clique é sempre na seta */
+  pointer-events: none;
   transition: color 0.15s ease, text-decoration-color 0.15s ease;
 }
 
-/* seta para a direita → legenda à direita */
+/* seta para a direita → texto fora, à direita */
 .nav-arrow.right .nav-label {
-  right: 0;
-  text-align: right;
-}
-
-/* seta para a esquerda → legenda à esquerda */
-.nav-arrow.left .nav-label {
-  left: 0;
+  left: 100%;
+  margin-left: 0.4rem;
   text-align: left;
 }
 
-/* hover: sublinhado só no texto */
+/* seta para a esquerda → texto fora, à esquerda */
+.nav-arrow.left .nav-label {
+  right: 100%;
+  margin-right: 0.4rem;
+  text-align: right;
+}
+
+/* hover */
 .nav-arrow:hover .nav-label {
   color: rgba(0, 0, 0, 0.9);
   text-decoration: underline;
