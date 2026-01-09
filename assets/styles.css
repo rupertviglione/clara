@@ -14,7 +14,9 @@ html, body {
 html {
   scroll-behavior: smooth;
 }
-
+.visual-hidden {
+  display:none;
+}
 body {
   font-family: Georgia, "Times New Roman", serif;
   background: #f7f4ee;
