@@ -14,7 +14,7 @@ html, body {
 html {
   scroll-behavior: smooth;
 }
-.visual-hidden {
+.visually-hidden {
   display:none;
 }
 body {
