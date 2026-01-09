@@ -1,98 +1,90 @@
 /* =========================================================
-   RESET
+   styles.css — versão consolidada (desktop + mobile)
+   Apagar tudo o que existia e colar este ficheiro.
 ========================================================= */
+
+/* RESET */
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
+html{scroll-behavior:smooth}
 body{
-  font-family:Georgia,"Times New Roman",serif;
+  font-family: Georgia, "Times New Roman", serif;
   background:#f7f4ee;
   color:#111;
   line-height:1.42;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
   overflow-x:hidden;
 }
-.visually-hidden{display:none}
 
-/* =========================================================
-   VARS (DESKTOP ONLY)
-========================================================= */
+/* VISUALLY HIDDEN */
+.visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* VARS (desktop) */
 :root{
   --content-width:40ch;
   --margin-width:12ch;
   --meta-width:24ch;
   --gap:2.5rem;
-  --block-total:calc(var(--content-width)+var(--margin-width)+var(--meta-width)+(var(--gap)*2));
+  --block-total:calc(var(--content-width) + var(--margin-width) + var(--meta-width) + (var(--gap)*2));
   --stroke:#999;
+  --page-padding-x:3rem;
 }
 
-/* =========================================================
-   TOPO
-========================================================= */
-.top{padding:1.6rem 3rem 0}
+/* -----------------------------
+   HEADER / BRAND
+--------------------------------*/
+.top{padding:1.6rem var(--page-padding-x) 0}
 .top-inner{
   max-width:var(--block-total);
   margin:0 auto;
   display:flex;
+  align-items:center;
   gap:2rem;
 }
 .brand{font-size:1rem}
 
-/* =========================================================
-   LINKS
-========================================================= */
+/* links */
 a{color:inherit;text-decoration:none}
-a:hover{opacity:.7}
+a:hover{opacity:.8}
 
 /* =========================================================
-   DESKTOP LAYOUT
+   LAYOUT — DESKTOP (3 col)
 ========================================================= */
 .page{
-  padding:2.2rem 3rem 1.4rem;
+  padding:2.2rem var(--page-padding-x) 1.4rem;
   min-height:calc(100vh - 3.6rem);
   display:flex;
   flex-direction:column;
 }
+
 .main{
   display:grid;
   grid-template-columns:var(--content-width) var(--margin-width) var(--meta-width);
-  gap:var(--gap);
+  column-gap:var(--gap);
   max-width:var(--block-total);
   margin:0 auto;
+  align-items:start;
 }
 
-/* =========================================================
-   TITULOS
-========================================================= */
-.page-title{display:flex;gap:.8rem;margin-bottom:1.6rem}
-.section-letter{font-size:3.4rem;font-weight:700}
-.section-title{font-size:2.4rem;font-weight:400}
+/* Titles */
+.page-title{display:flex;align-items:baseline;gap:.8rem;margin-bottom:1.6rem}
+.section-letter{font-size:3.4rem;font-weight:700;line-height:1}
+.section-title{font-size:2.4rem;font-weight:400;line-height:1.02}
 
-/* =========================================================
-   TEXTO
-========================================================= */
+/* Content */
 .content p{margin-bottom:1rem}
 .lead{margin-bottom:1.4rem}
 
-/* =========================================================
-   MARGINALIA / META (DESKTOP)
-========================================================= */
-.margin{
-  font-style:italic;
-  opacity:.55;
-  display:flex;
-  flex-direction:column;
-  gap:.8rem;
-  padding-top:5.6rem;
-}
-.meta{
-  display:flex;
-  flex-direction:column;
-  gap:1.2rem;
-  padding-top:5.6rem;
-}
-.meta h3{font-size:1rem}
+/* Marginalia & Meta (desktop) */
+.margin{font-style:italic;opacity:.55;display:flex;flex-direction:column;gap:.8rem;padding-top:5.6rem}
+.meta{display:flex;flex-direction:column;gap:1.2rem;padding-top:5.6rem}
+.meta h3{font-size:1rem;margin-bottom:.25rem}
 
 /* =========================================================
-   FOOTER DESKTOP
+   FOOTER FIXO (desktop)
+   - ocupa exactamente a largura do bloco total
+   - footer-nav contém as duas setas (ou uma)
 ========================================================= */
 .footer-fixed{
   position:fixed;
@@ -104,214 +96,254 @@ a:hover{opacity:.7}
   flex-direction:column;
   gap:.6rem;
   pointer-events:none;
+  z-index:10;
 }
-.footer-nav{display:flex;height:26px;pointer-events:auto}
+
+.footer-nav{display:flex;height:26px;pointer-events:auto;align-items:center}
+
+/* assinatura alinhada ao fim do bloco (direita do bloco total) */
 .signature{
   align-self:flex-end;
   font-size:1.75rem;
   white-space:nowrap;
   pointer-events:auto;
+  margin-right:0.4rem;
 }
 
 /* =========================================================
-   SETAS DESKTOP
+   NAV ARROWS — DESKTOP
+   - duas metades que se tocam, formando "uma seta de duas pontas"
+   - labels fora da linha, alinhadas com as cabeças
 ========================================================= */
-.nav-arrow{flex:1;position:relative}
+.nav-arrow{
+  flex:1;
+  position:relative;
+  cursor:pointer;
+  display:block;
+  min-height:26px;
+  box-sizing:border-box;
+}
+
+/* a linha da seta atravessa cada metade */
 .nav-arrow::before{
   content:"";
   position:absolute;
-  top:50%;left:0;right:0;
+  top:50%;
+  left:0; right:0;
   height:1px;
   background:var(--stroke);
+  transform:translateY(-50%);
 }
+
+/* cabeça da seta (pequeno triângulo desenhado por bordas) */
 .nav-arrow::after{
   content:"";
   position:absolute;
   top:50%;
-  width:7px;height:7px;
+  width:8px;height:8px;
   border-top:1px solid var(--stroke);
   border-right:1px solid var(--stroke);
+  transform:translateY(-50%);
 }
-.nav-arrow.left::after{left:0;transform:rotate(-135deg)}
-.nav-arrow.right::after{right:0;transform:rotate(45deg)}
 
+/* direcção */
+.nav-arrow.left::after{ left:0; transform:translateY(-50%) rotate(-135deg) }
+.nav-arrow.right::after{ right:0; transform:translateY(-50%) rotate(45deg) }
+
+/* label desktop — fora da linha */
 .nav-label{
   position:absolute;
   top:100%;
+  margin-top:.12rem;
   font-size:.55rem;
   font-weight:600;
   letter-spacing:.06em;
-  opacity:.6;
+  text-transform:uppercase;
+  color:rgba(0,0,0,0.6);
+  white-space:nowrap;
+  pointer-events:auto;
 }
-.nav-arrow.left .nav-label{right:100%;margin-right:.4rem;text-align:right}
-.nav-arrow.right .nav-label{left:100%;margin-left:.4rem;text-align:left}
+
+/* alinhar labels com as cabeças */
+.nav-arrow.left .nav-label{ right:100%; margin-right:.4rem; text-align:right }
+.nav-arrow.right .nav-label{ left:100%; margin-left:.4rem; text-align:left }
+
+/* hover/active feedback (desktop) */
+.nav-arrow:hover::before,
+.nav-arrow:focus::before{ background:#777 }
+.nav-arrow:hover::after,
+.nav-arrow:focus::after{ border-color:#777 }
 
 /* =========================================================
-   C — DESKTOP
+   PAGE C — EXERCÍCIO (desktop)
 ========================================================= */
-.page.C .exercise{
-  width:var(--block-total);
-  margin:1rem auto 0;
-  display:flex;
-  gap:2rem;
-}
-.page.C .exercise-item{
-  width:50%;
-  height:32vh;
-  overflow:hidden;
-  border:8px solid #fff;
-}
-.page.C img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  cursor:zoom-in;
-}
+.page.C .exercise{ width:var(--block-total); margin:1rem auto 0; display:flex; gap:2rem }
+.page.C .exercise-item{ width:50%; height:32vh; overflow:hidden; border:8px solid #fff }
+.page.C .exercise-item img{ width:100%; height:100%; object-fit:cover; object-position:top; cursor:zoom-in }
+
+/* LIGHTBOX / MODAL (funcional) */
+.modal, .lightbox{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(255,255,255,0.96); z-index:10000 }
+.modal.open, .lightbox.open{ display:flex }
+.modal img, .lightbox img, .lightbox iframe{ max-width:92vw; max-height:92vh; width:auto; height:auto; object-fit:contain }
+.modal .modal-close, .lightbox .modal-close{ position:absolute; top:12px; right:12px; background:none;border:none;font-size:1.6rem;cursor:pointer }
 
 /* =========================================================
-   D — DESKTOP (CAROUSEL LIMPO)
+   PAGE D — TRABALHOS (desktop)
+   - apenas um item activo por vez
+   - remove controls/dots genéricas
 ========================================================= */
-.page.D .carousel{width:var(--block-total);margin:1rem auto 0}
-.page.D .carousel-item{display:none}
-.page.D .carousel-item.active{display:block}
-.page.D video{
-  width:100%;
-  height:auto;
-  object-fit:contain;
-  border:6px solid #fff;
-}
+.page.D .carousel{ width:var(--block-total); margin:1rem auto 0; position:relative }
+.page.D .carousel-item{ display:none }
+.page.D .carousel-item.active{ display:block }
+.page.D video{ width:100%; height:auto; object-fit:contain; border:6px solid #fff; display:block }
 
-/* REMOVER DOTS / UI FANTASMA */
-.page.D [class*="dot"],
-.page.D [class*="indicator"],
-.page.D ol,
-.page.D ul{
-  display:none!important;
-}
+/* remover dots/ui nativas que apareciam (garante que ficam escondidas) */
+.page.D [class*="dot"], .page.D [class*="indicator"], .page.D ol, .page.D ul { display:none !important; visibility:hidden !important; height:0 !important; opacity:0 !important; pointer-events:none !important }
+
+/* carousel arrows sobre o vídeo (desktop) */
+.page.D .carousel-arrow{ position:absolute; top:50%; transform:translateY(-50%); width:36px; height:36px; background:none;border:none;cursor:pointer; z-index:12 }
+.page.D .carousel-arrow.prev{ left:12px }
+.page.D .carousel-arrow.next{ right:12px }
 
 /* =========================================================
-   CONTACTO DESKTOP
+   CONTACTO — DESKTOP
+   - carta centrada, "papel" com sombra, inputs visíveis mas discretos
 ========================================================= */
-.page.contact{
-  min-height:calc(100vh - 4rem);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
+.page.contact{ min-height:calc(100vh - 4rem); display:flex; align-items:center; justify-content:center; padding-bottom:3rem }
 .letter{
-  width:44ch;
-  max-width:92vw;
-  padding:2.6rem 2.8rem;
+  width:min(44ch,92vw);
+  padding:2.6rem 2.4rem;
   background:#fbfaf7;
   font-family:"Courier New",monospace;
-  box-shadow:0 0 0 1px rgba(0,0,0,.04),
-             0 18px 40px rgba(0,0,0,.04);
+  box-shadow:0 0 0 1px rgba(0,0,0,.04), 0 18px 40px rgba(0,0,0,.04);
 }
-.letter p{margin-bottom:1.1rem}
-.letter input,
-.letter textarea{
+.letter p{ margin-bottom:1.15rem }
+.letter input, .letter textarea{
   width:100%;
   background:transparent;
   border:none;
-  border-bottom:1px solid rgba(0,0,0,.2);
+  border-bottom:1px solid rgba(0,0,0,0.18);
+  padding:.22rem 0;
+  font-family:inherit;
+  font-size:inherit;
 }
+.letter textarea{ min-height:4.5rem }
 .letter button{
   margin-top:1.2rem;
   background:none;
   border:none;
   text-decoration:underline;
   cursor:pointer;
+  font-family:Georgia,"Times New Roman",serif;
 }
 
 /* =========================================================
-   MOBILE — REGIME LIMPO
+   GLOBAL SAFEGUARDS
+   - impede overflow lateral
+   - garante que nav-labels não sobrepõem o conteúdo em mobile quando for alterado
 ========================================================= */
-@media(max-width:600px){
+html,body{overflow-x:hidden}
 
-  /* eixo único */
-  .top-inner,
-  .main,
-  .footer-fixed,
-  .page.C .exercise,
-  .page.D .carousel,
-  .page.contact{
-    padding-inline:1.2rem;
-    width:100%;
-    max-width:none;
-    margin:0;
-  }
+/* =========================================================
+   MOBILE — REGIME AUTÓNOMO (≤ 600px)
+   - este bloco ignora o sistema desktop
+   - texto principal + marginália ocupam quase toda a largura
+   - padding-inline pequeno e simétrico (16px)
+   - nav-labels em baixo, estáveis
+   - contacto centrado, sobe para junto do topo
+========================================================= */
+@media (max-width: 600px) {
 
-  /* layout */
+  /* padding/colunas: alinhamento com menu (menu também respeita padding) */
+  :root{ --mobile-padding-inline: 1rem } /* 16px */
+  .top{ padding:1rem var(--mobile-padding-inline) 0 }
+  .top-inner{ max-width:none; margin:0; padding:0; gap:1rem }
+
+  /* main e bloco de leitura ocupam quase toda a largura */
   .main{
     display:grid;
-    grid-template-columns:1fr 7ch;
-    gap:.8rem;
+    grid-template-columns: 1fr 7ch; /* texto cresce, marginália fixa */
+    column-gap: .6rem;
+    max-width:100%;
+    margin:0; padding:0;
+    width:100%;
+    padding-inline:var(--mobile-padding-inline);
   }
 
-  /* títulos */
-  .section-letter{font-size:1.2rem}
-  .section-title{font-size:1.35rem}
+  /* garantir que a margem direita existe e igual à esquerda */
+  .margin{ font-size:.78rem; opacity:.72; padding-top:1.2rem; padding-right:.5rem }
 
-  /* marginália */
-  .margin{
-    padding-top:1.2rem;
-    font-size:.75rem;
-    opacity:.65;
+  /* meta passa para baixo do fluxo */
+  .meta{ grid-column:1 / -1; margin-top:.8rem; padding-top:0 }
+
+  /* footer passa a fluxo normal */
+  .footer-fixed{ position:static; transform:none; width:auto; margin-top:1rem; padding-inline:var(--mobile-padding-inline); pointer-events:auto; display:block }
+  .footer-nav{ display:flex; gap:.4rem; align-items:center }
+
+  /* setas — alvos tácteis grandes; ocupam texto+marginália */
+  .nav-arrow{
+    flex:1 1 0;
+    min-height:44px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    -webkit-tap-highlight-color:transparent;
+    box-sizing:border-box;
   }
 
-  /* meta */
-  .meta{
-    grid-column:1/-1;
-    margin-top:.8rem;
-    padding-top:0;
-  }
-
-  /* footer */
-  .footer-fixed{
-    position:static;
-    transform:none;
-    margin-top:1rem;
-  }
-
-  /* labels SEMPRE em baixo */
+  /* remover comportamento absolute dos labels em mobile — ficam abaixo, no fluxo */
   .nav-label{
-    position:static;
+    position:static !important;
     display:block;
     margin-top:.35rem;
-    font-size:.6rem;
+    font-size:.62rem;
+    opacity:.9;
+    pointer-events:auto;
   }
+
   .nav-arrow.left .nav-label{text-align:left}
   .nav-arrow.right .nav-label{text-align:right}
 
-  .signature{
-    font-size:1.15rem;
-    text-align:right;
-    margin-top:.4rem;
-  }
+  /* evitar que qualquer label ou arrow faça overflow horizontal */
+  .footer-nav{ max-width:100%; overflow:hidden }
 
-  /* C */
-  .page.C .exercise{
-    flex-direction:column;
-    gap:.9rem;
-  }
-  .page.C .exercise-item{
-    width:100%;
-    height:30vh;
-  }
+  /* assinatura alinhada com o fim da marginália (ou seja, com o fim do bloco de leitura) */
+  .signature{ display:block; width:100%; text-align:right; font-size:1.05rem; margin-top:.45rem }
 
-  /* D */
-  .page.D video{
-    height:46vh;
-    object-fit:cover;
-  }
+  /* PAGE C — empilhamento de imagens */
+  .page.C .exercise{ flex-direction:column; gap:.9rem; padding-inline:var(--mobile-padding-inline) }
+  .page.C .exercise-item{ width:100%; height:30vh; border:6px solid #fff }
+  .page.C .exercise-item img{ height:100%; object-fit:cover }
 
-  /* contacto */
+  /* PAGE D — vídeo ajustado */
+  .page.D .carousel{ padding-inline:var(--mobile-padding-inline) }
+  .page.D video{ width:100%; height:44vh; object-fit:cover; border:4px solid #fff }
+
+  /* remover qualquer botão ou dot que venha de plugins no mobile */
+  .page.D [class*="dot"], .page.D [class*="indicator"], .page.D ol, .page.D ul { display:none !important }
+
+  /* CONTACTO — carta centrada e subida */
   .page.contact{
     align-items:flex-start;
-    padding-top:.6rem;
+    padding-top:.8rem;
+    padding-inline:var(--mobile-padding-inline);
   }
   .letter{
     margin:0 auto;
-    padding:1.6rem 1.4rem;
+    padding:1.6rem 1.2rem;
+    width:100%;
+    max-width:720px; /* mantém carta centrada e com margem */
+    background:#fbfaf7;
+    box-sizing:border-box;
   }
+  .letter input, .letter textarea{
+    background:transparent;
+    border-bottom:1px solid rgba(0,0,0,0.18);
+    padding:.18rem 0;
+  }
+  .letter button{ background:none; border:none; text-decoration:underline; padding:0; cursor:pointer }
+
+  /* geral: forçar que nada saia do ecrã */
+  html,body{overflow-x:hidden}
 }
