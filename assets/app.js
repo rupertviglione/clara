@@ -72,12 +72,18 @@ function initContactForm() {
 
     try {
       const res = await fetch(form.action, {
-        method: form.method,
+        method: form.method || 'POST',
         body: data,
-        headers: { 'Accept': 'application/json' }
+        headers: {
+          'Accept': 'application/json'
+        }
       });
 
-      if (!res.ok) throw new Error();
+      const result = await res.json();
+
+      if (!res.ok || result.errors) {
+        throw new Error('Formspree error');
+      }
 
       form.innerHTML = `
         <section class="letter">
@@ -86,11 +92,13 @@ function initContactForm() {
           <p>Respondemos em breve.</p>
           <p class="sign">– clara.</p>
         </section>`;
-    } catch {
-      alert('Houve um problema no envio. Tenta novamente.');
+    } catch (err) {
+      console.error(err);
+      alert('Houve um problema no envio. Verifica os dados ou tenta mais tarde.');
     }
   });
 }
+
 
 /* =========================================================
    VIEWER DE VÍDEOS (PROJECTOS)
