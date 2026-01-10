@@ -157,7 +157,7 @@ a {
   font-size: 1.75rem;
   white-space: nowrap;
 }
-.visually-hidden{
+.visually-hidden {
   display:none;
 }
 /* ---------- setas ---------- */
@@ -202,7 +202,7 @@ a {
 .nav-label {
   position: absolute;
   top: 100%;
-  margin-top: .2rem;
+  margin-top: .15rem:
   font-size: .55rem;
   font-weight: 600;
   letter-spacing: .06em;
@@ -272,6 +272,13 @@ a {
   display: none !important;
 }
 
+.carousel [class*="dot"],
+.carousel [class*="indicator"],
+.carousel button,
+.carousel ol,
+.carousel ul {
+  display: none !important;
+}
 
 
 /* =========================================================
@@ -285,11 +292,22 @@ a {
 
 .letter {
   width: 44ch;
+  line-height: 1.48;
   max-width: 92vw;
   padding: 2.6rem;
   background: #fbfaf7;
   box-shadow: 0 0 0 1px rgba(0,0,0,.04), 0 18px 40px rgba(0,0,0,.04);
   font-family: "Courier New", monospace;
+}
+.letter button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-top: 1rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: .95rem;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .letter input,
@@ -320,12 +338,49 @@ a {
   max-height: 88vh;
   object-fit: contain;
 }
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,.95);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox.open {
+  display: flex;
+}
+
+.lightbox img,
+.lightbox iframe {
+  max-width: 92vw;
+  max-height: 88vh;
+  object-fit: contain;
+}
+
+.lightbox button {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
 
 
 /* =========================================================
    MOBILE (≤ 600px) — REGIME ISOLADO
 ========================================================= */
 @media (max-width: 600px) {
+.section-letter {
+  font-size: 1.6rem;
+}
+
+.section-title {
+  font-size: 1.3rem;
+}
 
   .top {
     padding: 1.2rem 1.2rem 0;
@@ -351,7 +406,7 @@ a {
   }
 
   .margin {
-    padding-top: 0;
+    padding-top: 2.2rem;
     font-size: .8rem;
   }
 
@@ -378,7 +433,7 @@ a {
 .nav-label {
   position: static;
   display: block;
-  margin-top: .35rem;
+  margin-top: .65rem;
   font-size: .6rem;
 }
 
@@ -402,15 +457,19 @@ a {
     display: block;
   }
 
-  .page.C .exercise-item {
-    width: 100%;
-    height: auto;
-    margin-bottom: 1rem;
-  }
+.page.C .exercise-item {
+  width: 100%;
+  height: 34vh;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
 
-  .page.C img {
-    height: auto;
-  }
+.page.C img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
 
   /* D */
 
@@ -439,4 +498,9 @@ a {
     font-size: 1.1rem;
     align-self: flex-end;
   }
+
+  .page.contact .footer-fixed {
+  margin-top: .5rem;
+}
+
 }
