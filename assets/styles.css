@@ -172,6 +172,7 @@ a {
   right: 0;
   height: 1px;
   background: var(--stroke);
+  transform: translateY(-50%);
 }
 
 .nav-arrow::after {
@@ -182,7 +183,9 @@ a {
   height: 7px;
   border-top: 1px solid var(--stroke);
   border-right: 1px solid var(--stroke);
+  transform: translateY(-50%);
 }
+
 
 .nav-arrow.left::after {
   left: 0;
@@ -234,6 +237,7 @@ a {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: top;
 }
 
 /* =========================================================
@@ -258,6 +262,15 @@ a {
   object-fit: cover;
   border: 6px solid #fff;
 }
+
+.page.D [class*="dot"],
+.page.D [class*="indicator"],
+.page.D ol,
+.page.D ul {
+  display: none !important;
+}
+
+
 
 /* =========================================================
    CONTACTO (DESKTOP)
@@ -285,6 +298,27 @@ a {
   background: transparent;
   font-family: inherit;
 }
+
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,.95);
+  z-index: 1000;
+}
+
+.modal[hidden] {
+  display: none;
+}
+
+.modal img {
+  max-width: 92vw;
+  max-height: 88vh;
+  object-fit: contain;
+}
+
 
 /* =========================================================
    MOBILE (≤ 600px) — REGIME ISOLADO
@@ -339,12 +373,22 @@ a {
     width: 50%;
   }
 
-  .nav-label {
-    position: static;
-    display: block;
-    margin-top: .25rem;
-    text-align: inherit;
-  }
+.nav-label {
+  position: static;
+  display: block;
+  margin-top: .35rem;
+  font-size: .6rem;
+}
+
+/* alinhar com a cabeça da seta */
+.nav-arrow.left .nav-label {
+  text-align: left;
+}
+
+.nav-arrow.right .nav-label {
+  text-align: right;
+}
+
 
   .signature {
     font-size: 1.1rem;
@@ -367,9 +411,16 @@ a {
   }
 
   /* D */
+
   .page.D video {
-    height: 36vh;
+    width: 100%;
+    height: 60vw;          /* aproxima de um quadrado */
+    max-height: 52vh;      /* trava exageros em ecrãs altos */
+    object-fit: cover;
+    object-position: center; /* perde dos lados, não em cima/baixo */
   }
+
+
 
   /* contacto */
   .page.contact {
@@ -379,5 +430,11 @@ a {
 
   .letter {
     margin: 0 auto;
+  }
+
+    .page.contact .signature {
+    margin-top: 0.1rem;
+    font-size: 1.1rem;
+    align-self: flex-end;
   }
 }
