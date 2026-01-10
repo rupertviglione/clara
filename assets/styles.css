@@ -220,6 +220,29 @@ a {
   right: 0;
 }
 
+/* ===============================
+   HOVER — SETAS + LABELS (DESKTOP)
+=============================== */
+
+/* linha */
+.nav-arrow:hover::before {
+  background: #666;
+}
+
+/* cabeça */
+.nav-arrow:hover::after {
+  border-color: #666;
+}
+
+/* label */
+.nav-arrow:hover .nav-label,
+.nav-label:hover {
+  color: #000;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
 
 /* =========================================================
    C — EXERCÍCIO (DESKTOP)
