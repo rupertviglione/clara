@@ -204,7 +204,7 @@ a {
 .nav-label {
   position: absolute;
   top: 100%;
-  margin-top: .35rem; /* ligeiramente mais baixo */
+  margin-top: .15rem; 
   font-size: .55rem;
   font-weight: 600;
   letter-spacing: .06em;
@@ -424,11 +424,67 @@ a {
   }
 
   /* footer vira fluxo normal */
-  .footer-fixed {
-    position: static;
-      width: calc(100% - 1.6rem);
-    margin: 1.4rem auto 0;
-  }
+/* ---------- setas ---------- */
+.nav-arrow {
+  flex: 1;
+  position: relative;
+}
+
+/* linha */
+.nav-arrow::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--stroke);
+  transform: translateY(-0.5px); /* alinha pixel-perfect */
+}
+
+/* cabeça */
+.nav-arrow::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border-top: 1px solid var(--stroke);
+  border-right: 1px solid var(--stroke);
+  transform: translateY(-50%);
+}
+
+/* direcções */
+.nav-arrow.left::after {
+  left: 0;
+  transform: translateY(-50%) rotate(-135deg);
+}
+
+.nav-arrow.right::after {
+  right: 0;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+/* labels */
+.nav-label {
+  position: absolute;
+  top: 100%;
+  margin-top: .35rem; /* ligeiramente mais baixo */
+  font-size: .55rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.nav-arrow.left .nav-label {
+  left: 0;
+}
+
+.nav-arrow.right .nav-label {
+  right: 0;
+}
+
 
   .footer-nav {
     width: 100%;
@@ -445,7 +501,7 @@ a {
 .nav-label {
   position: static;
   display: block;
-  margin-top: .85rem;
+  margin-top: 1rem;
   font-size: .6rem;
 }
 
@@ -470,13 +526,13 @@ a {
   }
 
 .page.C .exercise-item {
-  width: calc(100% - 1.6rem);
+  width: calc(100vw - 2.4rem);
   margin-left: auto;
   margin-right: auto;
   height: 34vh;
-  margin-bottom: 1rem;
   overflow: hidden;
 }
+
 
 .page.C img {
   width: 100%;
@@ -486,15 +542,15 @@ a {
 }
 
   /* D */
-
-  .page.D video {
-    width: calc(100% - 1.6rem);
-  margin: 0 auto;
-    height: 60vw;          /* aproxima de um quadrado */
-    max-height: 52vh;      /* trava exageros em ecrãs altos */
-    object-fit: cover;
-    object-position: center; /* perde dos lados, não em cima/baixo */
-  }
+.page.D video {
+  width: calc(100vw - 2.4rem);
+  margin-left: auto;
+  margin-right: auto;
+  height: 60vw;          /* quase quadrado */
+  max-height: 52vh;
+  object-fit: cover;
+  object-position: center;
+}
 
 
 
@@ -502,8 +558,13 @@ a {
   .page.contact {
     align-items: flex-start;
     padding-top: 1.2rem;
+      padding-bottom: 0;
   }
 
+.page.contact .footer-fixed {
+  margin-top: .3rem;
+   gap: .2rem;
+}
   .letter {
     margin: 0 auto;
   }
@@ -514,9 +575,5 @@ a {
     align-self: flex-end;
   }
 
-  .page.contact .footer-fixed {
-      gap: .2rem;
-  margin-top: .5rem;
-}
 
 }
