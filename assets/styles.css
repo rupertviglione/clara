@@ -447,23 +447,28 @@ a {
   ===================================================== */
 
   .footer-fixed {
-    position: static;
-    width: 100%;
-    margin: 1.2rem 0 0;
-    padding: 0 1.2rem;
-    display: flex;
-    flex-direction: column;
-    gap: .6rem;
-  }
+  position: static;
+  width: calc(100% - 2.4rem);
+  margin: 1.2rem auto 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+}
+
 
   .footer-nav {
     display: flex;
-    height: auto;          /* remove os 26px do desktop */
+    width: 100%;
   }
 
-  .nav-arrow {
-    flex: 1;
-    height: 44px;          /* alvo táctil real */
+.nav-arrow {
+    flex: 0 0 auto;   /* 👈 mata o comportamento desktop */
+    width: 100%;      /* 👈 seta única ocupa todo o eixo útil */
+  }
+
+   .footer-nav .nav-arrow + .nav-arrow {
+    width: 50%;
   }
 
   .nav-arrow::before {
@@ -474,7 +479,7 @@ a {
   .nav-label {
     position: static;
     display: block;
-    margin-top: .9rem;
+    margin-top: 2rem;
     font-size: .6rem;
   }
 
@@ -494,25 +499,25 @@ a {
   }
 
   /* ---------- C — Exercício ---------- */
+.page.C .exercise {
+  display: block;
+  margin-top: 1rem;
+}
 
-  .page.C .exercise {
-    display: block;
-  }
+.page.C .exercise-item {
+  width: calc(100% - 2.4rem);
+  margin: 0 auto 1.4rem;
+  height: 34vh;
+  overflow: hidden;
+}
 
-  .page.C .exercise-item {
-    width: calc(100vw - 2.4rem);
-    margin-left: auto;
-    margin-right: auto;
-    height: 34vh;
-    overflow: hidden;
-  }
+.page.C img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
 
-  .page.C img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top;
-  }
 
   /* ---------- D — Trabalhos ---------- */
 
@@ -529,9 +534,9 @@ a {
   /* ---------- Contacto ---------- */
 
   .page.contact {
-    align-items: flex-start;
-    padding-top: 1.2rem;
-    padding-bottom: 0;
+  align-items: flex-start;
+  padding-top: 0rem;
+  padding-bottom: 0;
   }
 
   .letter {
