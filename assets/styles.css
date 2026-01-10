@@ -1,169 +1,144 @@
 /* =========================================================
-   RESET
-========================================================= */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+   styles.css — clara.
+   - Mantém versão desktop
+   - Regime mobile limpo e coerente
+   - Nav arrows: ocupam bloco (texto principal + marginalia)
+   - Nav labels: abaixo, alinhados com cabeça da seta
+   - Lightbox/modal funcional e large
+   - C: imagens ancoradas em cima; mobile empilhadas
+   - D: vídeo com setas sobrepostas centradas verticalmente
+   - Contacto: carta centrada, campos subtils
+   ========================================================= */
 
-html, body {
-  height: 100%;
-}
-
+/* RESET */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; scroll-behavior: smooth; overflow-x: hidden; }
+.visually-hidden { display: none !important; }
 body {
   font-family: Georgia, "Times New Roman", serif;
   background: #f7f4ee;
   color: #111;
   line-height: 1.42;
-  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* =========================================================
-   VARIÁVEIS
-========================================================= */
-:root {
-  --content-width: 40ch;
-  --margin-width: 12ch;
-  --meta-width: 24ch;
+/* VARIÁVEIS */
+:root{
   --gap: 2.5rem;
 
-  --block-total: calc(
-    var(--content-width) +
-    var(--margin-width) +
-    var(--meta-width) +
-    (var(--gap) * 2)
-  );
+  /* tamanhos base — ajuste aqui se quiseres alterar a largura do corpo */
+  --content-width: 40ch;   /* largura do texto principal */
+  --margin-width: 12ch;    /* marginalia */
+  --meta-width: 24ch;      /* meta column */
+
+  /* bloco principal (texto + gap + marginalia) — usado para as setas/assinatura */
+  --block-main: calc(var(--content-width) + var(--gap) + var(--margin-width));
+
+  /* total do layout (inclui meta) */
+  --block-total: calc(var(--block-main) + var(--gap) + var(--meta-width));
 
   --stroke: #999;
+  --paper: #fbfaf7;
 }
 
-/* =========================================================
-   TOPO
-========================================================= */
-.top {
-  padding: 1.6rem 3rem 0;
-}
-
+/* TOPO */
+.top { padding: 1.6rem 3rem 0; }
 .top-inner {
   max-width: var(--block-total);
   margin: 0 auto;
-  display: flex;
+  display:flex;
   gap: 2rem;
+  align-items:center;
 }
+.brand { font-size: 1rem; }
 
-.brand {
-  font-size: 1rem;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-/* =========================================================
-   LAYOUT DESKTOP
-========================================================= */
+/* PAGE BASE */
 .page {
   padding: 2.2rem 3rem 1.4rem;
   min-height: calc(100vh - 3.6rem);
+  display:flex;
+  flex-direction:column;
+  animation: pageIn .42s cubic-bezier(.4,0,.2,1) both;
 }
 
+/* MAIN GRID - DESKTOP (texto | marginalia | meta) */
 .main {
   display: grid;
   grid-template-columns: var(--content-width) var(--margin-width) var(--meta-width);
   column-gap: var(--gap);
   max-width: var(--block-total);
   margin: 0 auto;
+  align-items: start;
 }
 
-/* =========================================================
-   TÍTULOS
-========================================================= */
-.page-title {
-  display: flex;
-  align-items: baseline;
-  gap: .8rem;
-  margin-bottom: 1.6rem;
-}
+/* TITULOS */
+.page-title { display:flex; align-items:baseline; gap:.8rem; margin-bottom:1.6rem; }
+.section-letter { font-size: 3.4rem; font-weight:700; line-height:1; }
+.section-title { font-size: 2.4rem; font-weight:400; }
 
-.section-letter {
-  font-size: 3.4rem;
-  font-weight: 700;
-}
+/* CONTEÚDO */
+.content p { margin-bottom: 1rem; }
+.lead { margin-bottom: 1.4rem; }
 
-.section-title {
-  font-size: 2.4rem;
-  font-weight: 400;
-}
-
-/* =========================================================
-   TEXTO
-========================================================= */
-.content p {
-  margin-bottom: 1rem;
-}
-
-.lead {
-  margin-bottom: 1.4rem;
-}
-
-/* =========================================================
-   MARGINALIA / META
-========================================================= */
+/* MARGINALIA / META */
 .margin {
   font-style: italic;
   opacity: .55;
-  display: flex;
-  flex-direction: column;
-  gap: .8rem;
+  display:flex;
+  flex-direction:column;
+  gap:.8rem;
   padding-top: 5.6rem;
 }
-
 .meta {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  padding-top: 5.6rem;
+  display:flex;
+  flex-direction:column;
+  gap:1.2rem;
+  padding-top:5.6rem;
 }
+.meta h3 { font-size:1rem; margin-bottom:.25rem; }
 
-.meta h3 {
-  font-size: 1rem;
-}
-
-/* =========================================================
-   FOOTER DESKTOP
-========================================================= */
+/* FOOTER FIXO - NAVEGAÇÃO E ASSINATURA */
 .footer-fixed {
   position: fixed;
   left: 50%;
   bottom: 1rem;
   transform: translateX(-50%);
-  width: var(--block-total);
-  display: flex;
-  flex-direction: column;
-  gap: .8rem;
-  z-index: 10;
+  width: var(--block-main); /* importante: ocupa só content + gap + marginalia */
+  display:flex;
+  flex-direction:column;
+  gap:.8rem;
+  z-index: 30;
+  pointer-events: auto;
 }
 
-.footer-nav {
-  display: flex;
+/* footer-nav: a linha das setas */
+.footer-fixed .footer-nav {
+  display:flex;
+  align-items:center;
   height: 26px;
+  gap: 0;
+  position: relative;
+  pointer-events: auto;
 }
 
-.signature {
+/* assinatura final - alinha com o fim da marginalia (direita do bloco principal) */
+.footer-fixed .signature {
   align-self: flex-end;
   font-size: 1.75rem;
   white-space: nowrap;
+  margin-right: 0; /* já está no extremo direito do bloco-main */
 }
 
-/* ---------- setas ---------- */
+/* NAV ARROWS (base — desktop) */
 .nav-arrow {
   flex: 1;
   position: relative;
+  cursor: pointer;
+  pointer-events: auto;
 }
 
+/* linha principal das setas */
 .nav-arrow::before {
   content: "";
   position: absolute;
@@ -172,8 +147,11 @@ a {
   right: 0;
   height: 1px;
   background: var(--stroke);
+  transform: translateY(-50%);
+  transition: background .15s ease;
 }
 
+/* cabeça */
 .nav-arrow::after {
   content: "";
   position: absolute;
@@ -182,202 +160,433 @@ a {
   height: 7px;
   border-top: 1px solid var(--stroke);
   border-right: 1px solid var(--stroke);
+  transform: translateY(-50%);
+  transition: border-color .15s ease;
 }
+.nav-arrow.left::after  { left: 0; transform: translateY(-50%) rotate(-135deg); }
+.nav-arrow.right::after { right: 0; transform: translateY(-50%) rotate(45deg); }
 
-.nav-arrow.left::after {
-  left: 0;
-  transform: rotate(-135deg);
-}
+.nav-arrow:hover::before,
+.nav-arrow:focus::before { background: #777; }
+.nav-arrow:hover::after,
+.nav-arrow:focus::after  { border-color: #777; }
 
-.nav-arrow.right::after {
-  right: 0;
-  transform: rotate(45deg);
-}
-
+/* NAV LABEL — desktop: posicionado absoluto, abaixo da linha, alinhado à cabeça */
 .nav-label {
   position: absolute;
-  top: 100%;
-  margin-top: .2rem;
-  font-size: .55rem;
+  top: calc(100% + 0.25rem); /* abaixo da linha */
+  font-size: 0.55rem;
   font-weight: 600;
-  letter-spacing: .06em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
+  color: rgba(0,0,0,0.55);
   white-space: nowrap;
+  transition: color .15s ease, text-decoration-color .15s ease;
+  pointer-events: auto;
 }
 
-.nav-arrow.left .nav-label {
-  left: 0;
-}
-
+/* label para a direita (termina na cabeça direita) */
 .nav-arrow.right .nav-label {
   right: 0;
+  transform: translateX(0);
+  text-align: right;
+  margin-right: 0.2rem;
+}
+
+/* label para a esquerda (termina na cabeça esquerda) */
+.nav-arrow.left .nav-label {
+  left: 0;
+  transform: translateX(0);
+  text-align: left;
+  margin-left: 0.2rem;
+}
+
+/* hover: ativa quando se hover na seta ou no texto */
+.nav-arrow:hover .nav-label,
+.nav-label:hover {
+  color: rgba(0,0,0,0.9);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  cursor: pointer;
 }
 
 /* =========================================================
-   C — EXERCÍCIO (DESKTOP)
+   PÁGINA C — EXERCÍCIO
+   imagens: cortar por cima (object-position: top) no desktop
 ========================================================= */
-.page.C .exercise {
-  width: var(--block-total);
+main.page.C .exercise {
+  width: var(--block-main); /* manter alinhamento com bloco principal */
   margin: 1rem auto 0;
-  display: flex;
+  display:flex;
   gap: 2rem;
 }
-
-.page.C .exercise-item {
+main.page.C .exercise-item {
   width: 50%;
-  height: 42vh;
+  height: 36vh; /* desktop: moderado (evita imagens demasiado altas) */
   overflow: hidden;
   border: 8px solid #fff;
+  background: #fff;
 }
-
-.page.C img {
+main.page.C .exercise-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: top;
+  cursor: zoom-in;
+}
+
+/* LIGHTBOX / MODAL */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,0.96);
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem;
+}
+.lightbox.open { display: flex; }
+.lightbox-content {
+  width: 92vw;
+  height: 92vh;
+  max-width: 1400px;
+  max-height: 900px;
+  background: var(--paper);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.06);
+  position: relative;
+}
+.lightbox-content img,
+.lightbox-content iframe { width:100%; height:100%; object-fit:contain; border:0; display:block; }
+.lightbox-close {
+  position: absolute;
+  top: .5rem;
+  right: .5rem;
+  z-index: 10010;
+  font-size: 1.5rem;
+  background:none;
+  border:none;
+  cursor:pointer;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 /* =========================================================
-   D — TRABALHOS (DESKTOP)
+   PÁGINA D — CAROUSEL / VIDEO
+   - vídeos com setas centradas verticalmente
+   - escondemos pips/dots
 ========================================================= */
-.page.D .carousel {
-  width: var(--block-total);
-  margin: 1rem auto 0;
-}
-
-.page.D .carousel-item {
-  display: none;
-}
-
-.page.D .carousel-item.active {
-  display: block;
-}
-
-.page.D video {
+main.page.D .carousel { width: var(--block-main); margin: 1rem auto 0; position: relative; }
+main.page.D .carousel-track { position: relative; }
+main.page.D .carousel-item { display:none; }
+main.page.D .carousel-item.active { display:block; }
+main.page.D video {
   width: 100%;
   height: 48vh;
   object-fit: cover;
+  object-position: top;
   border: 6px solid #fff;
+  display:block;
 }
+
+/* arrows sobre o vídeo — desktop */
+.page.D .carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  z-index: 12;
+}
+.page.D .carousel-arrow:focus { outline: none; box-shadow: 0 0 0 3px rgba(0,0,0,0.06); }
+
+/* left/right positions (sobre o vídeo, afastadas da borda) */
+.page.D .carousel-arrow.prev { left: 16px; }
+.page.D .carousel-arrow.next { right: 16px; }
+
+/* desenhar cabeças com pseudo-elemento */
+.page.D .carousel-arrow::before {
+  content: "";
+  display:block;
+  width:8px;height:8px;border-top:1px solid var(--stroke);border-right:1px solid var(--stroke);
+}
+.page.D .carousel-arrow.prev::before { transform: rotate(-135deg); }
+.page.D .carousel-arrow.next::before { transform: rotate(45deg); }
+.page.D .carousel-arrow:hover::before { border-color:#777; }
+
+/* esconder pips/dots/indicators */
+.page.D .carousel [class*="dot"],
+.page.D .carousel [class*="indicator"],
+.page.D .carousel ol, .page.D .carousel ul {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  pointer-events: none !important;
+}
+
+/* remove controlos nativos de vídeo (UI fantasma) */
+video::-webkit-media-controls,
+video::-webkit-media-controls-enclosure,
+video::-webkit-media-controls-panel,
+video::-webkit-media-controls-overlay-play-button,
+video::-webkit-media-controls-play-button,
+video::-webkit-media-controls-start-playback-button { display:none !important; }
 
 /* =========================================================
-   CONTACTO (DESKTOP)
+   CONTACTO — CARTA
+   - carta centrada, campos subtis, botão tipo texto
 ========================================================= */
 .page.contact {
-  display: flex;
-  justify-content: center;
+  min-height: calc(100vh - 5rem);
+  display:flex;
   align-items: center;
+  justify-content: center;
+  padding: 0;
+  overflow: visible;
+  box-sizing: border-box;
 }
-
+.page.contact form { margin:0; padding:0; display:flex; align-items:center; justify-content:center; width:100%; }
 .letter {
   width: 44ch;
   max-width: 92vw;
-  padding: 2.6rem;
-  background: #fbfaf7;
+  padding: 2.6rem 2.8rem;
+  background: var(--paper);
+  border-radius: 2px;
   box-shadow: 0 0 0 1px rgba(0,0,0,.04), 0 18px 40px rgba(0,0,0,.04);
-  font-family: "Courier New", monospace;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: #111;
+  position: relative;
+  overflow: visible;
+  margin: 0 auto;
 }
+.letter p { margin: 0 0 1.15rem 0; }
 
+/* campos “fundidos” */
 .letter input,
 .letter textarea {
-  width: 100%;
-  border: none;
-  border-bottom: 1px solid rgba(0,0,0,.15);
-  background: transparent;
   font-family: inherit;
+  font-size: inherit;
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(0,0,0,.10);
+  padding: .18rem 0;
+  color: inherit;
+  resize: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.letter input { max-width: 28ch; display:block; }
+.letter textarea { min-height: 4.2rem; }
+.letter input:focus, .letter textarea:focus {
+  outline: none;
+  border-bottom-color: rgba(0,0,0,.28);
+}
+
+/* botão discreto — aparência de link/linha */
+.letter button {
+  margin-top: 1.2rem;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.letter button:hover { opacity:.85; transform: translateY(-1px); }
+
+/* assinatura dentro da carta */
+.letter .sign { margin-top: .9rem; font-size: 1rem; }
+
+/* =========================================================
+   TRANSIÇÕES (simples)
+========================================================= */
+@keyframes pageIn {
+  from { opacity: 0; transform: translateX(32px); } to { opacity:1; transform:translateX(0); }
+}
+@keyframes pageOut {
+  from { opacity:1; transform:translateX(0); } to { opacity:0; transform:translateX(-32px); }
 }
 
 /* =========================================================
-   MOBILE (≤ 600px) — REGIME ISOLADO
+   RESPONSIVE — TABLET (≤ 900px)
+   - passamos a layout que permite content + marginalia na mesma linha se houver espaço
+========================================================= */
+@media (max-width: 900px) {
+  .main {
+    grid-template-columns: 1fr auto;
+    column-gap: 1.25rem;
+    align-items: start;
+    max-width: var(--block-total);
+  }
+
+  .margin { font-size: 0.85rem; opacity: 0.7; }
+  .meta { margin-top: 1.25rem; }
+  .footer-nav { padding: 0 1.25rem; }
+}
+
+/* =========================================================
+   RESPONSIVE — MOBILE (≤ 600px)
+   Regime vertical, limpo e coerente
+   - texto principal + marginalia formam o bloco principal
+   - meta desce para baixo do conteúdo
+   - footer (setas) ocupa largura do bloco-main e não sai do ecrã
 ========================================================= */
 @media (max-width: 600px) {
 
-  .top {
-    padding: 1.2rem 1.2rem 0;
-  }
+  html, body { overflow-x: hidden; }
+  body { font-size: 16px; line-height: 1.55; }
 
-  .top-inner {
-    max-width: none;
-  }
-
-  .page {
-    padding: 1.4rem 1.2rem;
-  }
-
-  /* layout principal */
+  /* layout principal: content + margin como colunas se houver espaço,
+     mas em mobile o meta passa para abaixo */
   .main {
-    max-width: none;
-    grid-template-columns: 1fr auto;
+    display: grid;
+    grid-template-columns: 1fr auto; /* content + margin stacked horizontally if space */
     column-gap: 1rem;
+    padding: 1.2rem 1rem;
+    align-items: start;
+    max-width: calc(100vw - 2rem);
+    margin: 0 auto;
   }
 
-  .content {
-    max-width: none;
-  }
+  /* títulos */
+  .page-title { margin-bottom: 1rem; }
+  .section-letter { font-size: 1.05rem; font-weight:700; margin-right:0.4rem; }
+  .section-title { font-size: 1.25rem; line-height:1.15; }
 
+  .lead { font-size: 1rem; }
+  .content p { font-size: 0.95rem; }
+
+  /* Marginalia ao lado (compacta) */
   .margin {
-    padding-top: 0;
-    font-size: .8rem;
+    display: block;
+    font-size: 0.8rem;
+    opacity: 0.65;
+    white-space: nowrap;
   }
+  .margin span { display:block; margin-bottom:0.35rem; }
 
-  .meta {
-    grid-column: 1 / -1;
-    padding-top: 1rem;
-  }
+  /* Meta — passa para baixo (full width) */
+  .meta { grid-column: 1 / -1; margin-top: 1rem; font-size: 0.9rem; }
+  .meta-block { margin-bottom: 1rem; }
 
-  /* footer vira fluxo normal */
+  /* FOOTER => barra de navegação contida (block-main) */
   .footer-fixed {
     position: static;
-    width: calc(100% - 2.4rem);
-    margin: 1.4rem auto 0;
+    margin-top: 1.25rem;
+    padding: 0;
+    background: transparent;
+    width: 100%;
   }
 
   .footer-nav {
+    display:flex;
+    justify-content:center;
+    align-items:center;
     width: 100%;
+    max-width: var(--block-main);
+    margin: 0 auto;
+    gap: 0.5rem;
   }
 
+  /* NAV ARROWS mobile: grandes alvos tácteis, ocupam metade do bloco-main cada */
   .nav-arrow {
-    width: 50%;
+    position: relative;
+    width: calc(50% - 0.25rem);
+    min-height: 56px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding: .4rem;
+    border-radius: 6px;
+    background: transparent;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    box-sizing: border-box;
   }
 
+  /* evitar salto de conteúdos por pointer events */
+  .nav-arrow * { pointer-events: none; }
+
+  /* label: abaixo, sempre visível e clicável */
   .nav-label {
-    position: static;
-    display: block;
-    margin-top: .25rem;
-    text-align: inherit;
+    position: static !important;
+    display:block !important;
+    font-size: 0.68rem;
+    margin-top: 0.45rem;
+    text-align: center;
+    white-space: nowrap;
+    opacity: 0.9;
+    pointer-events: auto;
   }
 
+  /* garantir que a linha das setas seja visível e contenha o traço até às cabeças */
+  .nav-arrow::before { left: .6rem; right: .6rem; }
+
+  /* remover rectângulos azuis no toque mas manter indicação de foco */
+  .nav-arrow:focus { outline: none; box-shadow: 0 0 0 3px rgba(0,0,0,0.06); }
+
+  /* assinatura final mais discreta, próxima do bloco */
   .signature {
-    font-size: 1.1rem;
-    margin-top: .6rem;
+    width: max-content;
+    margin: 0.6rem auto 0;
+    text-align: right;
+    font-size: 0.95rem;
+    opacity: 0.8;
   }
 
-  /* C */
-  .page.C .exercise {
-    display: block;
-  }
-
-  .page.C .exercise-item {
-    width: 100%;
+  /* C — imagens empilhadas e escala segura */
+  .exercise { display:block !important; margin-top: 1.25rem; }
+  .exercise-item { width: 100% !important; margin-bottom: 1rem !important; height: auto !important; }
+  .exercise-item img {
+    width: calc(100% - 2rem);
+    max-width: 92vw;
     height: auto;
-    margin-bottom: 1rem;
-  }
-
-  .page.C img {
-    height: auto;
-  }
-
-  /* D */
-  .page.D video {
-    height: 36vh;
-  }
-
-  /* contacto */
-  .page.contact {
-    align-items: flex-start;
-    padding-top: 1.2rem;
-  }
-
-  .letter {
+    object-fit: cover;
+    object-position: top;
+    display:block;
     margin: 0 auto;
   }
+
+  /* D — vídeos dimensionados adequadamente */
+  .carousel { margin-top: 1.25rem; }
+  .carousel-track { height: auto; }
+  .carousel-item { position: relative; }
+  .carousel video {
+    width: 100%;
+    height: auto;
+    max-height: 58vh;
+    object-fit: cover;
+    display:block;
+  }
+
+  /* setas do vídeo em mobile: sobre o vídeo, centro vertical */
+  .page.D .carousel-arrow { width:44px; height:44px; }
+  .page.D .carousel-arrow.prev { left: 8px; }
+  .page.D .carousel-arrow.next { right: 8px; }
+
+  /* CONTACTO: carta sobe, centrada */
+  .page.contact .letter {
+    margin-top: 0.6rem;
+    padding: 1.2rem 1rem;
+    width: calc(100% - 2rem);
+    max-width: 92vw;
+    box-sizing: border-box;
+  }
+
+  /* LIGHTBOX mobile ocupa quase tudo */
+  .lightbox { padding: 0.5rem; }
+  .lightbox-content { width: 94vw; height: 92vh; max-width: 960px; max-height: 88vh; }
 }
+
+/* FIM das regras */
