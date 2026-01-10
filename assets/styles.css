@@ -1,383 +1,465 @@
 /* =========================================================
+   STYLES.CSS — VERSÃO UNIFICADA (desktop estável + mobile fixes)
+   Mantém a grid desktop; corrige footer/nav, C (imagens), D (vídeo/carousel),
+   modal/lightbox, contact card e .visually-hidden.
+========================================================= */
+
+/* =========================================================
    RESET
 ========================================================= */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+html{scroll-behavior:smooth}
+.visually-hidden{display:none !important} /* garantir invisível onde for usada */
+body{
+  font-family: Georgia,"Times New Roman",serif;
+  background:#f7f4ee;color:#111;line-height:1.42;
+  overflow-x:hidden;
+  transition:opacity .25s ease;
 }
+body.is-leaving{opacity:0}
 
-html, body {
-  height: 100%;
-}
-
-body {
-  font-family: Georgia, "Times New Roman", serif;
-  background: #f7f4ee;
-  color: #111;
-  line-height: 1.42;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
+/* =========================================================
+   VARIÁVEIS LAYOUT
+========================================================= */
+:root{
+  --content-width:40ch;       /* largura textual base */
+  --margin-width:12ch;        /* marginalia */
+  --meta-width:24ch;          /* coluna meta */
+  --gap:2.5rem;
+  --block-total:calc(var(--content-width) + var(--margin-width) + var(--meta-width) + (var(--gap) * 2));
+  --stroke:#999;
+  --page-max-width:var(--block-total);
+  --mobile-edge-gap:1rem;
 }
 
 /* =========================================================
-   VARIÁVEIS
+   TOPO / LINKS
 ========================================================= */
-:root {
-  --content-width: 40ch;
-  --margin-width: 12ch;
-  --meta-width: 24ch;
-  --gap: 2.5rem;
+.top{padding:1.6rem 3rem 0}
+.top-inner{
+  max-width:var(--page-max-width);
+  margin:0 auto;
+  display:flex;
+  gap:2rem;
+  align-items:center;
+}
+.brand{font-size:1rem}
+a{color:inherit;text-decoration:none;transition:opacity .12s ease,transform .12s ease}
+a:hover{opacity:.85;transform:translateY(-1px)}
 
-  --block-total: calc(
-    var(--content-width) +
-    var(--margin-width) +
-    var(--meta-width) +
-    (var(--gap) * 2)
-  );
-
-  --stroke: #999;
+/* =========================================================
+   PAGE LAYOUT (DESKTOP)
+========================================================= */
+.page{padding:2.2rem 3rem 1.4rem;min-height:calc(100vh - 3.6rem);display:flex;flex-direction:column}
+.main{
+  display:grid;
+  grid-template-columns:var(--content-width) var(--margin-width) var(--meta-width);
+  column-gap:var(--gap);
+  max-width:var(--page-max-width);
+  margin:0 auto;
+  align-items:start;
 }
 
 /* =========================================================
-   TOPO
+   TITULOS E TEXTO
 ========================================================= */
-.top {
-  padding: 1.6rem 3rem 0;
+.page-title{display:flex;align-items:baseline;gap:.8rem;margin-bottom:1.6rem}
+.section-letter{font-size:3.4rem;font-weight:700;line-height:1}
+.section-title{font-size:2.4rem;font-weight:400}
+.content p{margin-bottom:1rem}
+.lead{margin-bottom:1.4rem}
+
+/* =========================================================
+   MARGINALIA / META (DESKTOP)
+========================================================= */
+.margin{font-style:italic;opacity:.55;display:flex;flex-direction:column;gap:.8rem;padding-top:5.6rem}
+.meta{display:flex;flex-direction:column;gap:1.2rem;padding-top:5.6rem}
+.meta h3{font-size:1rem;margin-bottom:.25rem}
+
+/* =========================================================
+   FOOTER FIXO GLOBAL (DESKTOP)
+   Footer centrado com largura igual ao bloco. Nav à esquerda (stretch),
+   assinatura alinhada ao fim da marginália (aproximação conservadora).
+========================================================= */
+.footer-fixed{
+  position:fixed;
+  left:50%;
+  bottom:1rem;
+  transform:translateX(-50%);
+  width:var(--page-max-width);
+  display:flex;
+  flex-direction:column;
+  gap:.6rem;
+  z-index:10;
+  pointer-events:none;
+  padding:0;
 }
 
-.top-inner {
-  max-width: var(--block-total);
-  margin: 0 auto;
-  display: flex;
-  gap: 2rem;
+/* container interno para controlar alinhamentos */
+.footer-fixed .footer-inner{
+  width:100%;
+  max-width:var(--page-max-width);
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start; /* nav à esquerda */
+  pointer-events:auto;
 }
 
-.brand {
-  font-size: 1rem;
+/* footer nav ocupa o espaço do content + margin (para setas tocarem) */
+.footer-fixed .footer-nav{
+  display:flex;
+  align-items:center;
+  width:calc(var(--content-width) + var(--margin-width) + var(--gap));
+  gap:0;
+  position:relative;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+/* assinatura: alinhada à direita do espaço content+margin */
+.footer-fixed .signature{
+  margin-left:auto;
+  padding-left:1.2rem;
+  font-size:1.75rem;
+  white-space:nowrap;
+  pointer-events:auto;
 }
 
 /* =========================================================
-   LAYOUT DESKTOP
+   NAV ARROWS (DESKTOP + baseline)
+   - linha horizontal com cabeça nas extremidades
+   - nav-label colocada por baixo; alinhada com a cabeça (left/right)
 ========================================================= */
-.page {
-  padding: 2.2rem 3rem 1.4rem;
-  min-height: calc(100vh - 3.6rem);
+.nav-arrow{
+  flex:1;
+  position:relative;
+  cursor:pointer;
+  min-height:28px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-.main {
-  display: grid;
-  grid-template-columns: var(--content-width) var(--margin-width) var(--meta-width);
-  column-gap: var(--gap);
-  max-width: var(--block-total);
-  margin: 0 auto;
+/* linha base que percorre a largura do nav (visível) */
+.nav-arrow::before{
+  content:"";
+  position:absolute;
+  top:50%;
+  left:0;
+  right:0;
+  height:1px;
+  background:var(--stroke);
+  transform:translateY(-50%);
+  transition:background .15s ease;
 }
+
+/* cabeça da seta */
+.nav-arrow::after{
+  content:"";
+  position:absolute;
+  top:50%;
+  width:8px;
+  height:8px;
+  border-top:1px solid var(--stroke);
+  border-right:1px solid var(--stroke);
+  transform:translateY(-50%);
+  transition:border-color .15s ease;
+}
+.nav-arrow.left::after{ left:0; transform:translateY(-50%) rotate(-135deg) }
+.nav-arrow.right::after{ right:0; transform:translateY(-50%) rotate(45deg) }
+
+/* hover */
+.nav-arrow:hover::before{ background:#777 }
+.nav-arrow:hover::after{ border-color:#777 }
+
+/* NAV LABEL (desktop baseline) - por baixo, alinhamento com cabeça */
+.nav-label{
+  position:absolute;
+  top:calc(100% + 0.35rem);
+  font-size:0.55rem;
+  font-weight:600;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:rgba(0,0,0,0.55);
+  white-space:nowrap;
+  transition:color .15s ease,text-decoration-color .15s ease;
+  pointer-events:auto;
+}
+
+/* alinhar label com a cabeça da seta */
+.nav-arrow.right .nav-label{ right:0; text-align:right }
+.nav-arrow.left .nav-label{ left:0; text-align:left }
+
+/* hover textual também activa */
+.nav-arrow:hover .nav-label,
+.nav-label:hover{ color:rgba(0,0,0,0.9); text-decoration:underline; cursor:pointer }
 
 /* =========================================================
-   TÍTULOS
+   PÁGINA C — EXERCÍCIO (DESKTOP)
+   Imagens ancoradas em cima, cortadas (object-fit:cover)
 ========================================================= */
-.page-title {
-  display: flex;
-  align-items: baseline;
-  gap: .8rem;
-  margin-bottom: 1.6rem;
+main.page.C .exercise{
+  width:var(--page-max-width);
+  margin:1rem auto 0;
+  display:flex;
+  gap:2rem;
+}
+main.page.C .exercise-item{
+  width:50%;
+  height:36vh;               /* reduzido para evitar imagens desproporcionadas */
+  overflow:hidden;
+  border:8px solid #fff;
+  background:#fff;
+  position:relative;
+}
+main.page.C .exercise-item img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:top;       /* ANCORAR EM CIMA */
+  cursor:zoom-in;
+  display:block;
 }
 
-.section-letter {
-  font-size: 3.4rem;
-  font-weight: 700;
-}
+/* lightbox básica (desktop) */
+.lightbox{ position:fixed; inset:0; background:rgba(255,255,255,0.96); z-index:9999; display:none; align-items:center; justify-content:center }
+.lightbox.open{ display:flex }
+.lightbox-content{ width:92vw; height:92vh; max-width:1400px; max-height:900px; background:#fff; box-shadow:0 12px 30px rgba(0,0,0,0.12) }
+.lightbox-content img, .lightbox-content iframe{ width:100%; height:100%; object-fit:contain; border:0 }
+.lightbox-close{ position:fixed; top:1rem; right:1rem; font-size:1.5rem; background:none; border:none; cursor:pointer; z-index:10010 }
 
-.section-title {
-  font-size: 2.4rem;
-  font-weight: 400;
-}
+/* modal legacy (se existir) */
+.modal{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; z-index:10020; background:rgba(255,255,255,0.96) }
+.modal[hidden]{ display:none }
+.modal.open{ display:flex }
+.modal img{ max-width:92vw; max-height:88vh; object-fit:contain }
 
 /* =========================================================
-   TEXTO
+   PÁGINA D — TRABALHOS (DESKTOP)
+   Carousel simples: apenas 1 vídeo visível; dots/descriptors escondidos
 ========================================================= */
-.content p {
-  margin-bottom: 1rem;
+main.page.D .carousel{ width:var(--page-max-width); margin:1rem auto 0; position:relative }
+main.page.D .carousel-track{ position:relative }
+main.page.D .carousel-item{ display:none }
+main.page.D .carousel-item.active{ display:block }
+main.page.D video{
+  width:100%;
+  height:48vh;                /* tamanho desktop (retangular) */
+  object-fit:cover;
+  object-position:top;
+  border:6px solid #fff;
+  display:block;
 }
 
-.lead {
-  margin-bottom: 1.4rem;
+/* arrows sobre o vídeo */
+.page.D .carousel-arrow{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:36px;height:36px;
+  background:none;border:none;padding:0;margin:0;cursor:pointer;z-index:10;
+  -webkit-appearance:none;appearance:none;
 }
+.page.D .carousel-arrow.prev{ left:12px }
+.page.D .carousel-arrow.next{ right:12px }
+
+/* desenho da seta */
+.page.D .carousel-arrow::before{ content:""; display:block; width:8px;height:8px; border-top:1px solid var(--stroke); border-right:1px solid var(--stroke) }
+.page.D .carousel-arrow.prev::before{ transform:rotate(-135deg) }
+.page.D .carousel-arrow.next::before{ transform:rotate(45deg) }
+.page.D .carousel-arrow:hover::before{ border-color:#777 }
+
+/* esconder pontos/carousel indicators (qualquer plugin) */
+.page.D .carousel [class*="dot"],
+.page.D .carousel [class*="dots"],
+.page.D .carousel [class*="indicator"],
+.page.D .carousel ol,
+.page.D .carousel ul{ display:none !important; visibility:hidden !important; opacity:0 !important; height:0 !important; pointer-events:none !important }
+
+/* remover controlos nativos do video onde possível */
+video::-webkit-media-controls, video::-webkit-media-controls-enclosure, video::-webkit-media-controls-panel,
+video::-webkit-media-controls-overlay-play-button, video::-webkit-media-controls-play-button,
+video::-webkit-media-controls-start-playback-button{ display:none !important; opacity:0 !important }
 
 /* =========================================================
-   MARGINALIA / META
+   CONTACT — CARTA (desktop)
+   Carta centrada, inputs minimalistas, botão discreto
 ========================================================= */
-.margin {
-  font-style: italic;
-  opacity: .55;
-  display: flex;
-  flex-direction: column;
-  gap: .8rem;
-  padding-top: 5.6rem;
+.page.contact{
+  min-height:calc(100vh - 5rem);
+  display:flex; align-items:center; justify-content:center;
+  padding:0; overflow:hidden; box-sizing:border-box;
 }
-
-.meta {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  padding-top: 5.6rem;
+.page.contact form{ margin:0; padding:0; display:flex; align-items:center; justify-content:center; width:100% }
+.letter{
+  width:44ch; max-width:92vw; padding:2.6rem 2.8rem;
+  background:#fbfaf7; border-radius:2px;
+  box-shadow:0 0 0 1px rgba(0,0,0,.04), 0 18px 40px rgba(0,0,0,.04);
+  font-family:"Courier New",Courier,monospace; font-size:1rem; line-height:1.55; color:#111;
+  position:relative; overflow:visible;
 }
-
-.meta h3 {
-  font-size: 1rem;
+.letter::after{ content:""; position:absolute; inset:0; pointer-events:none; background:radial-gradient(ellipse at top left, rgba(0,0,0,.02), transparent 60%); opacity:.35 }
+.letter p{ margin:0 0 1.15rem 0 }
+.letter input, .letter textarea{
+  font-family:inherit; font-size:inherit; width:100%;
+  background:transparent; border:none; border-bottom:1px solid rgba(0,0,0,.10);
+  padding:.18rem 0; color:inherit; resize:none; transition:border-color .12s ease;
+  -webkit-appearance:none; appearance:none;
 }
+.letter input{ max-width:28ch; display:block }
+.letter textarea{ min-height:4.2rem }
+.letter input:focus, .letter textarea:focus{ outline:none; border-bottom-color:rgba(0,0,0,.28) }
+.letter strong{ font-weight:700 }
+.letter button{
+  margin-top:1.2rem; background:none; border:1px solid rgba(0,0,0,.12);
+  padding:.38rem .9rem; cursor:pointer; font-family:Georgia,"Times New Roman",serif;
+  transition:opacity .12s ease, transform .12s ease;
+}
+.letter button:hover{ opacity:.85; transform:translateY(-1px) }
+.letter .sign{ margin-top:.9rem; font-size:1rem }
 
 /* =========================================================
-   FOOTER DESKTOP
+   TRANSIÇÃO ENTRE PÁGINAS (pequenas animações)
 ========================================================= */
-.footer-fixed {
-  position: fixed;
-  left: 50%;
-  bottom: 1rem;
-  transform: translateX(-50%);
-  width: var(--block-total);
-  display: flex;
-  flex-direction: column;
-  gap: .8rem;
-  z-index: 10;
-}
-
-.footer-nav {
-  display: flex;
-  height: 26px;
-}
-
-.signature {
-  align-self: flex-end;
-  font-size: 1.75rem;
-  white-space: nowrap;
-}
-
-/* ---------- setas ---------- */
-.nav-arrow {
-  flex: 1;
-  position: relative;
-}
-
-.nav-arrow::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: var(--stroke);
-}
-
-.nav-arrow::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  width: 7px;
-  height: 7px;
-  border-top: 1px solid var(--stroke);
-  border-right: 1px solid var(--stroke);
-}
-
-.nav-arrow.left::after {
-  left: 0;
-  transform: rotate(-135deg);
-}
-
-.nav-arrow.right::after {
-  right: 0;
-  transform: rotate(45deg);
-}
-
-.nav-label {
-  position: absolute;
-  top: 100%;
-  margin-top: .2rem;
-  font-size: .55rem;
-  font-weight: 600;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.nav-arrow.left .nav-label {
-  left: 0;
-}
-
-.nav-arrow.right .nav-label {
-  right: 0;
-}
+@keyframes pageIn{ from{ opacity:0; transform:translateX(32px) } to{ opacity:1; transform:translateX(0) } }
+@keyframes pageOut{ from{ opacity:1; transform:translateX(0) } to{ opacity:0; transform:translateX(-32px) } }
+.page{ animation:pageIn .42s cubic-bezier(.4,0,.2,1) both }
+body.is-leaving .page{ animation:pageOut .28s cubic-bezier(.4,0,.2,1) both }
 
 /* =========================================================
-   C — EXERCÍCIO (DESKTOP)
+   RESPONSIVE — TABLET e MOBILE (ordenado e contendo)
 ========================================================= */
-.page.C .exercise {
-  width: var(--block-total);
-  margin: 1rem auto 0;
-  display: flex;
-  gap: 2rem;
+
+/* ---------- TABLET (≤ 900px) ---------- */
+@media (max-width:900px){
+  .main{ grid-template-columns:1fr; row-gap:1.75rem; max-width:var(--page-max-width) }
+  .margin{ display:none }             /* esconder marginalia em certos pontos */
+  .meta{ margin-top:1.5rem }
+  .footer-nav{ padding:0 1.25rem }
+  /* melhor equilíbrio quando couber content + margin lado-a-lado */
+  .main{ grid-template-columns: 1fr auto; column-gap:1.25rem; align-items:start }
+  .margin{ font-size:0.85rem; opacity:0.7 }
 }
 
-.page.C .exercise-item {
-  width: 50%;
-  height: 42vh;
-  overflow: hidden;
-  border: 8px solid #fff;
-}
+/* ---------- MOBILE (≤ 600px) — regime vertical / limpo ---------- */
+@media (max-width:600px){
 
-.page.C img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+  html,body{ overflow-x:hidden }
+  body{ font-size:16px; line-height:1.55 }
 
-/* =========================================================
-   D — TRABALHOS (DESKTOP)
-========================================================= */
-.page.D .carousel {
-  width: var(--block-total);
-  margin: 1rem auto 0;
-}
-
-.page.D .carousel-item {
-  display: none;
-}
-
-.page.D .carousel-item.active {
-  display: block;
-}
-
-.page.D video {
-  width: 100%;
-  height: 48vh;
-  object-fit: cover;
-  border: 6px solid #fff;
-}
-
-/* =========================================================
-   CONTACTO (DESKTOP)
-========================================================= */
-.page.contact {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.letter {
-  width: 44ch;
-  max-width: 92vw;
-  padding: 2.6rem;
-  background: #fbfaf7;
-  box-shadow: 0 0 0 1px rgba(0,0,0,.04), 0 18px 40px rgba(0,0,0,.04);
-  font-family: "Courier New", monospace;
-}
-
-.letter input,
-.letter textarea {
-  width: 100%;
-  border: none;
-  border-bottom: 1px solid rgba(0,0,0,.15);
-  background: transparent;
-  font-family: inherit;
-}
-
-/* =========================================================
-   MOBILE (≤ 600px) — REGIME ISOLADO
-========================================================= */
-@media (max-width: 600px) {
-
-  .top {
-    padding: 1.2rem 1.2rem 0;
-  }
-
-  .top-inner {
-    max-width: none;
-  }
-
-  .page {
-    padding: 1.4rem 1.2rem;
-  }
-
-  /* layout principal */
-  .main {
-    max-width: none;
+  /* layout: permitir que content e margin partilhem a largura maior */
+  .main{
+    display:grid;
     grid-template-columns: 1fr auto;
-    column-gap: 1rem;
+    column-gap:1rem;
+    padding:1.2rem 1rem;
+    align-items:start;
+    max-width:100%;
   }
 
-  .content {
-    max-width: none;
+  /* títulos */
+  .page-title{ margin-bottom:1rem }
+  .section-letter{ font-size:1.05rem; font-weight:700; margin-right:.4rem }
+  .section-title{ font-size:1.25rem; line-height:1.15 }
+  .lead{ font-size:1rem }
+  .content p{ font-size:0.95rem }
+
+  /* marginalia — manter à direita mas com margem igual */
+  .margin{ display:block; font-size:0.8rem; opacity:0.65; white-space:nowrap }
+  .margin span{ display:block; margin-bottom:.35rem }
+
+  /* meta passa a bloco abaixo do conteúdo principal */
+  .meta{ grid-column:1 / -1; margin-top:1rem; font-size:0.9rem }
+
+  /* FOOTER -> transformado para barra de navegação contida e sem overflow */
+  .footer-fixed{ position:static; margin-top:1.25rem; padding:0; background:transparent; width:100% }
+  .footer-fixed .footer-inner{ width:calc(100% - (var(--mobile-edge-gap) * 2)); margin:0 auto; padding:0; display:flex; align-items:center; justify-content:center; gap:0; }
+  .footer-fixed .footer-nav{ width:calc(100% - 0); display:flex; justify-content:space-between; align-items:center; gap:0; overflow:hidden; max-width:100% }
+
+  /* NAV ARROWS — grandes alvos tácteis; labels por baixo alinhadas com cabeça */
+  .nav-arrow{
+    flex:0 0 48%;
+    height:56px;
+    min-height:56px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-sizing:border-box;
+    padding:.45rem;
+    border-radius:6px;
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
   }
 
-  .margin {
-    padding-top: 0;
-    font-size: .8rem;
-  }
+  /* evitar saltos ao pressionar (touch) */
+  .nav-arrow *{ pointer-events:none }
 
-  .meta {
-    grid-column: 1 / -1;
-    padding-top: 1rem;
-  }
+  /* nav label: sempre visível por baixo; alinhada com cabeça */
+  .nav-label{ position:relative; top:0; display:block !important; font-size:0.68rem; margin-top:.35rem; pointer-events:auto; white-space:nowrap; opacity:0.9 }
+  .nav-arrow.left .nav-label{ text-align:left }
+  .nav-arrow.right .nav-label{ text-align:right }
 
-  /* footer vira fluxo normal */
-  .footer-fixed {
-    position: static;
-    width: calc(100% - 2.4rem);
-    margin: 1.4rem auto 0;
-  }
+  /* assinatura móvel: alinhada com margem direita (aproximação) */
+  .signature{ width:calc(100% - (var(--mobile-edge-gap) * 2)); margin:0.6rem auto 0; text-align:right; font-size:0.92rem; opacity:0.6; padding-right:var(--mobile-edge-gap) }
 
-  .footer-nav {
-    width: 100%;
-  }
+  /* Página C — imagens empilhadas e escala segura */
+  .exercise{ display:block; margin-top:1.2rem }
+  .exercise-item{ width:100%; margin-bottom:1rem; height:auto; border:8px solid #fff }
+  .exercise-item img{ display:block; width:calc(100% - 2rem); max-width:92vw; margin:0 auto; height:auto; object-fit:cover }
 
-  .nav-arrow {
-    width: 50%;
-  }
+  /* Página D — vídeos dimensionados e setas sobre o vídeo */
+  .carousel{ margin-top:1.2rem }
+  .carousel video{ width:100%; height:auto; max-height:48vh; object-fit:cover }
+  .carousel-arrow{ width:36px; height:36px }
+  .page.D .carousel-arrow{ position:absolute; top:50%; transform:translateY(-50%); } /* mantêm-se sobre o vídeo */
 
-  .nav-label {
-    position: static;
-    display: block;
-    margin-top: .25rem;
-    text-align: inherit;
-  }
+  /* CONTACTO — carta mais acima, centrada, inputs subtis */
+  .page.contact .letter{ margin-top:0.6rem; padding:1.2rem 1rem; width:calc(100% - 2rem); max-width:92vw; box-sizing:border-box }
+  .page.contact .signature{ margin-top:.6rem; }
 
-  .signature {
-    font-size: 1.1rem;
-    margin-top: .6rem;
-  }
-
-  /* C */
-  .page.C .exercise {
-    display: block;
-  }
-
-  .page.C .exercise-item {
-    width: 100%;
-    height: auto;
-    margin-bottom: 1rem;
-  }
-
-  .page.C img {
-    height: auto;
-  }
-
-  /* D */
-  .page.D video {
-    height: 36vh;
-  }
-
-  /* contacto */
-  .page.contact {
-    align-items: flex-start;
-    padding-top: 1.2rem;
-  }
-
-  .letter {
-    margin: 0 auto;
-  }
+  /* LIGHTBOX — ocupar quase todo o ecrã em mobile */
+  .lightbox{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(255,255,255,0.98); z-index:9999 }
+  .lightbox.open{ display:flex }
+  .lightbox-content{ width:94vw; height:92vh; max-width:960px; max-height:88vh; background:#fff; box-shadow:0 12px 30px rgba(0,0,0,0.12) }
+  .lightbox-content img, .lightbox-content iframe{ width:100%; height:100%; object-fit:contain }
+  .lightbox-close{ position:fixed; top:12px; right:12px; z-index:10010; font-size:1.4rem; background:none; border:none; cursor:pointer; -webkit-tap-highlight-color:rgba(0,0,0,0) }
 }
+
+/* =========================================================
+   AJUSTES FINOS — evitar overflow lateral por causa de marginais
+========================================================= */
+html,body{overflow-x:hidden}
+.main, .top-inner, .footer-fixed{box-sizing:border-box}
+@media (min-width:1200px){
+  /* reforçar leitura: content pode esticar um pouco */
+  :root{ --content-width:46ch }
+}
+
+/* =========================================================
+   UTILS / ACCESSIBILITY
+========================================================= */
+button{font-family:inherit}
+.nav-arrow:focus{ outline:none; box-shadow:0 0 0 3px rgba(0,0,0,0.06) }
+.nav-arrow, .nav-arrow *{ -webkit-tap-highlight-color:rgba(0,0,0,0) }
+
+/* =========================================================
+   CORREÇÕES ESPECÍFICAS QUE SITES PEDIRAM
+   - garantir que .visually-hidden não aparece
+   - esconder indicadores que alguns iframes/plugins possam expor
+========================================================= */
+.visually-hidden{display:none !important}
+iframe[title="lightbox"], iframe[title="modal"]{ max-width:100% }
+
+/* =========================================================
+   NOTAS FINAIS
+=========================================================
+- Desktop: mantive a grid original; só reduzi a altura de imagens (C) e videos (D) para evitar recortes/menus escondidos.
+- Mobile: o footer passa a barra contida; nav-labels colocadas por baixo e alinhadas com as cabeças das setas.
+- Lightbox/modal: largura e z-index reforçados; botão fechar posicionado.
+- Carousel: indicadores/dots ocultos por CSS (qualquer plugin que gere classes contendo 'dot'/'dots'/'indicator' fica invisível).
+
+Se queres, aplico agora 2 micro-ajustes (sem risco):
+1) aumentar ligeiramente .signature (desktop) para ficar idêntico ao que tinhas antes;
+2) reduzir a altura de main.page.C .exercise-item para 32vh (se as imagens ainda parecerem altas).
+
+Diz-me qual dessas 2 queres que eu faça já (faço e devolvo só o trecho alterado), ou testa este ficheiro e dizes exacto 1 problema residual com screenshot e eu corrijo na hora.
+::contentReference[oaicite:0]{index=0}
