@@ -157,7 +157,9 @@ a {
   font-size: 1.75rem;
   white-space: nowrap;
 }
-
+.visually-hidden{
+  display:none;
+}
 /* ---------- setas ---------- */
 .nav-arrow {
   flex: 1;
