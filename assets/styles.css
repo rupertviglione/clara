@@ -378,17 +378,21 @@ a {
 }
 
 
+
 /* =========================================================
-   MOBILE (≤ 600px) — REGIME ISOLADO
+   MOBILE (≤ 600px) — REGIME LIMPO E ISOLADO
 ========================================================= */
 @media (max-width: 600px) {
-.section-letter {
-  font-size: 1.6rem;
-}
 
-.section-title {
-  font-size: 1.3rem;
-}
+  /* ---------- base ---------- */
+
+  html, body {
+    overflow-x: hidden;
+  }
+
+  body {
+    line-height: 1.48;
+  }
 
   .top {
     padding: 1.2rem 1.2rem 0;
@@ -402,7 +406,8 @@ a {
     padding: 1.4rem 1.2rem;
   }
 
-  /* layout principal */
+  /* ---------- layout principal ---------- */
+
   .main {
     max-width: none;
     grid-template-columns: 1fr auto;
@@ -413,167 +418,129 @@ a {
     max-width: none;
   }
 
+  /* ---------- títulos ---------- */
+
+  .section-letter {
+    font-size: 1.6rem;
+  }
+
+  .section-title {
+    font-size: 1.3rem;
+  }
+
+  /* ---------- marginália ---------- */
+
   .margin {
-    padding-top: 4.9rem;
+    padding-top: 3.8rem;   /* desce claramente em relação ao título */
     font-size: .8rem;
   }
+
+  /* ---------- meta ---------- */
 
   .meta {
     grid-column: 1 / -1;
     padding-top: 1rem;
   }
 
-  /* footer vira fluxo normal */
-/* ---------- setas ---------- */
-.nav-arrow {
-  flex: 1;
-  position: relative;
-}
+  /* =====================================================
+     FOOTER + NAVEGAÇÃO — MOBILE (SUBSTITUI O DESKTOP)
+  ===================================================== */
 
-/* linha */
-.nav-arrow::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: var(--stroke);
-  transform: translateY(-0.5px); /* alinha pixel-perfect */
-}
-
-/* cabeça */
-.nav-arrow::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  width: 7px;
-  height: 7px;
-  border-top: 1px solid var(--stroke);
-  border-right: 1px solid var(--stroke);
-  transform: translateY(-50%);
-}
-
-/* direcções */
-.nav-arrow.left::after {
-  left: 0;
-  transform: translateY(-50%) rotate(-135deg);
-}
-
-.nav-arrow.right::after {
-  right: 0;
-  transform: translateY(-50%) rotate(45deg);
-}
-
-/* labels */
-.nav-label {
-  position: absolute;
-  top: 100%;
-  margin-top: .35rem; /* ligeiramente mais baixo */
-  font-size: .55rem;
-  font-weight: 600;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.nav-arrow.left .nav-label {
-  left: 0;
-}
-
-.nav-arrow.right .nav-label {
-  right: 0;
-}
-
+  .footer-fixed {
+    position: static;
+    width: 100%;
+    margin: 1.2rem 0 0;
+    padding: 0 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+  }
 
   .footer-nav {
-    width: 100%;
+    display: flex;
+    height: auto;          /* remove os 26px do desktop */
   }
-.nav-arrow::before,
-.nav-arrow::after {
-  top: 48%;
-}
 
   .nav-arrow {
-    width: 50%;
+    flex: 1;
+    height: 44px;          /* alvo táctil real */
   }
 
-.nav-label {
-  position: static;
-  display: block;
-  margin-top: 1rem;
-  font-size: .6rem;
-}
+  .nav-arrow::before {
+    left: 0;
+    right: 0;
+  }
 
-/* alinhar com a cabeça da seta */
-.nav-arrow.left .nav-label {
-  text-align: left;
-}
+  .nav-label {
+    position: static;
+    display: block;
+    margin-top: .9rem;
+    font-size: .6rem;
+  }
 
-.nav-arrow.right .nav-label {
-  text-align: right;
-}
+  .nav-arrow.left .nav-label {
+    text-align: left;
+  }
 
+  .nav-arrow.right .nav-label {
+    text-align: right;
+  }
 
   .signature {
+    display: block;
     font-size: 1.1rem;
-    margin-top: .6rem;
+    align-self: flex-end;
+    margin-top: .4rem;
   }
 
-  /* C */
+  /* ---------- C — Exercício ---------- */
+
   .page.C .exercise {
     display: block;
   }
 
-.page.C .exercise-item {
-  width: calc(100vw - 2.4rem);
-  margin-left: auto;
-  margin-right: auto;
-  height: 34vh;
-  overflow: hidden;
-}
+  .page.C .exercise-item {
+    width: calc(100vw - 2.4rem);
+    margin-left: auto;
+    margin-right: auto;
+    height: 34vh;
+    overflow: hidden;
+  }
 
+  .page.C img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+  }
 
-.page.C img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top;
-}
+  /* ---------- D — Trabalhos ---------- */
 
-  /* D */
-.page.D video {
-  width: calc(100vw - 2.4rem);
-  margin-left: auto;
-  margin-right: auto;
-  height: 60vw;          /* quase quadrado */
-  max-height: 52vh;
-  object-fit: cover;
-  object-position: center;
-}
+  .page.D video {
+    width: calc(100vw - 2.4rem);
+    margin-left: auto;
+    margin-right: auto;
+    height: 60vw;
+    max-height: 52vh;
+    object-fit: cover;
+    object-position: center;
+  }
 
+  /* ---------- Contacto ---------- */
 
-
-  /* contacto */
   .page.contact {
     align-items: flex-start;
     padding-top: 1.2rem;
-      padding-bottom: 0;
+    padding-bottom: 0;
   }
 
-.page.contact .footer-fixed {
-  margin-top: .3rem;
-   gap: .2rem;
-}
   .letter {
     margin: 0 auto;
   }
 
-    .page.contact .signature {
-    margin-top: 0.1rem;
-    font-size: 1.1rem;
-    align-self: flex-end;
+  .page.contact .footer-fixed {
+    margin-top: .3rem;
+    gap: .2rem;
   }
-
 
 }
