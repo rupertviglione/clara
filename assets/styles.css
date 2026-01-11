@@ -475,92 +475,146 @@ a {
     padding-top: 1rem;
   }
 
-  /* =====================================================
-     FOOTER + NAVEGAÇÃO (MOBILE)
-  ===================================================== */
+  /* ============================
+   FOOTER + NAVEGAÇÃO — MOBILE
+   (substituir o bloco existente)
+   ============================ */
 
-  .footer-fixed {
-    position: static;
-    width: 100%;
-    margin: 1.6rem 0 0;
-    padding: 0;
-    transform: none;
-    display: flex;
-    flex-direction: column;
-    gap: .6rem;
-  }
+.footer-fixed {
+  position: static;
+  width: 100%;
+  margin: 1.4rem 0 0;
+  padding: 0;
+  transform: none;
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+}
 
-  .footer-nav {
-    width: calc(100% - 2.4rem);   /* texto + marginália */
-    margin: 0 auto;
-    display: flex;
-    height: auto;
-  }
+/* alinhar a área de navegação exactamente com o content + marginália */
+.footer-nav {
+  width: calc(100% - 2.4rem); /* corresponde ao padding horizontal da página */
+  margin: 0 auto;
+  display: flex;
+  height: auto;
+  align-items: center;
+  box-sizing: border-box; 
+  padding: 0;      /* já estamos a usar calc acima */
+}
 
-  /* setas */
-  .nav-arrow {
-    flex: 1 1 0;
-  }
+/* cada seta ocupa espaço fluido; quando houver 1 seta ocupa toda a largura útil,
+   quando houver 2 partilham igualmente */
+.nav-arrow {
+  flex: 1 1 0;
+  min-width: 0;
+  position: relative;
+  box-sizing: border-box;
+}
 
-  /* labels abaixo da linha */
-  .nav-label {
-    position: static;
-    display: block;
-    margin-top: .8rem;
-    font-size: .6rem;
-  }
+/* garantir que a linha começa exactamente na margem esquerda e acaba na direita */
+.nav-arrow::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--stroke);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
 
-  .nav-arrow.left .nav-label {
-    text-align: left;
-  }
+/* cabeça da seta corretamente centrada verticalmente */
+.nav-arrow::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border-top: 1px solid var(--stroke);
+  border-right: 1px solid var(--stroke);
+  transform: translateY(-50%);
+}
 
-  .nav-arrow.right .nav-label {
-    text-align: right;
-  }
+/* direcções */
+.nav-arrow.left::after { left: 0; transform: translateY(-50%) rotate(-135deg); }
+.nav-arrow.right::after { right: 0; transform: translateY(-50%) rotate(45deg); }
 
-  /* assinatura acompanha o bloco */
-  .signature {
-    width: calc(100% - 2.4rem);
-    margin: .6rem auto 0;
-    text-align: right;
-    font-size: 1.1rem;
-  }
+/* legenda abaixo da linha - alinhada com a cabeça */
+.nav-label {
+  position: static;
+  display: block;
+  margin-top: .8rem;   /* descer o label para ficar abaixo da linha */
+  font-size: .6rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  width: 100%;
+}
+
+/* alinhamentos textuais em cada lado */
+.nav-arrow.left .nav-label { text-align: left; padding-left: 0; }
+.nav-arrow.right .nav-label { text-align: right; padding-right: 0; }
+
+/* assinatura acompanha a margem direita do bloco (texto + marginália) */
+.signature {
+  width: calc(100% - 2.4rem);
+  margin: .6rem auto 0;
+  text-align: right;
+  font-size: 1.1rem;
+  box-sizing: border-box;
+}
 
   /* =====================================================
      C — EXERCÍCIO
   ===================================================== */
 
-  .page.C .exercise {
-    display: block;
-    margin-top: 1rem;
-  }
+.page.C .exercise {
+  display: block;
+  margin-top: 1rem;
+  padding: 0 1.2rem;   /* garante alinhamento com o bloco de texto */
+  box-sizing: border-box;
+}
 
   .page.C .exercise-item {
-    width: calc(100% - 2.4rem);
-    margin: 0 auto 1.6rem;
-    height: 34vh;
-    overflow: hidden;
-  }
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto 1.4rem;
+  height: 34vh;
+  overflow: hidden;
+  box-sizing: border-box;
+}
 
-  .page.C img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top;
-  }
+ .page.C img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  max-width: 100%;
+}
+
 
   /* =====================================================
      D — TRABALHOS
   ===================================================== */
 
-  .page.D video {
-    width: calc(100% - 2.4rem);
-    margin: 0 auto;
-    height: 60vw;            /* quase quadrado */
-    max-height: 52vh;
-    object-fit: cover;
-    object-position: center;
-  }
+  .page.D .carousel {
+  padding: 0 1.2rem;  /* alinha vídeo com o resto do conteúdo */
+  box-sizing: border-box;
+}
+
+.page.D video {
+  width: calc(100% - 2.4rem); /* corresponde ao padding horizontal */
+  margin: 0 auto;
+  height: 60vw;
+  max-height: 52vh;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  box-sizing: border-box;
+}
 
   /* =====================================================
      CONTACTO
@@ -580,5 +634,9 @@ a {
     margin-top: .3rem;       /* sobe o - clara. */
     gap: .2rem;
   }
-
+/* assinatura específica da página de contacto (mobile) */
+.page.contact .signature {
+  margin-top: -1.4rem;   /* sobe a assinatura em relação ao fluxo normal */
+  padding-right: 1.2rem; /* mantém pequena margem lateral */
+}
 }
