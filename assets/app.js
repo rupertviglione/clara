@@ -26,10 +26,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function preloadAssets() {
   const assets = [
-    'assets/antes-full.png',
-    'assets/depois-full.png',
-    'assets/site seiva.mp4',
-    'assets/site gq.mp4'
+    '/assets/antes-full.png',
+    '/assets/depois-full.png',
+    '/assets/site seiva.mp4',
+    '/assets/site gq.mp4'
   ];
 
   assets.forEach(src => {
@@ -50,7 +50,7 @@ function preloadAssets() {
 
 function initPageTransitions() {
   document.querySelectorAll('a[href]').forEach(link => {
-    if (link.origin === location.origin) {
+    if (link.origin === location.origin && !link.hasAttribute('data-modal')) {
       link.addEventListener('click', e => {
         e.preventDefault();
         document.body.classList.add('is-leaving');
@@ -80,9 +80,7 @@ function initContactForm() {
       const res = await fetch(form.action, {
         method: form.method || 'POST',
         body: data,
-        headers: {
-          'Accept': 'application/json'
-        }
+        headers: { 'Accept': 'application/json' }
       });
 
       const result = await res.json();
@@ -104,7 +102,6 @@ function initContactForm() {
     }
   });
 }
-
 
 /* =========================================================
    VIEWER DE VÍDEOS (PROJECTOS)
@@ -143,7 +140,7 @@ function initViewers() {
 }
 
 /* =========================================================
-   CARROSSEL SIMPLES
+   CARROSSEL SIMPLES (D — Trabalhos)
 ========================================================= */
 
 function initCarousel() {
@@ -180,29 +177,8 @@ function initCarousel() {
 }
 
 /* =========================================================
-   LIGHTBOX / MODAL DE IMAGENS
+   LIGHTBOX / MODAL (IMAGEM OU IFRAME)
 ========================================================= */
-
-function initLightbox() {
-  const lightbox = document.getElementById('lightbox');
-  if (!lightbox) return;
-
-  const img = lightbox.querySelector('img');
-
-  document.querySelectorAll('[data-modal]').forEach(trigger => {
-    trigger.addEventListener('click', () => {
-      img.src = trigger.src;
-      lightbox.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    });
-  });
-
-  lightbox.addEventListener('click', () => {
-    lightbox.classList.remove('open');
-    img.src = '';
-    document.body.style.overflow = '';
-  });
-}
 
 function initLightbox() {
   const lightbox = document.getElementById('lightbox');
@@ -223,7 +199,7 @@ function initLightbox() {
             frameborder="0"
             aria-label="Exercício completo"
           ></iframe>`;
-      } else {
+      } else if (el.tagName === 'IMG') {
         content.innerHTML = `<img src="${el.src}" alt="">`;
       }
 
@@ -232,14 +208,15 @@ function initLightbox() {
     });
   });
 
-  closeBtn.addEventListener('click', close);
-  lightbox.addEventListener('click', e => {
-    if (e.target === lightbox) close();
-  });
-
   function close() {
     lightbox.classList.remove('open');
     content.innerHTML = '';
     document.body.style.overflow = '';
   }
+
+  closeBtn && closeBtn.addEventListener('click', close);
+
+  lightbox.addEventListener('click', e => {
+    if (e.target === lightbox) close();
+  });
 }

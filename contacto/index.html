@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+
+  <title>– clara. | E · Contacto</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contacto directo com a clara. Escreve-nos sobre o teu projecto e respondemos com clareza e próximos passos.">
+
+  <link rel="canonical" href="https://clarastudio.pt/contacto/">
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="assets/styles.css">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="– clara. · Contacto">
+  <meta property="og:description" content="Escreve-nos sobre o teu projecto. Respondemos com clareza.">
+  <meta property="og:url" content="https://clarastudio.pt/contacto/">
+  <meta property="og:type" content="website">
+
+  <!-- Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contacto — clara",
+    "description": "Página de contacto da clara."
+  }
+  </script>
+</head>
+
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <a href="/presenca-digital/" class="brand" aria-label="clara — página inicial">– clara.</a>
+  </div>
+</header>
+
+<main class="page contact" role="main">
+<form
+  id="contactForm"
+  action="https://formspree.io/f/mpqqazrl" 
+ method="POST">
+ <input type="hidden" name="_subject" value="Novo contacto — clara">
+<input type="hidden" name="_language" value="pt">
+
+    <section class="letter">
+
+      <p>Olá, <strong>– clara.</strong></p>
+
+      <p>
+        <label for="mensagem" class="visually-hidden">Mensagem</label>
+        Escrevo-te porque<br>
+        <textarea
+          id="mensagem"
+          name="mensagem"
+          rows="4"
+          required
+          placeholder="Conta-nos, com calma, o que precisas."
+        ></textarea>
+      </p>
+
+      <p>
+        <label for="email" class="visually-hidden">Email</label>
+        Podes responder para<br>
+        <input
+          id="email"
+          type="email"
+          name="email"
+          required
+          placeholder="teu@email.pt"
+        >
+      </p>
+
+      <p>
+        <label for="nome" class="visually-hidden">Nome</label>
+        Cumprimentos,<br>
+        <input
+          id="nome"
+          type="text"
+          name="nome"
+          placeholder="Nome (opcional)"
+        >
+      </p>
+
+      <button type="submit">Enviar</button>
+
+    </section>
+  </form>
+
+</main>
+
+<footer class="footer-fixed">
+  <div class="signature">– clara.</div>
+</footer>
+
+<script src="assets/app.js" defer></script>
+
+</body>
+</html>
