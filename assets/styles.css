@@ -511,7 +511,6 @@ a {
   box-sizing: border-box;
 }
 
-<<<<<<< HEAD
 /* garantir que a linha começa exactamente na margem esquerda e acaba na direita */
 .nav-arrow::before {
   content: "";
@@ -524,15 +523,6 @@ a {
   transform: translateY(-50%);
   pointer-events: none;
 }
-=======
-  /* labels abaixo da linha */
-  .nav-label {
-    position: static;
-    display: block;
-    margin-top: 1.1rem;
-    font-size: .6rem;
-  }
->>>>>>> ea6699cf720e20ac6e0e39937e43d574253481fc
 
 /* cabeça da seta corretamente centrada verticalmente */
 .nav-arrow::after {
