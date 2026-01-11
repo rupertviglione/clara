@@ -31,6 +31,7 @@ body {
   --content-max: 72rem;
   --side-gap: 1.5rem;
   --stroke: #999;
+  --footer-space: 5rem; /* espaço reservado ao footer */
 }
 
 /* =========================================================
@@ -197,7 +198,7 @@ a {
 .nav-label {
   position: absolute;
   top: 100%;
-  margin-top: .15rem;
+  margin-top: .1rem;
   font-size: .55rem;
   font-weight: 600;
   letter-spacing: .06em;
@@ -258,8 +259,12 @@ a {
 }
 
 /* =========================================================
-   D — TRABALHOS
+   D — TRABALHOS (REVISTO)
 ========================================================= */
+.page.D {
+  padding-bottom: calc(var(--footer-space) + 2rem);
+}
+
 .page.D .carousel {
   max-width: var(--content-max);
   margin: 1.2rem auto 0;
@@ -268,15 +273,16 @@ a {
 .page.D video {
   width: 100%;
   aspect-ratio: 16 / 9;
-  max-height: 60vh; /* DESKTOP seguro */
+  max-height: 52vh;       /* desktop seguro */
   object-fit: contain;
   border: 6px solid #fff;
 }
 
 /* esconder UI fantasma */
-.carousel *,
-[class*="dot"],
-[class*="indicator"] {
+.page.D [class*="dot"],
+.page.D [class*="indicator"],
+.page.D ol,
+.page.D ul {
   display: none !important;
 }
 
@@ -292,7 +298,7 @@ a {
 .letter {
   width: 42ch;
   max-width: 90vw;
-  padding: 2.8rem; /* mais respiração */
+  padding: 2.8rem;
   background: #fbfaf7;
   box-shadow: 0 0 0 1px rgba(0,0,0,.04),
               0 18px 40px rgba(0,0,0,.04);
@@ -317,7 +323,7 @@ a {
 }
 
 /* =========================================================
-   TABLET — RETRATO (≤1023px)
+   TABLET — RETRATO
 ========================================================= */
 @media (max-width: 1023px) and (orientation: portrait) {
 
@@ -338,7 +344,6 @@ a {
   }
 
   .signature {
-    align-self: flex-end;
     margin-top: 1.2rem;
   }
 
@@ -354,13 +359,9 @@ a {
 }
 
 /* =========================================================
-   TABLET — PAISAGEM (≤1023px)
+   TABLET — PAISAGEM
 ========================================================= */
 @media (max-width: 1023px) and (orientation: landscape) {
-
-  .footer-fixed {
-    bottom: .8rem;
-  }
 
   .signature {
     margin-top: .4rem;
@@ -373,7 +374,7 @@ a {
 }
 
 /* =========================================================
-   MOBILE (≤767px)
+   MOBILE
 ========================================================= */
 @media (max-width: 767px) {
 
@@ -399,10 +400,6 @@ a {
     position: static;
     width: 100%;
     margin-top: 1.5rem;
-  }
-
-  .footer-nav {
-    width: 100%;
   }
 
   .nav-label {
