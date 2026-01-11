@@ -28,7 +28,7 @@ body {
    VARIÁVEIS
 ========================================================= */
 :root {
-  --content-max: 72rem;      /* largura máxima real */
+  --content-max: 72rem;
   --side-gap: 1.5rem;
   --stroke: #999;
 }
@@ -111,9 +111,12 @@ a {
   opacity: .55;
   display: flex;
   flex-direction: column;
-  gap: .75rem;
-  padding-top: 4.8rem;
+  padding-top: 6.4rem;
 }
+
+/* irregularidade deliberada */
+.margin > *:nth-child(odd) { margin-bottom: .55rem; }
+.margin > *:nth-child(even) { margin-bottom: .85rem; }
 
 .meta {
   display: flex;
@@ -194,7 +197,7 @@ a {
 .nav-label {
   position: absolute;
   top: 100%;
-  margin-top: .35rem;
+  margin-top: .15rem;
   font-size: .55rem;
   font-weight: 600;
   letter-spacing: .06em;
@@ -215,8 +218,8 @@ a {
 /* hover */
 .nav-arrow:hover::before,
 .nav-arrow:hover::after {
-  border-color: #666;
   background: #666;
+  border-color: #666;
 }
 
 .nav-arrow:hover .nav-label {
@@ -247,6 +250,13 @@ a {
   object-position: top;
 }
 
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(255,255,255,.96);
+}
+
 /* =========================================================
    D — TRABALHOS
 ========================================================= */
@@ -255,26 +265,18 @@ a {
   margin: 1.2rem auto 0;
 }
 
-.page.D .carousel-item {
-  display: none;
-}
-
-.page.D .carousel-item.active {
-  display: block;
-}
-
 .page.D video {
   width: 100%;
   aspect-ratio: 16 / 9;
-  object-fit: cover;
+  max-height: 60vh; /* DESKTOP seguro */
+  object-fit: contain;
   border: 6px solid #fff;
 }
 
 /* esconder UI fantasma */
-.page.D [class*="dot"],
-.page.D [class*="indicator"],
-.page.D ol,
-.page.D ul {
+.carousel *,
+[class*="dot"],
+[class*="indicator"] {
   display: none !important;
 }
 
@@ -290,7 +292,7 @@ a {
 .letter {
   width: 42ch;
   max-width: 90vw;
-  padding: 2.4rem;
+  padding: 2.8rem; /* mais respiração */
   background: #fbfaf7;
   box-shadow: 0 0 0 1px rgba(0,0,0,.04),
               0 18px 40px rgba(0,0,0,.04);
@@ -307,7 +309,7 @@ a {
 }
 
 .letter button {
-  margin-top: 1rem;
+  margin-top: 1.2rem;
   background: none;
   border: none;
   text-decoration: underline;
@@ -315,9 +317,9 @@ a {
 }
 
 /* =========================================================
-   TABLET (≤ 1023px)
+   TABLET — RETRATO (≤1023px)
 ========================================================= */
-@media (max-width: 1023px) {
+@media (max-width: 1023px) and (orientation: portrait) {
 
   .main {
     grid-template-columns: 1fr 8rem;
@@ -332,12 +334,46 @@ a {
     position: static;
     transform: none;
     width: 100%;
-    margin-top: 2rem;
+    margin-top: 3rem;
+  }
+
+  .signature {
+    align-self: flex-end;
+    margin-top: 1.2rem;
+  }
+
+  .page.D video {
+    max-height: none;
+    object-fit: contain;
+  }
+
+  .page.contact {
+    align-items: flex-start;
+    padding-top: 2rem;
   }
 }
 
 /* =========================================================
-   MOBILE (≤ 767px)
+   TABLET — PAISAGEM (≤1023px)
+========================================================= */
+@media (max-width: 1023px) and (orientation: landscape) {
+
+  .footer-fixed {
+    bottom: .8rem;
+  }
+
+  .signature {
+    margin-top: .4rem;
+  }
+
+  .page.D video {
+    max-height: 50vh;
+    object-fit: contain;
+  }
+}
+
+/* =========================================================
+   MOBILE (≤767px)
 ========================================================= */
 @media (max-width: 767px) {
 
