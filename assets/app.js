@@ -50,7 +50,10 @@ function preloadAssets() {
 
 function initPageTransitions() {
   document.querySelectorAll('a[href]').forEach(link => {
-    if (link.origin === location.origin && !link.hasAttribute('data-modal')) {
+    // ⚠️ ignora links que abrem modais
+    if (link.hasAttribute('data-modal')) return;
+
+    if (link.origin === location.origin) {
       link.addEventListener('click', e => {
         e.preventDefault();
         document.body.classList.add('is-leaving');
@@ -140,7 +143,7 @@ function initViewers() {
 }
 
 /* =========================================================
-   CARROSSEL SIMPLES (D — Trabalhos)
+   CARROSSEL (D — Trabalhos)
 ========================================================= */
 
 function initCarousel() {
@@ -163,7 +166,7 @@ function initCarousel() {
   });
 
   next.addEventListener('click', () => {
-    index = (index + 1) % items.length;
+    index = (index + items.length) % items.length;
     show(index);
   });
 
@@ -188,7 +191,11 @@ function initLightbox() {
   const closeBtn = lightbox.querySelector('.lightbox-close');
 
   document.querySelectorAll('[data-modal]').forEach(el => {
-    el.addEventListener('click', () => {
+    el.addEventListener('click', e => {
+      // 🔒 isto é CRUCIAL
+      e.preventDefault();
+      e.stopPropagation();
+
       const iframeSrc = el.dataset.iframe;
 
       if (iframeSrc) {
@@ -214,7 +221,10 @@ function initLightbox() {
     document.body.style.overflow = '';
   }
 
-  closeBtn && closeBtn.addEventListener('click', close);
+  closeBtn && closeBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    close();
+  });
 
   lightbox.addEventListener('click', e => {
     if (e.target === lightbox) close();
