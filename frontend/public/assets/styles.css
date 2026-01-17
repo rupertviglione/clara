@@ -1,7 +1,7 @@
 /* =========================================================
    CLARA — styles.css
-   BRUTALISM EDITORIAL · CO-STAR INSPIRED
-   Pure black & white · Sharp edges · Editorial grid
+   BRUTALISM EDITORIAL · CO-STAR INSPIRED · TECH AESTHETIC
+   Pure black & white · Terminal elements · Glitch · Grid
 ========================================================= */
 
 /* -------------------------
@@ -13,6 +13,7 @@
   --grey-dark: #1a1a1a;
   --grey-mid: #666666;
   --grey-light: #e5e5e5;
+  --accent: #00ff88;
   
   --font-mono: 'JetBrains Mono', 'SF Mono', 'Consolas', monospace;
   --font-serif: 'Source Serif 4', 'Georgia', serif;
@@ -20,6 +21,7 @@
   
   --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-glitch: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 /* -------------------------
@@ -53,12 +55,32 @@ body {
   color: var(--black);
   line-height: 1.7;
   overflow-x: hidden;
-  cursor: default;
+  cursor: crosshair;
+  position: relative;
 }
 
-/* Custom cursor for interactive elements */
-a, button, [role="button"], .clickable {
-  cursor: crosshair;
+/* Grid overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 9997;
+}
+
+/* Grain texture overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.035;
+  pointer-events: none;
+  z-index: 9998;
 }
 
 img, video {
@@ -82,6 +104,149 @@ ul {
 }
 
 /* =========================================================
+   SCANLINES EFFECT
+========================================================= */
+.scanlines::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.03) 2px,
+    rgba(0,0,0,0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* =========================================================
+   COORDINATE MARKERS
+========================================================= */
+.coord-marker {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.15em;
+  color: var(--grey-mid);
+  opacity: 0.5;
+}
+
+.coord-marker--tl { top: 1rem; left: 1rem; }
+.coord-marker--tr { top: 1rem; right: 1rem; }
+.coord-marker--bl { bottom: 1rem; left: 1rem; }
+.coord-marker--br { bottom: 1rem; right: 1rem; }
+
+/* =========================================================
+   GLITCH TEXT EFFECT
+========================================================= */
+.glitch {
+  position: relative;
+}
+
+.glitch:hover {
+  animation: glitch-text 0.3s ease;
+}
+
+@keyframes glitch-text {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+/* Glitch effect on hover with pseudo-elements */
+.glitch-hover {
+  position: relative;
+}
+
+.glitch-hover::before,
+.glitch-hover::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+.glitch-hover:hover::before {
+  animation: glitch-1 0.2s ease;
+  color: cyan;
+  opacity: 0.8;
+}
+
+.glitch-hover:hover::after {
+  animation: glitch-2 0.2s ease;
+  color: magenta;
+  opacity: 0.8;
+}
+
+@keyframes glitch-1 {
+  0% { clip-path: inset(40% 0 61% 0); transform: translate(-2px, 0); }
+  100% { clip-path: inset(0% 0 0% 0); transform: translate(0); }
+}
+
+@keyframes glitch-2 {
+  0% { clip-path: inset(20% 0 80% 0); transform: translate(2px, 0); }
+  100% { clip-path: inset(0% 0 0% 0); transform: translate(0); }
+}
+
+/* =========================================================
+   BLINKING CURSOR
+========================================================= */
+.blink-cursor::after {
+  content: '▋';
+  animation: blink 1s step-end infinite;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* =========================================================
+   TERMINAL PROMPT STYLE
+========================================================= */
+.terminal-prompt {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--grey-mid);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.terminal-prompt::before {
+  content: '>';
+  color: var(--black);
+}
+
+/* =========================================================
+   ASCII BORDER DECORATION
+========================================================= */
+.ascii-border {
+  position: relative;
+}
+
+.ascii-border::before {
+  content: '┌──────────────────────────────────────┐';
+  position: absolute;
+  top: -1.5rem;
+  left: 0;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--grey-light);
+  letter-spacing: -0.05em;
+}
+
+/* =========================================================
    LOADING & PAGE TRANSITIONS
 ========================================================= */
 .page-loader {
@@ -90,8 +255,10 @@ ul {
   background: var(--black);
   z-index: 9999;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 1rem;
   transition: opacity 0.6s var(--ease-out-expo), visibility 0.6s;
 }
 
@@ -103,15 +270,33 @@ ul {
 
 .loader-text {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.5em;
+  font-size: 0.7rem;
+  letter-spacing: 0.4em;
   color: var(--white);
-  animation: pulse 1.5s ease infinite;
+  text-transform: lowercase;
 }
 
-@keyframes pulse {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 1; }
+.loader-bar {
+  width: 120px;
+  height: 1px;
+  background: var(--grey-dark);
+  position: relative;
+  overflow: hidden;
+}
+
+.loader-bar::after {
+  content: '';
+  position: absolute;
+  left: -50%;
+  width: 50%;
+  height: 100%;
+  background: var(--white);
+  animation: loader-sweep 1s ease infinite;
+}
+
+@keyframes loader-sweep {
+  0% { left: -50%; }
+  100% { left: 100%; }
 }
 
 /* =========================================================
@@ -125,7 +310,6 @@ ul {
   background: var(--white);
   border-bottom: 1px solid var(--black);
   z-index: 1000;
-  mix-blend-mode: normal;
 }
 
 .nav {
@@ -193,7 +377,7 @@ ul {
   width: 100%;
   height: 1px;
   background: var(--black);
-  transition: transform 0.3s var(--ease-out-expo), opacity 0.2s;
+  transition: transform 0.3s var(--ease-out-expo), opacity 0.2s, background 0.2s;
 }
 
 .menu-toggle[aria-expanded="true"] span:nth-child(1) {
@@ -266,10 +450,11 @@ ul {
 }
 
 .nav-links a[aria-current="page"]::before {
-  content: '→';
+  content: '>';
   position: absolute;
-  left: -2rem;
-  font-weight: 300;
+  left: -1.5rem;
+  font-weight: 400;
+  animation: blink 1s step-end infinite;
 }
 
 .nav-cta {
@@ -283,10 +468,11 @@ ul {
   max-width: 1400px;
   margin: 0 auto;
   padding: 7rem 1.5rem 5rem;
+  position: relative;
 }
 
 /* =========================================================
-   HERO — Editorial Style
+   HERO — Editorial Style with Terminal Elements
 ========================================================= */
 .hero {
   min-height: 60vh;
@@ -300,15 +486,33 @@ ul {
 }
 
 .hero::before {
-  content: '';
+  content: 'sys.init';
   position: absolute;
   top: 2rem;
   right: 0;
   font-family: var(--font-mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.3em;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
   color: var(--grey-mid);
-  text-transform: uppercase;
+  text-transform: lowercase;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 2rem;
+  right: 0;
+  width: 6px;
+  height: 6px;
+  background: var(--black);
+  border-radius: 50%;
+  margin-right: 4rem;
+  animation: pulse-dot 2s ease infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
 }
 
 .hero h1 {
@@ -353,6 +557,36 @@ ul {
 }
 
 /* =========================================================
+   AVAILABILITY BADGE (Exclusivity)
+========================================================= */
+.availability-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: lowercase;
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--black);
+  margin-top: 2rem;
+  background: var(--white);
+}
+
+.availability-badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--black);
+  border-radius: 50%;
+  animation: pulse-dot 2s ease infinite;
+}
+
+.availability-badge.limited::before {
+  background: #ff6b6b;
+}
+
+/* =========================================================
    SECTIONS — Editorial Grid
 ========================================================= */
 .section {
@@ -373,6 +607,16 @@ ul {
   padding-bottom: 0.75rem;
   border-bottom: 1px solid var(--black);
   display: inline-block;
+  position: relative;
+}
+
+/* Terminal cursor after section titles */
+.section h2::after {
+  content: '▋';
+  position: absolute;
+  right: -1rem;
+  animation: blink 1s step-end infinite;
+  font-size: 0.6rem;
 }
 
 .section p {
@@ -387,7 +631,7 @@ ul {
   margin-bottom: 0;
 }
 
-/* Work blocks — Brutalist cards */
+/* Work blocks — Brutalist cards with tech aesthetic */
 .work-block,
 .step {
   background: var(--white);
@@ -398,10 +642,37 @@ ul {
   transition: transform 0.4s var(--ease-out-expo), box-shadow 0.4s var(--ease-out-expo);
 }
 
+.work-block::before,
+.step::before {
+  content: attr(data-index);
+  position: absolute;
+  top: -0.5rem;
+  right: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  color: var(--grey-mid);
+  background: var(--white);
+  padding: 0 0.25rem;
+}
+
 .work-block:hover,
 .step:hover {
   transform: translate(-4px, -4px);
   box-shadow: 8px 8px 0 var(--black);
+}
+
+/* Glitch effect on card hover */
+.work-block:hover {
+  animation: glitch-box 0.1s ease;
+}
+
+@keyframes glitch-box {
+  0% { transform: translate(-4px, -4px); }
+  25% { transform: translate(-6px, -2px); }
+  50% { transform: translate(-2px, -6px); }
+  75% { transform: translate(-5px, -3px); }
+  100% { transform: translate(-4px, -4px); }
 }
 
 /* CTA Buttons */
@@ -418,11 +689,30 @@ ul {
   text-transform: lowercase;
   background: var(--white);
   transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta::before,
+.contact-cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--black);
+  transition: left 0.3s var(--ease-out-expo);
+  z-index: -1;
+}
+
+.cta:hover::before,
+.contact-cta:hover::before {
+  left: 0;
 }
 
 .cta:hover,
 .contact-cta:hover {
-  background: var(--black);
   color: var(--white);
   transform: translate(-2px, -2px);
   box-shadow: 4px 4px 0 var(--black);
@@ -453,13 +743,13 @@ ul {
 
 .approach-list li::before,
 .work-scope li::before {
-  content: '';
+  content: '>';
   position: absolute;
   left: 0;
-  top: 0.7em;
-  width: 1rem;
-  height: 1px;
-  background: var(--black);
+  top: 0;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--grey-mid);
 }
 
 .approach-list li strong {
@@ -481,13 +771,29 @@ ul {
 
 .step-number {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   font-weight: 500;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.15em;
   background: var(--black);
   color: var(--white);
   padding: 0.5rem 0.75rem;
   width: fit-content;
+  position: relative;
+}
+
+/* Scanline effect on step numbers */
+.step-number::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 1px,
+    rgba(255,255,255,0.03) 1px,
+    rgba(255,255,255,0.03) 2px
+  );
+  pointer-events: none;
 }
 
 .step-content h2 {
@@ -500,6 +806,10 @@ ul {
   border-bottom: none;
   padding-bottom: 0;
   display: block;
+}
+
+.step-content h2::after {
+  display: none;
 }
 
 .step-content p {
@@ -525,6 +835,7 @@ ul {
 
 .work-media {
   margin-top: 2rem;
+  position: relative;
 }
 
 .work-compare {
@@ -566,6 +877,32 @@ ul {
   z-index: 10;
 }
 
+/* Video play indicator */
+.work-video {
+  cursor: crosshair;
+  position: relative;
+}
+
+.work-media::after {
+  content: '[ click to expand ]';
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  background: var(--black);
+  color: var(--white);
+  padding: 0.4rem 0.6rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.work-media:hover::after {
+  opacity: 1;
+}
+
 /* =========================================================
    CONTACTO — Editorial form
 ========================================================= */
@@ -577,7 +914,21 @@ ul {
   flex-direction: column;
   gap: 2rem;
   max-width: 600px;
+  position: relative;
 }
+
+/* Corner decorations */
+.contact-form .letter::before,
+.contact-form .letter::after {
+  content: '+';
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--grey-light);
+}
+
+.contact-form .letter::before { top: 0.5rem; left: 0.5rem; }
+.contact-form .letter::after { bottom: 0.5rem; right: 0.5rem; }
 
 .contact-form .greeting {
   font-family: var(--font-serif);
@@ -599,7 +950,7 @@ ul {
   font-family: var(--font-mono);
   font-size: 0.7rem;
   letter-spacing: 0.15em;
-  text-transform: uppercase;
+  text-transform: lowercase;
   color: var(--grey-mid);
 }
 
@@ -655,7 +1006,7 @@ ul {
 }
 
 /* =========================================================
-   MODAL — Fullscreen
+   MODAL — Fullscreen with Zoom Controls
 ========================================================= */
 .image-modal {
   position: fixed;
@@ -679,19 +1030,39 @@ ul {
 
 .image-modal__content {
   position: relative;
-  max-width: 90vw;
-  max-height: 85vh;
+  width: 90vw;
+  height: 85vh;
   z-index: 1;
-  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
-.image-modal__content img,
-.image-modal__content video,
-.image-modal__content iframe {
+.image-modal__content img {
   max-width: 100%;
-  max-height: 85vh;
+  max-height: 100%;
   object-fit: contain;
-  pointer-events: auto;
+  transition: transform 0.3s var(--ease-out-expo);
+  cursor: zoom-in;
+}
+
+.image-modal__content img.zoomed {
+  cursor: zoom-out;
+  transform: scale(1.5);
+}
+
+.image-modal__content video {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.image-modal__content iframe {
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: #fff;
 }
 
 .image-modal__close {
@@ -708,6 +1079,7 @@ ul {
   z-index: 9999;
   pointer-events: auto;
   transition: background 0.2s ease, color 0.2s ease;
+  text-transform: lowercase;
 }
 
 .image-modal__close:hover {
@@ -715,8 +1087,35 @@ ul {
   color: var(--black);
 }
 
+/* Zoom controls */
+.image-modal__controls {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  z-index: 9999;
+}
+
+.image-modal__controls button {
+  background: var(--black);
+  border: 1px solid var(--white);
+  color: var(--white);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  padding: 0.5rem 1rem;
+  cursor: crosshair;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.image-modal__controls button:hover {
+  background: var(--white);
+  color: var(--black);
+}
+
 /* =========================================================
-   FOOTER — Minimal
+   FOOTER — Minimal with Status
 ========================================================= */
 .site-footer {
   border-top: 1px solid var(--black);
@@ -733,6 +1132,17 @@ ul {
   font-size: 0.75rem;
   letter-spacing: 0.15em;
   text-transform: lowercase;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.site-footer .status-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--black);
+  border-radius: 50%;
+  animation: pulse-dot 2s ease infinite;
 }
 
 .footer-links {
@@ -744,7 +1154,7 @@ ul {
   font-family: var(--font-mono);
   font-size: 0.65rem;
   letter-spacing: 0.1em;
-  text-transform: uppercase;
+  text-transform: lowercase;
   color: var(--grey-mid);
   transition: color 0.2s ease;
 }
@@ -775,6 +1185,7 @@ ul {
     gap: 2.5rem;
     margin-left: auto;
     align-items: center;
+    pointer-events: auto;
   }
 
   .nav-links li {
@@ -831,10 +1242,6 @@ ul {
   .hero {
     min-height: 70vh;
     padding-bottom: 5rem;
-  }
-
-  .hero::before {
-    content: 'est. 2024';
   }
 
   .section {
@@ -955,43 +1362,25 @@ ul {
   border: 0;
 }
 
-/* Grain texture overlay */
-body::after {
+/* Data attribute styling */
+[data-status="online"]::before {
   content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  opacity: 0.03;
-  pointer-events: none;
-  z-index: 9998;
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: #00ff88;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+  animation: pulse-dot 2s ease infinite;
 }
 
-/* Video play indicator */
-.work-video {
-  cursor: crosshair;
-  position: relative;
-}
-
-.work-media::after {
-  content: '▶ expandir';
-  position: absolute;
-  bottom: 1rem;
-  right: 1rem;
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.15em;
-  background: var(--black);
-  color: var(--white);
-  padding: 0.4rem 0.6rem;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-}
-
-.work-media {
-  position: relative;
-}
-
-.work-media:hover::after {
-  opacity: 1;
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
