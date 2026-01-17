@@ -374,4 +374,51 @@
   console.log('%c– clara.', 'font-family: monospace; font-size: 24px; font-weight: bold;');
   console.log('%csys.init > presença digital com clareza', 'font-family: monospace; color: #666;');
 
+  /* =========================================================
+     THEME TOGGLE — Dark/Light Mode
+  ========================================================= */
+  const themeToggle = document.querySelector('.theme-toggle');
+  const html = document.documentElement;
+  
+  // Check for saved theme preference or system preference
+  const savedTheme = localStorage.getItem('clara-theme');
+  const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  
+  if (savedTheme) {
+    html.setAttribute('data-theme', savedTheme);
+  } else if (systemPrefersDark) {
+    html.setAttribute('data-theme', 'dark');
+  }
+  
+  // Update button text based on current theme
+  function updateToggleText() {
+    const currentTheme = html.getAttribute('data-theme');
+    if (themeToggle) {
+      themeToggle.textContent = currentTheme === 'dark' ? 'light' : 'dark';
+    }
+  }
+  updateToggleText();
+  
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      
+      html.setAttribute('data-theme', newTheme === 'light' ? '' : newTheme);
+      if (newTheme === 'light') {
+        html.removeAttribute('data-theme');
+      }
+      localStorage.setItem('clara-theme', newTheme === 'light' ? '' : newTheme);
+      updateToggleText();
+    });
+  }
+  
+  // Listen for system theme changes
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+    if (!localStorage.getItem('clara-theme')) {
+      html.setAttribute('data-theme', e.matches ? 'dark' : '');
+      updateToggleText();
+    }
+  });
+
 })();
