@@ -573,6 +573,7 @@ ul {
   border: 1px solid var(--black);
   margin-top: 2rem;
   background: var(--white);
+  width: fit-content;
 }
 
 .availability-badge::before {
