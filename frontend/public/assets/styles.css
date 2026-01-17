@@ -270,6 +270,40 @@ ul {
 }
 
 /* =========================================================
+   THEME TOGGLE
+========================================================= */
+.theme-toggle {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 1000;
+  background: var(--text);
+  color: var(--bg);
+  border: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  padding: 0.6rem 0.8rem;
+  cursor: crosshair;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  text-transform: lowercase;
+}
+
+.theme-toggle:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--border);
+}
+
+.theme-toggle::before {
+  content: '◐';
+  margin-right: 0.5rem;
+}
+
+[data-theme="dark"] .theme-toggle::before {
+  content: '◑';
+}
+
+/* =========================================================
    LOADING & PAGE TRANSITIONS
 ========================================================= */
 .page-loader {
