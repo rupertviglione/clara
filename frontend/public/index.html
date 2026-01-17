@@ -1,178 +1,186 @@
 <!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#000000" />
-        <meta name="description" content="A product of emergent.sh" />
-        <!--
-        manifest.json provides metadata used when your web app is installed on a
-        user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-        -->
-        <!--
-        Notice the use of %PUBLIC_URL% in the tags above.
-        It will be replaced with the URL of the `public` folder during the build.
-        Only files inside the `public` folder can be referenced from the HTML.
+<html lang="pt">
+<head>
+  <meta charset="utf-8">
+  <title>– clara. — Presença digital</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-        work correctly both with client-side routing and a non-root public URL.
-        Learn how to configure a non-root public URL by running `npm run build`.
-        -->
-        <title>Emergent | Fullstack App</title>
-        <script src="https://assets.emergent.sh/scripts/emergent-main.js"></script>
-        <!--
-        These two scripts have been added for the Visual Edits, please do not edit or remove them
-        -->
-        <script>
-            // Only load visual edit scripts when inside an iframe
-            if (window.self !== window.top) {
-                // Load debug monitor script
-                var debugMonitorScript = document.createElement('script');
-                debugMonitorScript.src = 'https://assets.emergent.sh/scripts/debug-monitor.js';
-                document.head.appendChild(debugMonitorScript);
+  <meta name="description"
+        content="Criação e reestruturação de websites focados em clareza, confiança e visibilidade online.">
 
-                // Configure Tailwind
-                window.tailwind = window.tailwind || {};
-                tailwind.config = {
-                    corePlugins: { preflight: false },
-                };
+  <!-- favicon -->
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='white'/%3E%3Ctext x='50' y='68' text-anchor='middle' font-size='64' fill='black' font-family='Arial,Helvetica,sans-serif' font-weight='700'%3Ec%3C/text%3E%3C/svg%3E">
 
-                // Load Tailwind CDN
-                var tailwindScript = document.createElement('script');
-                tailwindScript.src = 'https://cdn.tailwindcss.com';
-                document.head.appendChild(tailwindScript);
-            }
-        </script>
-    </head>
-    <body>
-        <noscript>You need to enable JavaScript to run this app.</noscript>
-        <div id="root"></div>
-        <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+<body>
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-        <a
-            id="emergent-badge"
-            target="_blank"
-            href="https://app.emergent.sh/?utm_source=emergent-badge"
-            style="
-                display: flex !important;
-                align-items: center !important;
-                position: fixed !important;
-                bottom: 20px;
-                right: 20px;
-                text-decoration: none;
-                padding: 6px 10px;
-                font-family: -apple-system, BlinkMacSystemFont,
-                    &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell,
-                    &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;,
-                    sans-serif !important;
-                font-size: 12px !important;
-                z-index: 9999 !important;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
-                border-radius: 8px !important;
-                background-color: #ffffff !important;
-                border: 1px solid rgba(255, 255, 255, 0.25) !important;
-            "
-        >
-            <div
-                style="display: flex; flex-direction: row; align-items: center"
-            >
-                <img
-                    style="width: 20px; height: 20px; margin-right: 8px"
-                    src="https://avatars.githubusercontent.com/in/1201222?s=120&u=2686cf91179bbafbc7a71bfbc43004cf9ae1acea&v=4"
-                />
-                <p
-                    style="
-                        color: #000000;
-                        font-family: -apple-system, BlinkMacSystemFont,
-                            &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu,
-                            Cantarell, &quot;Open Sans&quot;,
-                            &quot;Helvetica Neue&quot;, sans-serif !important;
-                        font-size: 12px !important;
-                        align-items: center;
-                        margin-bottom: 0;
-                    "
-                >
-                    Made with Emergent
-                </p>
-            </div>
-        </a>
-        <script>
-            !(function (t, e) {
-                var o, n, p, r;
-                e.__SV ||
-                    ((window.posthog = e),
-                    (e._i = []),
-                    (e.init = function (i, s, a) {
-                        function g(t, e) {
-                            var o = e.split(".");
-                            2 == o.length && ((t = t[o[0]]), (e = o[1])),
-                                (t[e] = function () {
-                                    t.push(
-                                        [e].concat(
-                                            Array.prototype.slice.call(
-                                                arguments,
-                                                0,
-                                            ),
-                                        ),
-                                    );
-                                });
-                        }
-                        ((p = t.createElement("script")).type =
-                            "text/javascript"),
-                            (p.crossOrigin = "anonymous"),
-                            (p.async = !0),
-                            (p.src =
-                                s.api_host.replace(
-                                    ".i.posthog.com",
-                                    "-assets.i.posthog.com",
-                                ) + "/static/array.js"),
-                            (r =
-                                t.getElementsByTagName(
-                                    "script",
-                                )[0]).parentNode.insertBefore(p, r);
-                        var u = e;
-                        for (
-                            void 0 !== a ? (u = e[a] = []) : (a = "posthog"),
-                                u.people = u.people || [],
-                                u.toString = function (t) {
-                                    var e = "posthog";
-                                    return (
-                                        "posthog" !== a && (e += "." + a),
-                                        t || (e += " (stub)"),
-                                        e
-                                    );
-                                },
-                                u.people.toString = function () {
-                                    return u.toString(1) + ".people (stub)";
-                                },
-                                o =
-                                    "init me ws ys ps bs capture je Di ks register register_once register_for_session unregister unregister_for_session Ps getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty Es $s createPersonProfile Is opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing Ss debug xs getPageViewId captureTraceFeedback captureTraceMetric".split(
-                                        " ",
-                                    ),
-                                n = 0;
-                            n < o.length;
-                            n++
-                        )
-                            g(u, o[n]);
-                        e._i.push([i, s, a]);
-                    }),
-                    (e.__SV = 1));
-            })(document, window.posthog || []);
-            posthog.init("phc_xAvL2Iq4tFmANRE7kzbKwaSqp1HJjN7x48s3vr0CMjs", {
-                api_host: "https://us.i.posthog.com",
-                person_profiles: "identified_only", // or 'always' to create profiles for anonymous users as well,
-                session_recording: {
-                    recordCrossOriginIframes: true,
-                },
-            });
-        </script>
-    </body>
+<header class="site-header">
+  <nav class="nav">
+    <a href="/" class="logo">– clara.</a>
+       <button
+      class="menu-toggle"
+      aria-label="Menu"
+      aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="/presenca-digital/" aria-current="page">Presença digital</a></li>
+      <li><a href="/metodo/">Método</a></li>
+      <li><a href="/trabalhos/">Trabalhos</a></li>
+      <li><a href="/contacto/" class="nav-cta">Fale connosco</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main class="page presenca-digital">
+
+  <!-- HERO -->
+  <section class="hero">
+<h1>presença digital </br>— clara.</h1>
+  <p class="subtitle">
+      Um website é muitas vezes o primeiro contacto entre uma empresa
+      e quem a procura. Se não for claro, perde-se confiança.
+    </p>
+  </section>
+
+  <!-- CONTEXTO -->
+  <section class="section">
+    <h2>O problema</h2>
+    <p>
+      Muitos websites falham não por falta de informação,
+      mas por excesso de ruído, má hierarquia e ausência de intenção.
+    </p>
+    <p>
+      Quando não se percebe rapidamente o que uma empresa faz,
+      o visitante hesita — e sai.
+    </p>
+  </section>
+
+  <!-- IMPORTÂNCIA -->
+  <section class="section">
+    <h2>Porque é importante</h2>
+    <p>
+      Um website bem construído ajuda a comunicar com clareza,
+      a posicionar melhor nos motores de busca
+      e a gerar confiança nos primeiros segundos.
+    </p>
+    <p>
+      Isto é especialmente relevante para empresas, escritórios,
+      clínicas e serviços locais que dependem de visibilidade
+      e credibilidade online.
+    </p>
+  </section>
+
+  <!-- ABORDAGEM -->
+  <section class="section has-marker">
+    <h2>Abordagem</h2>
+    <ul class="approach-list">
+      <li><strong>Clareza antes de estilo.</strong> A forma serve o conteúdo.</li>
+      <li><strong>Hierarquia visível.</strong> O essencial lê-se primeiro.</li>
+      <li><strong>Decisões conscientes.</strong> Cada elemento tem função.</li>
+      <li><strong>Base técnica sólida.</strong> Performance e SEO desde o início.</li>
+    </ul>
+  </section>
+
+  <!-- EXEMPLOS -->
+  <section class="section">
+    <h2>Exemplos</h2>
+    <p>
+      Alguns exemplos de reorganização visual e estrutural,
+      antes e depois de uma intervenção focada em clareza.
+    </p>
+<article class="work work-block">
+  
+  <div class="work-media work-compare">
+
+    <!-- ANTES -->
+    <figure class="work-image">
+  <span class="label">Antes</span>
+
+  <picture>
+    <!-- AVIF (thumb, crop preservado) -->
+    <source
+      type="image/avif"
+      srcset="/assets/media/antes-600.avif">
+
+    <!-- WebP (thumb, crop preservado) -->
+    <source
+      type="image/webp"
+      srcset="/assets/media/antes-600.webp">
+
+    <!-- JPG fallback (thumb original) -->
+    <img
+      src="/assets/media/antes-thumb.jpg"
+      alt="Website — antes"
+      loading="lazy"
+      width="600"
+      height="400"
+      data-modal
+      data-full-avif="/assets/media/antes-1200.avif"
+      data-full-webp="/assets/media/antes-1200.webp"
+      data-full-jpg="/assets/media/antes-full.jpg">
+  </picture>
+</figure>
+
+
+    <!-- DEPOIS -->
+  <figure class="work-image">
+  <span class="label">Depois</span>
+
+  <a
+    href="/trabalhos/levett/depois-preview.html"
+    data-preview
+    data-modal-html="/trabalhos/levett/depois-preview.html">
+    <picture>
+      <source type="image/avif" srcset="/assets/media/depois-600.avif">
+      <source type="image/webp" srcset="/assets/media/depois-600.webp">
+      <img
+        src="/assets/media/depois-thumb.jpg"
+        alt="Website — depois"
+        loading="lazy"
+        width="600"
+        height="400">
+    </picture>
+  </a>
+</figure>
+
+
+  </div>
+</article>
+
+  </section>
+
+  <!-- CTA -->
+  <section class="section">
+    <h2>Na prática</h2>
+    <p>
+      Cada projecto começa com uma leitura cuidada do contexto,
+      dos objectivos e das limitações reais.
+    </p>
+    <a href="/contacto/" class="cta contact-cta">Fale connosco</a>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>– clara.</p>
+</footer>
+<div class="image-modal">
+  <div class="image-modal__overlay" data-modal-close></div>
+    <button
+    class="image-modal__close"
+    data-modal-close
+    aria-label="Fechar">
+    ×
+  </button>
+  <div class="image-modal__content"></div>
+</div>
+<script src="/assets/app.js"></script>
+</body>
 </html>
+
