@@ -695,12 +695,12 @@ ul {
 /* Work blocks — Brutalist cards with tech aesthetic */
 .work-block,
 .step {
-  background: var(--white);
-  border: 1px solid var(--black);
+  background: var(--card-bg);
+  border: 1px solid var(--border);
   padding: 2rem;
   margin-bottom: 3rem;
   position: relative;
-  transition: transform 0.4s var(--ease-out-expo), box-shadow 0.4s var(--ease-out-expo);
+  transition: transform 0.4s var(--ease-out-expo), box-shadow 0.4s var(--ease-out-expo), background 0.3s ease;
 }
 
 .work-block::before,
