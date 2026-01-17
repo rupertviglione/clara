@@ -205,9 +205,34 @@
   color: #f0f0f0;
 }
 
-[data-theme="dark"] .approach-list li::before,
-[data-theme="dark"] .work-scope li::before {
+[data-theme="dark"] .footer-links a {
   color: #888888;
+}
+
+[data-theme="dark"] .footer-links a:hover {
+  color: #f0f0f0;
+}
+
+[data-theme="dark"] .site-footer p {
+  color: #f0f0f0;
+}
+
+[data-theme="dark"] .work h3 {
+  color: #999999;
+}
+
+[data-theme="dark"] .work-block::before,
+[data-theme="dark"] .step::before {
+  color: #666666;
+}
+
+[data-theme="dark"] .field-title {
+  color: #999999;
+}
+
+[data-theme="dark"] .contact-form input::placeholder,
+[data-theme="dark"] .contact-form textarea::placeholder {
+  color: #666666;
 }
 
 [data-theme="dark"] body::before {
