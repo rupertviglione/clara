@@ -15,6 +15,14 @@
   --grey-light: #e5e5e5;
   --accent: #00ff88;
   
+  /* Theme colors (light mode default) */
+  --bg: var(--white);
+  --text: var(--black);
+  --text-muted: var(--grey-mid);
+  --border: var(--black);
+  --card-bg: var(--white);
+  --overlay-bg: rgba(0, 0, 0, 0.95);
+  
   --font-mono: 'JetBrains Mono', 'SF Mono', 'Consolas', monospace;
   --font-serif: 'Source Serif 4', 'Georgia', serif;
   --font-sans: 'Satoshi', 'Helvetica Neue', sans-serif;
@@ -22,6 +30,20 @@
   --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
   --ease-glitch: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Dark mode */
+[data-theme="dark"] {
+  --bg: #0a0a0a;
+  --text: #f0f0f0;
+  --text-muted: #888888;
+  --border: #f0f0f0;
+  --card-bg: #111111;
+  --overlay-bg: rgba(255, 255, 255, 0.95);
+  --black: #f0f0f0;
+  --white: #0a0a0a;
+  --grey-dark: #e0e0e0;
+  --grey-light: #222222;
 }
 
 /* -------------------------
