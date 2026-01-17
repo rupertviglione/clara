@@ -475,11 +475,11 @@ ul {
    HERO — Editorial Style with Terminal Elements
 ========================================================= */
 .hero {
-  min-height: 60vh;
+  min-height: 70vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding-bottom: 4rem;
+  padding-bottom: 3rem;
   margin-bottom: 5rem;
   border-bottom: 1px solid var(--black);
   position: relative;
