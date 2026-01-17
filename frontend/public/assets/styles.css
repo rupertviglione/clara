@@ -52,6 +52,19 @@
   border-color: #333333;
 }
 
+[data-theme="dark"] .hero .subtitle,
+[data-theme="dark"] .section p,
+[data-theme="dark"] .step-content p,
+[data-theme="dark"] .work p,
+[data-theme="dark"] .contact-form .greeting,
+[data-theme="dark"] .contact-form .signature p {
+  color: #cccccc;
+}
+
+[data-theme="dark"] .hero::before {
+  color: #888888;
+}
+
 [data-theme="dark"] .logo,
 [data-theme="dark"] .nav-links a,
 [data-theme="dark"] .hero h1,
