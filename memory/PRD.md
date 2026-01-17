@@ -90,6 +90,7 @@ Improve the clara. website with:
 - [x] Zoom controls on modals
 - [x] Availability badge
 - [x] Fixed iframe proportions
+- [x] Dark mode toggle with localStorage persistence
 
 ### P1 (Future)
 - [ ] Video file compression (current: 12MB + 9.5MB webm files)
