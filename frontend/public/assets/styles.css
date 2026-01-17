@@ -309,7 +309,7 @@ ul {
 .page-loader {
   position: fixed;
   inset: 0;
-  background: var(--black);
+  background: var(--text);
   z-index: 9999;
   display: flex;
   flex-direction: column;
@@ -329,7 +329,7 @@ ul {
   font-family: var(--font-mono);
   font-size: 0.7rem;
   letter-spacing: 0.4em;
-  color: var(--white);
+  color: var(--bg);
   text-transform: lowercase;
 }
 
