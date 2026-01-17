@@ -540,7 +540,8 @@ ul {
 
 /* Staggered reveal animation */
 .hero h1,
-.hero .subtitle {
+.hero .subtitle,
+.hero .availability-badge {
   opacity: 0;
   transform: translateY(30px);
   animation: revealUp 0.8s var(--ease-out-expo) forwards;
@@ -548,6 +549,7 @@ ul {
 
 .hero h1 { animation-delay: 0.2s; }
 .hero .subtitle { animation-delay: 0.4s; }
+.hero .availability-badge { animation-delay: 0.6s; }
 
 @keyframes revealUp {
   to {
