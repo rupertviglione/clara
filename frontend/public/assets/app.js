@@ -1,6 +1,6 @@
 /* =========================================================
    CLARA — app.js
-   Brutalist Editorial · Performance Optimized
+   Brutalist Editorial · Tech Aesthetic · Performance Optimized
 ========================================================= */
 
 (function () {
@@ -15,7 +15,7 @@
     if (loader) {
       setTimeout(() => {
         loader.classList.add('loaded');
-      }, 300);
+      }, 400);
     }
   });
 
@@ -97,16 +97,112 @@
   });
 
   /* =========================================================
-     MODAL BASE
+     MODAL BASE WITH ZOOM
   ========================================================= */
   const modal = document.querySelector('.image-modal');
   const modalContent = modal?.querySelector('.image-modal__content');
+  let currentZoom = 1;
+  let isDragging = false;
+  let startX, startY, scrollLeft, scrollTop;
 
-  function openModal(html) {
+  function createZoomControls() {
+    const existingControls = document.querySelector('.image-modal__controls');
+    if (existingControls) existingControls.remove();
+    
+    const controls = document.createElement('div');
+    controls.className = 'image-modal__controls';
+    controls.innerHTML = `
+      <button data-zoom="in" aria-label="Zoom in">+</button>
+      <button data-zoom="reset" aria-label="Reset zoom">1:1</button>
+      <button data-zoom="out" aria-label="Zoom out">−</button>
+    `;
+    modal.appendChild(controls);
+    
+    controls.addEventListener('click', (e) => {
+      const action = e.target.dataset.zoom;
+      const img = modalContent.querySelector('img');
+      if (!img) return;
+      
+      if (action === 'in' && currentZoom < 3) {
+        currentZoom += 0.5;
+      } else if (action === 'out' && currentZoom > 0.5) {
+        currentZoom -= 0.5;
+      } else if (action === 'reset') {
+        currentZoom = 1;
+      }
+      
+      img.style.transform = `scale(${currentZoom})`;
+      img.classList.toggle('zoomed', currentZoom > 1);
+      modalContent.style.overflow = currentZoom > 1 ? 'auto' : 'hidden';
+    });
+  }
+
+  function openModal(html, hasZoom = false) {
     if (!modal || !modalContent) return;
     modalContent.innerHTML = html;
     modal.classList.add('is-open');
     document.body.style.overflow = 'hidden';
+    currentZoom = 1;
+    
+    if (hasZoom) {
+      createZoomControls();
+      
+      // Click to zoom on image
+      const img = modalContent.querySelector('img');
+      if (img) {
+        img.style.cursor = 'zoom-in';
+        img.addEventListener('click', () => {
+          if (currentZoom === 1) {
+            currentZoom = 2;
+            img.style.transform = `scale(${currentZoom})`;
+            img.classList.add('zoomed');
+            img.style.cursor = 'zoom-out';
+            modalContent.style.overflow = 'auto';
+          } else {
+            currentZoom = 1;
+            img.style.transform = `scale(1)`;
+            img.classList.remove('zoomed');
+            img.style.cursor = 'zoom-in';
+            modalContent.style.overflow = 'hidden';
+          }
+        });
+        
+        // Drag to pan when zoomed
+        modalContent.addEventListener('mousedown', (e) => {
+          if (currentZoom > 1) {
+            isDragging = true;
+            startX = e.pageX - modalContent.offsetLeft;
+            startY = e.pageY - modalContent.offsetTop;
+            scrollLeft = modalContent.scrollLeft;
+            scrollTop = modalContent.scrollTop;
+            modalContent.style.cursor = 'grabbing';
+          }
+        });
+        
+        modalContent.addEventListener('mousemove', (e) => {
+          if (!isDragging) return;
+          e.preventDefault();
+          const x = e.pageX - modalContent.offsetLeft;
+          const y = e.pageY - modalContent.offsetTop;
+          const walkX = (x - startX) * 1.5;
+          const walkY = (y - startY) * 1.5;
+          modalContent.scrollLeft = scrollLeft - walkX;
+          modalContent.scrollTop = scrollTop - walkY;
+        });
+        
+        modalContent.addEventListener('mouseup', () => {
+          isDragging = false;
+          modalContent.style.cursor = currentZoom > 1 ? 'grab' : 'default';
+        });
+        
+        modalContent.addEventListener('mouseleave', () => {
+          isDragging = false;
+        });
+      }
+    } else {
+      const existingControls = document.querySelector('.image-modal__controls');
+      if (existingControls) existingControls.remove();
+    }
   }
 
   function closeModal() {
@@ -117,8 +213,12 @@
     const video = modalContent.querySelector('video');
     if (video) video.pause();
     
+    const existingControls = document.querySelector('.image-modal__controls');
+    if (existingControls) existingControls.remove();
+    
     setTimeout(() => {
       modalContent.innerHTML = '';
+      currentZoom = 1;
     }, 200);
     
     document.body.style.overflow = '';
@@ -140,7 +240,7 @@
   modal?.querySelector('.image-modal__overlay')?.addEventListener('click', closeModal);
 
   /* =========================================================
-     IMAGE MODAL — "ANTES"
+     IMAGE MODAL — "ANTES" with Zoom
   ========================================================= */
   document.querySelectorAll('[data-modal]').forEach(img => {
     img.style.cursor = 'crosshair';
@@ -158,14 +258,14 @@
         <picture>
           ${avif ? `<source type="image/avif" srcset="${avif}">` : ''}
           ${webp ? `<source type="image/webp" srcset="${webp}">` : ''}
-          <img src="${jpg}" alt="${alt}" loading="eager">
+          <img src="${jpg}" alt="${alt}" loading="eager" draggable="false">
         </picture>
-      `);
+      `, true); // Enable zoom
     });
   });
 
   /* =========================================================
-     HTML MODAL — "DEPOIS"
+     HTML MODAL — "DEPOIS" with better proportions
   ========================================================= */
   document.querySelectorAll('[data-modal-html]').forEach(link => {
     link.addEventListener('click', e => {
@@ -175,10 +275,10 @@
       openModal(`
         <iframe
           src="${link.dataset.modalHtml}"
-          style="width: 90vw; height: 80vh; border: 1px solid #fff; background: #fff;"
+          style="width: 100%; height: 100%; border: none; background: #fff;"
           loading="lazy">
         </iframe>
-      `);
+      `, false); // No zoom for iframe
     });
   });
 
@@ -198,9 +298,9 @@
           src="${src}"
           controls
           autoplay
-          style="max-width: 90vw; max-height: 85vh;">
+          style="max-width: 100%; max-height: 100%;">
         </video>
-      `);
+      `, false); // No zoom for video
     });
   });
 
@@ -215,6 +315,13 @@
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     });
+  });
+
+  /* =========================================================
+     GLITCH TEXT EFFECT — Add data-text attribute
+  ========================================================= */
+  document.querySelectorAll('.glitch-hover').forEach(el => {
+    el.setAttribute('data-text', el.textContent);
   });
 
   /* =========================================================
@@ -239,6 +346,15 @@
   }
 
   /* =========================================================
+     STATUS INDICATOR — Random subtle animation
+  ========================================================= */
+  const statusDots = document.querySelectorAll('.status-dot, [data-status]');
+  statusDots.forEach(dot => {
+    // Add slight random delay to make multiple dots feel organic
+    dot.style.animationDelay = `${Math.random() * 2}s`;
+  });
+
+  /* =========================================================
      PERFORMANCE — REDUCE MOTION
   ========================================================= */
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -251,5 +367,11 @@
       el.style.transform = 'none';
     });
   }
+
+  /* =========================================================
+     CONSOLE EASTER EGG — Tech savvy touch
+  ========================================================= */
+  console.log('%c– clara.', 'font-family: monospace; font-size: 24px; font-weight: bold;');
+  console.log('%csys.init > presença digital com clareza', 'font-family: monospace; color: #666;');
 
 })();
