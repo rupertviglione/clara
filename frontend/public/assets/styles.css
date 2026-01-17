@@ -720,7 +720,7 @@ ul {
 .work-block:hover,
 .step:hover {
   transform: translate(-4px, -4px);
-  box-shadow: 8px 8px 0 var(--black);
+  box-shadow: 8px 8px 0 var(--border);
 }
 
 /* Glitch effect on card hover */
