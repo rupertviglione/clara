@@ -177,6 +177,8 @@ ul {
   justify-content: center;
   gap: 5px;
   transition: background 0.2s ease;
+  z-index: 1200;
+  position: relative;
 }
 
 .menu-toggle:hover {
