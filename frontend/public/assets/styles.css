@@ -196,6 +196,15 @@
   color: #f0f0f0;
 }
 
+[data-theme="dark"] .approach-list li,
+[data-theme="dark"] .work-scope li {
+  color: #cccccc;
+}
+
+[data-theme="dark"] .approach-list li strong {
+  color: #f0f0f0;
+}
+
 [data-theme="dark"] .approach-list li::before,
 [data-theme="dark"] .work-scope li::before {
   color: #888888;
