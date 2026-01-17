@@ -94,7 +94,6 @@ Improve the clara. website with:
 ### P1 (Future)
 - [ ] Video file compression (current: 12MB + 9.5MB webm files)
 - [ ] Create OG image asset for social sharing
-- [ ] Dark mode toggle
 
 ### P2 (Nice to Have)
 - [ ] Cookie consent banner
