@@ -1,0 +1,9 @@
+# robots.txt for clara.
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://clara.pt/sitemap.xml
+
+# Crawl-delay (optional, for polite crawling)
+Crawl-delay: 1
