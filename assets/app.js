@@ -20,7 +20,7 @@
   });
 
   /* =========================================================
-     MENU MOBILE
+     MENU MOBILE — with focus management for accessibility
   ========================================================= */
   const toggle = document.querySelector('.menu-toggle');
   const navLinks = document.querySelector('.nav-links');
@@ -30,6 +30,16 @@
       const open = navLinks.classList.toggle('is-open');
       toggle.setAttribute('aria-expanded', open);
       document.body.style.overflow = open ? 'hidden' : '';
+      
+      // Accessibility: manage focus
+      if (open) {
+        // Focus first link when menu opens
+        const firstLink = navLinks.querySelector('a');
+        if (firstLink) firstLink.focus();
+      } else {
+        // Return focus to toggle when menu closes
+        toggle.focus();
+      }
     });
   }
 
@@ -77,23 +87,33 @@
   });
 
   /* =========================================================
-     LAZY LOAD VIDEOS
+     LAZY LOAD VIDEOS — Play on hover instead of autoplay
   ========================================================= */
-  const videos = document.querySelectorAll('video[preload="metadata"]');
+  const videos = document.querySelectorAll('video.work-video');
   
-  const videoObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const video = entry.target;
-        video.play().catch(() => {});
-        videoObserver.unobserve(video);
-      }
-    });
-  }, { threshold: 0.25 });
-
   videos.forEach(video => {
-    video.pause();
-    videoObserver.observe(video);
+    // Play on hover
+    video.addEventListener('mouseenter', () => {
+      video.play().catch(() => {});
+    });
+    
+    // Pause when not hovering
+    video.addEventListener('mouseleave', () => {
+      video.pause();
+    });
+    
+    // Also play when visible on mobile (touch devices)
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && 'ontouchstart' in window) {
+          video.play().catch(() => {});
+        } else if (!entry.isIntersecting) {
+          video.pause();
+        }
+      });
+    }, { threshold: 0.5 });
+    
+    observer.observe(video);
   });
 
   /* =========================================================
