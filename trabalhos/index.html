@@ -2,11 +2,11 @@
 <html lang="pt">
 <head>
   <meta charset="utf-8">
-  <title>Trabalhos — clara. | Portfolio de Presença Digital</title>
+  <title>Trabalhos — clara. | Exercícios de Método</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <!-- SEO Meta Tags -->
-  <meta name="description" content="Alguns trabalhos de presença digital desenvolvidos pela clara. Identidade, websites, SEO e reestruturação.">
+  <meta name="description" content="Exercícios de método que demonstram como a clara. aborda problemas de presença digital. Raciocínio aplicado, não decoração.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://clarastudio.pt/trabalhos/">
   
@@ -14,14 +14,14 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://clarastudio.pt/trabalhos/">
   <meta property="og:title" content="Trabalhos — clara.">
-  <meta property="og:description" content="Portfolio de presença digital: identidade, websites, SEO e reestruturação.">
+  <meta property="og:description" content="Exercícios de método: raciocínio aplicado à presença digital.">
   <meta property="og:image" content="https://clarastudio.pt/assets/media/og-image.jpg">
   <meta property="og:locale" content="pt_PT">
   
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Trabalhos — clara.">
-  <meta name="twitter:description" content="Portfolio de presença digital.">
+  <meta name="twitter:description" content="Exercícios de método aplicado à presença digital.">
   
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23000'/%3E%3Ctext x='50' y='68' text-anchor='middle' font-size='64' fill='%23fff' font-family='monospace' font-weight='400'%3Ec%3C/text%3E%3C/svg%3E">
@@ -37,6 +37,379 @@
   <meta name="theme-color" content="#000000">
   
   <link rel="stylesheet" href="/assets/styles.css">
+  
+  <style>
+    /* Exercise-specific styles */
+    .exercise {
+      margin-bottom: 6rem;
+      padding-bottom: 4rem;
+      border-bottom: 1px solid var(--border, #000);
+    }
+    
+    .exercise:last-of-type {
+      border-bottom: none;
+    }
+    
+    .exercise-header {
+      margin-bottom: 3rem;
+    }
+    
+    .exercise-label {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted, #666);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    .exercise-label .tag {
+      background: var(--text, #000);
+      color: var(--bg, #fff);
+      padding: 0.2rem 0.5rem;
+      font-size: 0.55rem;
+    }
+    
+    .exercise-label .tag--real {
+      background: transparent;
+      border: 1px solid var(--text, #000);
+      color: var(--text, #000);
+    }
+    
+    [data-theme="dark"] .exercise-label .tag--real {
+      border-color: #f0f0f0;
+      color: #f0f0f0;
+    }
+    
+    .exercise-title {
+      font-family: var(--font-mono);
+      font-size: 1.5rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      text-transform: lowercase;
+      margin-bottom: 1.5rem;
+    }
+    
+    .exercise-intro {
+      font-family: var(--font-serif);
+      font-size: 1.125rem;
+      max-width: 60ch;
+      line-height: 1.8;
+    }
+    
+    .exercise-intro + .exercise-intro {
+      margin-top: 1rem;
+    }
+    
+    .exercise-section {
+      margin-bottom: 3rem;
+    }
+    
+    .exercise-section h4 {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+      color: var(--text-muted, #666);
+    }
+    
+    .exercise-section h4::before {
+      content: '> ';
+    }
+    
+    .problem-list {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .problem-list li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.75rem;
+      font-family: var(--font-serif);
+      line-height: 1.7;
+    }
+    
+    .problem-list li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--text-muted, #666);
+    }
+    
+    .approach-steps {
+      counter-reset: step;
+      list-style: none;
+      padding: 0;
+    }
+    
+    .approach-steps li {
+      counter-increment: step;
+      position: relative;
+      padding-left: 2.5rem;
+      margin-bottom: 1rem;
+      font-family: var(--font-serif);
+      line-height: 1.7;
+    }
+    
+    .approach-steps li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      width: 1.5rem;
+      height: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border, #000);
+    }
+    
+    [data-theme="dark"] .approach-steps li::before {
+      border-color: #444;
+    }
+    
+    /* Side by side comparison */
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    
+    @media (min-width: 1024px) {
+      .comparison-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+      }
+    }
+    
+    .comparison-text {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+      max-width: 55ch;
+      line-height: 1.7;
+    }
+    
+    .comparison-text strong {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+    
+    /* Live site embed with cinematic filter */
+    .live-site {
+      border: 1px solid var(--border, #000);
+      background: var(--card-bg, #fff);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    [data-theme="dark"] .live-site {
+      border-color: #333;
+    }
+    
+    .live-site-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border, #000);
+      background: var(--bg, #fff);
+    }
+    
+    [data-theme="dark"] .live-site-header {
+      background: #0a0a0a;
+      border-color: #333;
+    }
+    
+    .live-site-label {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    
+    .live-site-label--original {
+      color: var(--text-muted, #666);
+    }
+    
+    .live-site-label--proposal {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .live-site-label--proposal::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: #00cc66;
+      border-radius: 50%;
+      animation: pulse-dot 2s ease infinite;
+    }
+    
+    .live-site-link {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.08em;
+      color: var(--text-muted, #666);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    
+    .live-site-link:hover {
+      color: var(--text, #000);
+    }
+    
+    [data-theme="dark"] .live-site-link:hover {
+      color: #f0f0f0;
+    }
+    
+    .live-site-frame-wrapper {
+      position: relative;
+      height: 450px;
+    }
+    
+    @media (min-width: 768px) {
+      .live-site-frame-wrapper {
+        height: 500px;
+      }
+    }
+    
+    .live-site-frame {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #fff;
+      filter: grayscale(100%) contrast(1.1);
+      transition: filter 0.5s ease;
+    }
+    
+    .live-site:hover .live-site-frame,
+    .live-site:focus-within .live-site-frame {
+      filter: grayscale(0%) contrast(1);
+    }
+    
+    /* Cinematic overlay hint */
+    .live-site-frame-wrapper::after {
+      content: 'hover para ver a cores';
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      color: #666;
+      background: rgba(255,255,255,0.9);
+      padding: 0.3rem 0.5rem;
+      opacity: 1;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    
+    .live-site:hover .live-site-frame-wrapper::after {
+      opacity: 0;
+    }
+    
+    [data-theme="dark"] .live-site-frame-wrapper::after {
+      background: rgba(0,0,0,0.8);
+      color: #888;
+    }
+    
+    /* Result block */
+    .result-block {
+      background: var(--card-bg, #f8f8f8);
+      border: 1px solid var(--border, #000);
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+    
+    [data-theme="dark"] .result-block {
+      background: #111;
+      border-color: #333;
+    }
+    
+    .result-block h4 {
+      margin-bottom: 1.25rem;
+    }
+    
+    .result-list {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      gap: 0.75rem;
+    }
+    
+    .result-list li {
+      font-family: var(--font-serif);
+      padding-left: 1.5rem;
+      position: relative;
+      line-height: 1.6;
+    }
+    
+    .result-list li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+    }
+    
+    /* Note blocks */
+    .note-block {
+      margin-top: 2rem;
+      padding: 1.25rem 1.5rem;
+      border-left: 2px solid var(--border, #000);
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+      color: var(--text-muted, #666);
+    }
+    
+    [data-theme="dark"] .note-block {
+      border-color: #444;
+    }
+    
+    .note-block a {
+      color: var(--text, #000);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    
+    [data-theme="dark"] .note-block a {
+      color: #ccc;
+    }
+    
+    /* Closing note */
+    .closing-note {
+      margin-top: 5rem;
+      padding: 2.5rem;
+      border: 1px dashed var(--border, #000);
+      text-align: center;
+    }
+    
+    [data-theme="dark"] .closing-note {
+      border-color: #444;
+    }
+    
+    .closing-note p {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      max-width: 50ch;
+      margin: 0 auto 1.5rem;
+      line-height: 1.8;
+    }
+    
+    .closing-note .cta {
+      margin-top: 1rem;
+    }
+  </style>
 </head>
 
 <body>
@@ -72,121 +445,205 @@
   <section class="hero" aria-labelledby="hero-title">
     <h1 id="hero-title">trabalhos<br>— clara.</h1>
     <p class="subtitle">
-      Alguns exemplos de intervenção em presença digital.
+      Como penso um site.<br>
+      Dois exercícios de método aplicado à presença digital.
     </p>
   </section>
 
-  <!-- TRABALHO 1 -->
-  <article class="work work-block">
-    <h3>Identidade e website</h3>
-    <p>
-      Criação de identidade gráfica, tipografia,
-      website completo, SEO e manutenção contínua.
-    </p>
-    <div class="work-media">
-      <video
-        class="work-video"
-        muted
-        loop
-        playsinline
-        preload="none"
-        poster="/assets/media/antes-thumb.jpg"
-        data-video-modal
-        data-video-src="/assets/media/Site-Seiva.mp4"
-        aria-label="Ver vídeo em tamanho maior">
-        
-        <source src="/assets/media/Site-Seiva.mp4" type="video/mp4">
-      </video>
+  <!-- ============================================
+       EXERCÍCIO 01 — Levett & Quinn (exercício)
+       ============================================ -->
+  <article class="exercise">
+    <header class="exercise-header">
+      <p class="exercise-label">
+        Exercício 01
+        <span class="tag">exercício de método</span>
+      </p>
+      <h2 class="exercise-title">reestruturação de site de serviços</h2>
+      <p class="exercise-intro">
+        Este projecto parte do site real de uma empresa de canalizações no Reino Unido.
+        O exercício consistiu em reorganizar a informação existente, com foco em clareza, 
+        hierarquia e leitura imediata — sem alterar serviços, textos ou identidade de base.
+      </p>
+      <p class="exercise-intro">
+        Levett & Quinn presta serviços de canalização a clientes residenciais e comerciais.
+        O site original reúne toda a informação necessária, mas apresenta-a de forma contínua, 
+        com pouca hierarquia e sem distinguir prioridades para quem chega pela primeira vez.
+      </p>
+    </header>
+    
+    <div class="exercise-section">
+      <h4>Problemas identificados</h4>
+      <ul class="problem-list">
+        <li>Serviços apresentados em bloco, sem diferenciação clara</li>
+        <li>Dificuldade em perceber rapidamente o que fazem e para quem</li>
+        <li>Percurso até ao contacto pouco evidente</li>
+        <li>Página longa, densa e com esforço de leitura constante</li>
+      </ul>
+      <p class="note-block">
+        Nada disto impede o site de funcionar — mas torna-o menos eficaz.
+      </p>
     </div>
-  </article>
-
-  <!-- TRABALHO 2 -->
-  <article class="work work-block">
-    <h3>Portefólio profissional</h3>
-    <p>
-      Análise, desenho e implementação de portefólio
-      pessoal com foco em clareza e posicionamento.
-    </p>
-    <div class="work-media">
-      <video
-        class="work-video"
-        muted
-        loop
-        playsinline
-        preload="none"
-        poster="/assets/media/depois-thumb.jpg"
-        data-video-modal
-        data-video-src="/assets/media/Site-Gq.mp4"
-        aria-label="Ver vídeo em tamanho maior">
-        
-        <source src="/assets/media/Site-Gq.mp4" type="video/mp4">
-      </video>
+    
+    <div class="exercise-section">
+      <h4>Abordagem</h4>
+      <p style="font-family: var(--font-serif); margin-bottom: 1.25rem; line-height: 1.7;">
+        A proposta focou-se em:
+      </p>
+      <ol class="approach-steps">
+        <li>Clarificar a entrada, apresentando logo o tipo de serviços prestados</li>
+        <li>Organizar os serviços por categorias e níveis de importância</li>
+        <li>Separar informação operacional de informação institucional</li>
+        <li>Tornar o contacto visível sem o tornar intrusivo</li>
+      </ol>
+      <p class="note-block">
+        Todo o conteúdo utilizado já existia no site original.
+      </p>
     </div>
-  </article>
-
-  <!-- TRABALHO 3 -->
-  <article class="work work-block">
-    <h3>Reestruturação de website</h3>
-    <p>
-      Redefinição de copy, hierarquia e estrutura.
-      Actualização técnica, visual e de SEO.
-    </p>
-    <div class="work-media">
-      <div class="work-compare">
-        <!-- ANTES -->
-        <figure class="work-image">
-          <span class="label">Antes</span>
-          <picture>
-            <source type="image/avif" srcset="/assets/media/antes-600.avif">
-            <source type="image/webp" srcset="/assets/media/antes-600.webp">
-            <img
-              src="/assets/media/antes-thumb.jpg"
-              alt="Website antes da reestruturação"
+    
+    <div class="exercise-section">
+      <h4>Comparação visual</h4>
+      <p class="comparison-text">
+        <strong>Site original:</strong> informação contínua, com pouca hierarquia.<br>
+        <strong>Proposta:</strong> estrutura clara, leitura por blocos e percursos evidentes.
+      </p>
+      
+      <div class="comparison-grid">
+        <!-- ANTES: Site original -->
+        <div class="live-site">
+          <div class="live-site-header">
+            <span class="live-site-label live-site-label--original">site original</span>
+            <a href="https://www.levettandquinn.co.uk/" target="_blank" rel="noopener" class="live-site-link">abrir site →</a>
+          </div>
+          <div class="live-site-frame-wrapper">
+            <iframe 
+              src="https://www.levettandquinn.co.uk/" 
+              class="live-site-frame"
               loading="lazy"
-              width="600"
-              height="400"
-              data-modal
-              data-full-avif="/assets/media/antes-1200.avif"
-              data-full-webp="/assets/media/antes-1200.webp"
-              data-full-jpg="/assets/media/antes-full.jpg">
-          </picture>
-        </figure>
+              title="Site original Levett & Quinn">
+            </iframe>
+          </div>
+        </div>
+        
+        <!-- DEPOIS: Proposta -->
+        <div class="live-site">
+          <div class="live-site-header">
+            <span class="live-site-label live-site-label--proposal">proposta</span>
+            <a href="/trabalhos/levett/depois-preview.html" target="_blank" class="live-site-link">abrir proposta →</a>
+          </div>
+          <div class="live-site-frame-wrapper">
+            <iframe 
+              src="/trabalhos/levett/depois-preview.html" 
+              class="live-site-frame"
+              loading="lazy"
+              title="Proposta de reestruturação">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="exercise-section">
+      <div class="result-block">
+        <h4>O que muda na prática</h4>
+        <ul class="result-list">
+          <li>Leitura mais rápida para novos utilizadores</li>
+          <li>Maior clareza sobre serviços prestados</li>
+          <li>Menor esforço até encontrar contactos</li>
+          <li>Sensação de organização e profissionalismo</li>
+        </ul>
+      </div>
+    </div>
+    
+    <p class="note-block">
+      Este projecto é um exercício de método, desenvolvido a partir de um site real.<br>
+      Site original: <a href="https://www.levettandquinn.co.uk/" target="_blank" rel="noopener">levettandquinn.co.uk</a>
+    </p>
+  </article>
 
-        <!-- DEPOIS -->
-        <figure class="work-image">
-          <span class="label">Depois</span>
-          <a
-            href="/trabalhos/levett/depois-preview.html"
-            data-preview
-            data-modal-html="/trabalhos/levett/depois-preview.html"
-            aria-label="Ver versão expandida">
-            <picture>
-              <source type="image/avif" srcset="/assets/media/depois-600.avif">
-              <source type="image/webp" srcset="/assets/media/depois-600.webp">
-              <img
-                src="/assets/media/depois-thumb.jpg"
-                alt="Website depois da reestruturação"
-                loading="lazy"
-                width="600"
-                height="400">
-            </picture>
-          </a>
-        </figure>
+  <!-- ============================================
+       EXERCÍCIO 02 — Portefólio (trabalho real)
+       ============================================ -->
+  <article class="exercise">
+    <header class="exercise-header">
+      <p class="exercise-label">
+        Exercício 02
+        <span class="tag tag--real">projecto real</span>
+      </p>
+      <h2 class="exercise-title">portefólio de profissional multidisciplinar</h2>
+      <p class="exercise-intro">
+        Este projecto consistiu na criação de um portefólio para um profissional com trabalho em várias áreas.
+        O principal desafio foi organizar essa diversidade sem a fragmentar, mantendo uma leitura clara 
+        do percurso e das diferentes frentes de trabalho.
+      </p>
+      <p class="exercise-intro">
+        O cliente desenvolve trabalho em diferentes áreas, com formatos, linguagens e públicos distintos.
+        O site precisava de apresentar essa diversidade sem criar ruído nem dispersão.
+      </p>
+    </header>
+    
+    <div class="exercise-section">
+      <h4>Problema</h4>
+      <ul class="problem-list">
+        <li>Risco de fragmentação do percurso profissional</li>
+        <li>Dificuldade em apresentar várias áreas sem hierarquização forçada</li>
+        <li>Necessidade de um espaço flexível, capaz de crescer com o trabalho</li>
+      </ul>
+    </div>
+    
+    <div class="exercise-section">
+      <h4>Abordagem</h4>
+      <p style="font-family: var(--font-serif); margin-bottom: 1.25rem; line-height: 1.7;">
+        A solução passou por:
+      </p>
+      <ol class="approach-steps">
+        <li>Tratar o portefólio como um percurso, não como uma lista</li>
+        <li>Criar uma estrutura que permita coexistência entre áreas distintas</li>
+        <li>Usar contenção visual para não competir com o conteúdo</li>
+      </ol>
+    </div>
+    
+    <div class="exercise-section">
+      <h4>Resultado</h4>
+      
+      <!-- Live site embed -->
+      <div class="live-site">
+        <div class="live-site-header">
+          <span class="live-site-label live-site-label--proposal">site live</span>
+          <a href="https://rupertviglione.github.io/goncalo-quirino" target="_blank" rel="noopener" class="live-site-link">visitar site →</a>
+        </div>
+        <div class="live-site-frame-wrapper">
+          <iframe 
+            src="https://rupertviglione.github.io/goncalo-quirino" 
+            class="live-site-frame"
+            loading="lazy"
+            title="Portefólio profissional">
+          </iframe>
+        </div>
+      </div>
+    </div>
+    
+    <div class="exercise-section">
+      <div class="result-block">
+        <h4>O que se conseguiu</h4>
+        <ul class="result-list">
+          <li>Um site que aceita a diversidade como ponto de partida</li>
+          <li>Permite leitura transversal ou focada</li>
+          <li>Não força uma especialização que não existe</li>
+          <li>Espaço flexível que pode crescer com o trabalho</li>
+        </ul>
       </div>
     </div>
   </article>
 
-  <!-- CTA -->
-  <section class="section">
-    <h2>o seu projecto</h2>
-    <div class="section-content">
-      <p>
-        Se procura clareza e presença digital para o seu negócio,
-        fale connosco.
-      </p>
-      <a href="/contacto/" class="cta contact-cta">iniciar conversa</a>
-    </div>
-  </section>
+  <!-- CLOSING NOTE -->
+  <div class="closing-note">
+    <p>
+      Se este método fizer sentido para o seu projecto,<br>
+      podemos conversar.
+    </p>
+    <a href="/contacto/" class="cta contact-cta">fale connosco</a>
+  </div>
 
 </main>
 
@@ -215,5 +672,6 @@
 <button class="theme-toggle" aria-label="Alternar tema">dark</button>
 
 <script src="/assets/app.js"></script>
+
 </body>
 </html>

@@ -115,7 +115,16 @@
 
 [data-theme="dark"] .work-block:hover,
 [data-theme="dark"] .step:hover {
-  box-shadow: 8px 8px 0 #333333;
+  box-shadow: 8px 8px 0 rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="dark"] .cta:hover,
+[data-theme="dark"] .contact-cta:hover {
+  box-shadow: 4px 4px 0 rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+  box-shadow: 4px 4px 0 rgba(255, 255, 255, 0.3);
 }
 
 [data-theme="dark"] .step-number {
