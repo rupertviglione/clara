@@ -115,7 +115,7 @@
 
 [data-theme="dark"] .work-block:hover,
 [data-theme="dark"] .step:hover {
-  box-shadow: 8px 8px 0 rgba(255, 255, 255, 0.3);
+  box-shadow: 8px 8px 0 rgba(227, 227, 227, 0.865);
 }
 
 [data-theme="dark"] .cta:hover,
