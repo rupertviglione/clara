@@ -1,9 +1,5 @@
-# robots.txt for clara.
+# robots.txt for Clara Studio
 User-agent: *
 Allow: /
 
-# Sitemap
-Sitemap: https://clara.pt/sitemap.xml
-
-# Crawl-delay (optional, for polite crawling)
-Crawl-delay: 1
+Sitemap: https://clarastudio.pt/sitemap.xml

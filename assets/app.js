@@ -122,6 +122,7 @@
   const modal = document.querySelector('.image-modal');
   const modalContent = modal?.querySelector('.image-modal__content');
   let currentZoom = 1;
+  let lastModalTrigger = null;
   let isDragging = false;
   let startX, startY, scrollLeft, scrollTop;
 
@@ -157,12 +158,14 @@
     });
   }
 
-  function openModal(html, hasZoom = false) {
+  function openModal(html, hasZoom = false, trigger = document.activeElement) {
     if (!modal || !modalContent) return;
+    lastModalTrigger = trigger instanceof HTMLElement ? trigger : document.activeElement;
     modalContent.innerHTML = html;
     modal.classList.add('is-open');
     document.body.style.overflow = 'hidden';
     currentZoom = 1;
+    modal.querySelector('[data-modal-close]')?.focus();
     
     if (hasZoom) {
       createZoomControls();
@@ -242,6 +245,9 @@
     }, 200);
     
     document.body.style.overflow = '';
+    if (lastModalTrigger && typeof lastModalTrigger.focus === 'function') {
+      lastModalTrigger.focus({ preventScroll: true });
+    }
   }
 
   // Close with ESC
@@ -280,7 +286,7 @@
           ${webp ? `<source type="image/webp" srcset="${webp}">` : ''}
           <img src="${jpg}" alt="${alt}" loading="eager" draggable="false">
         </picture>
-      `, true); // Enable zoom
+      `, true, img); // Enable zoom
     });
   });
 
@@ -298,7 +304,7 @@
           style="width: 100%; height: 100%; border: none; background: #fff;"
           loading="lazy">
         </iframe>
-      `, false); // No zoom for iframe
+      `, false, link); // No zoom for iframe
     });
   });
 
@@ -320,9 +326,10 @@
           autoplay
           style="max-width: 100%; max-height: 100%;">
         </video>
-      `, false); // No zoom for video
+      `, false, video); // No zoom for video
     });
   });
+
 
   /* =========================================================
      SMOOTH ANCHOR LINKS
