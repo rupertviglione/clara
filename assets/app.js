@@ -123,7 +123,6 @@
   const modalContent = modal?.querySelector('.image-modal__content');
   let currentZoom = 1;
   let lastModalTrigger = null;
-  let preferredModalTrigger = null;
   let isDragging = false;
   let startX, startY, scrollLeft, scrollTop;
 
@@ -161,8 +160,7 @@
 
   function openModal(html, hasZoom = false, trigger = document.activeElement) {
     if (!modal || !modalContent) return;
-    lastModalTrigger = preferredModalTrigger || (trigger instanceof HTMLElement ? trigger : document.activeElement);
-    preferredModalTrigger = null;
+    lastModalTrigger = trigger instanceof HTMLElement ? trigger : document.activeElement;
     modalContent.innerHTML = html;
     modal.classList.add('is-open');
     document.body.style.overflow = 'hidden';
@@ -332,19 +330,6 @@
     });
   });
 
-
-
-  document.querySelectorAll('[data-modal-trigger]').forEach(trigger => {
-    trigger.addEventListener('click', e => {
-      e.preventDefault();
-      const card = trigger.closest('.portfolio-card');
-      const modalTarget = card?.querySelector('[data-modal], [data-modal-html]');
-      if (modalTarget) {
-        preferredModalTrigger = trigger;
-        modalTarget.click();
-      }
-    });
-  });
 
   /* =========================================================
      SMOOTH ANCHOR LINKS
