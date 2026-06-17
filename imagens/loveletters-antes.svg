@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+<title id="title">Site antigo We Love Love Letters</title><desc id="desc">Mockup monocromático de uma loja antiga com catálogo pouco hierarquizado.</desc>
+<rect width="1200" height="800" fill="#f7f3ee"/><rect x="70" y="70" width="1060" height="660" fill="#fff" stroke="#111" stroke-width="4"/>
+<text x="110" y="140" font-family="Georgia,serif" font-size="54" fill="#111">We Love Love Letters</text><text x="110" y="190" font-family="monospace" font-size="22" fill="#666">site antigo · catálogo disperso</text>
+<line x1="110" y1="230" x2="1090" y2="230" stroke="#111" stroke-width="3"/>
+<g fill="#ddd" stroke="#111" stroke-width="3"><rect x="110" y="280" width="300" height="170"/><rect x="450" y="280" width="300" height="170"/><rect x="790" y="280" width="300" height="170"/></g>
+<g font-family="monospace" font-size="24" fill="#111"><text x="130" y="500">produto</text><text x="470" y="500">produto</text><text x="810" y="500">produto</text></g>
+<g fill="none" stroke="#111" stroke-width="3"><rect x="110" y="560" width="980" height="38"/><rect x="110" y="625" width="680" height="38"/></g>
+</svg>

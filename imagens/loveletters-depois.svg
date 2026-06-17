@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+<title id="title">Novo site We Love Love Letters</title><desc id="desc">Mockup da nova loja online com hero claro, catálogo organizado e área de backoffice.</desc>
+<rect width="1200" height="800" fill="#111"/><rect x="70" y="70" width="1060" height="660" fill="#fffaf5" stroke="#fff" stroke-width="4"/>
+<text x="110" y="145" font-family="Georgia,serif" font-size="58" fill="#111">We Love Love Letters</text><text x="110" y="195" font-family="monospace" font-size="22" fill="#444">loja online · catálogo + backoffice</text>
+<rect x="110" y="245" width="460" height="300" fill="#f2d7df" stroke="#111" stroke-width="3"/><text x="150" y="405" font-family="Georgia,serif" font-size="42" fill="#111">cartas com intenção</text>
+<g fill="#fff" stroke="#111" stroke-width="3"><rect x="620" y="245" width="210" height="210"/><rect x="860" y="245" width="210" height="210"/><rect x="620" y="490" width="450" height="55"/></g>
+<g font-family="monospace" font-size="20" fill="#111"><text x="640" y="495">catálogo organizado</text><text x="640" y="525">comprar agora →</text><text x="130" y="620">backoffice dedicado · gestão de encomendas · produtos personalizados</text></g>
+</svg>
