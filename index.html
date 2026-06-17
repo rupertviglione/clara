@@ -2,11 +2,11 @@
 <html lang="pt">
 <head>
   <meta charset="utf-8">
-  <title>clara. — Presença Digital | Websites com Clareza e Confiança</title>
+  <title>Clara Studio – Sites para PME com foco em resultados</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <!-- SEO Meta Tags -->
-  <meta name="description" content="Criação e reestruturação de websites focados em clareza, confiança e visibilidade online. Design editorial brutalist para empresas que valorizam a essência.">
+  <meta name="description" content="Clara Studio cria sites para PME com foco em resultados, clareza, confiança, SEO e presença digital profissional.">
   <meta name="keywords" content="presença digital, web design, criação websites, SEO, design minimalista, brutalismo, Portugal">
   <meta name="author" content="clara.">
   <meta name="robots" content="index, follow">
@@ -102,7 +102,7 @@
 
   <!-- HERO -->
   <section class="hero" aria-labelledby="hero-title">
-    <h1 id="hero-title">presença digital<br>— clara.</h1>
+    <h1 id="hero-title">Clara Studio – Design Digital</h1>
     <p class="subtitle">
       Um website é muitas vezes o primeiro contacto entre uma empresa
       e quem a procura. Se não for claro, perde-se confiança.
@@ -166,17 +166,16 @@
         antes e depois de uma intervenção focada em clareza.
       </p>
       
-      <article class="work work-block">
-        <div class="work-media work-compare">
-          <!-- ANTES -->
-          <figure class="work-image">
+      <div class="portfolio-card-grid" aria-label="Cards Antes e Depois">
+        <article class="portfolio-card work-block">
+          <figure class="portfolio-card__media work-image">
             <span class="label">Antes</span>
             <picture>
               <source type="image/avif" srcset="/assets/media/antes-600.avif">
               <source type="image/webp" srcset="/assets/media/antes-600.webp">
               <img
                 src="/assets/media/antes-thumb.jpg"
-                alt="Website antes da reestruturação — layout confuso e sem hierarquia clara"
+                alt="Portal de serviços Levett & Quinn antes do redesenho, com conteúdo denso e pouca hierarquia visual"
                 loading="lazy"
                 width="600"
                 height="400"
@@ -186,29 +185,40 @@
                 data-full-jpg="/assets/media/antes-full.jpg">
             </picture>
           </figure>
+          <div class="portfolio-card__body">
+            <h3>Portal Levett & Quinn – Antes</h3>
+            <p>Exemplo real de site com informação contínua antes de uma intervenção focada em clareza.</p>
+            <button class="portfolio-card__button" type="button" data-modal-trigger="before-home">ver antes</button>
+          </div>
+        </article>
 
-          <!-- DEPOIS -->
-          <figure class="work-image">
+        <article class="portfolio-card work-block">
+          <figure class="portfolio-card__media work-image">
             <span class="label">Depois</span>
             <a
               href="/trabalhos/levett/depois-preview.html"
               data-preview
               data-modal-html="/trabalhos/levett/depois-preview.html"
-              aria-label="Ver versão expandida do website reestruturado">
+              aria-label="Ver proposta depois do redesenho do portal Levett & Quinn">
               <picture>
                 <source type="image/avif" srcset="/assets/media/depois-600.avif">
                 <source type="image/webp" srcset="/assets/media/depois-600.webp">
                 <img
                   src="/assets/media/depois-thumb.jpg"
-                  alt="Website depois da reestruturação — layout claro e hierarquia definida"
+                  alt="Portal Levett & Quinn depois do redesenho, com blocos claros e hierarquia definida"
                   loading="lazy"
                   width="600"
                   height="400">
               </picture>
             </a>
           </figure>
-        </div>
-      </article>
+          <div class="portfolio-card__body">
+            <h3>Portal Levett & Quinn – Depois</h3>
+            <p>Proposta de redesenho com navegação mais evidente, secções claras e contacto mais acessível.</p>
+            <a class="portfolio-card__button" href="/trabalhos/levett/depois-preview.html" data-modal-html="/trabalhos/levett/depois-preview.html">ver depois</a>
+          </div>
+        </article>
+      </div>
     </div>
   </section>
 
